@@ -1,90 +1,51 @@
 import 'package:flutter/material.dart';
-
+import 'package:google_fonts/google_fonts.dart';
+import 'package:sales_management_system/Core/Constants/theme.dart';
 void main() {
   runApp(const MyApp());
 }
+
+// NOTICE: Do not play anything else
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-    
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+    const outlineInputBorder = OutlineInputBorder(
+      borderSide: BorderSide(
+        width: 1,
+        color: Color.fromARGB(198, 0, 51, 102),
       ),
-      home:  MyHomePage(title: 'Flutter Demo Home Page'),
     );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-
-
-  final String title='';
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        
-        backgroundColor: Color(Colors.amber),
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+    return MaterialApp(
+      title: 'Sales Management System App',
+      // NOTE (From Zakaria): everyone when creating your task page
+      // put the home page as your main working screen
+      // home:,
+      theme: ThemeData(
+        useMaterial3: true,
+        textTheme: GoogleFonts.robotoTextTheme(),
+        fontFamily: GoogleFonts.roboto().fontFamily,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: ThemeColors.primary,
+          secondary: ThemeColors.secondary,
+          outline: const Color.fromARGB(198, 0, 51, 102),
+        ),
+        inputDecorationTheme: const InputDecorationTheme(
+          border: outlineInputBorder,
+          enabledBorder: outlineInputBorder,
+          focusedBorder: outlineInputBorder,
+          prefixIconColor: Color(0xFF003366),
+          outlineBorder: BorderSide(
+            width: .8,
+            color: Color.fromARGB(198, 0, 51, 102),
+          ),
+          hintStyle: TextStyle(
+            color: Color.fromARGB(198, 0, 51, 102),
+          ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
