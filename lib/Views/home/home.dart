@@ -1,145 +1,53 @@
 import 'package:flutter/material.dart';
-import 'package:sales_management_system/Core/Constants/theme.dart';
+import 'package:sales_management_system/Core/Components/home/Circle_image.dart';
+import 'package:sales_management_system/Core/Components/home/search_bar.dart';
 
-class HomePage extends StatefulWidget {
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  int _selectedIndex = 0;
-
-  final List<Widget> _pages = [
-    PageOne(),
-    PageTwo(),
-    PageThree(),
-    PageFour(),
-    PageFive(),
-  ];
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Left Bar Example'),
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.red,
       ),
-      body: Row(
-        children: [
-          // Left Bar
-          Container(
-            width: 200,
-            color: ThemeColors.primary,
-            child: ListView(
+      child: Scaffold(
+        body: Column(
+          children: [
+            //=============1===============
+            Row(
+              mainAxisSize: MainAxisSize.min,
               children: [
-                ListTile(
-                  title: const Text('Dashboard'),
-                  leading: Icon(Icons.home_work_outlined),
-                  selected: _selectedIndex == 0,
-                  onTap: () => _onItemTapped(0),
-                ),
-                ListTile(
-                  title: const Text('Admins'),
-                  leading: Image.asset(
-                    "assets/images/administrator.png",
-                    width: 20,
-                    height: 20,
-                    color: ThemeColors.secondary,
-                  ),
-                  selected: _selectedIndex == 1,
-                  onTap: () => _onItemTapped(1),
-                ),
-                ListTile(
-                  title: const Text('Report'),
-                  leading: Icon(Icons.home_work_outlined),
-                  selected: _selectedIndex == 2,
-                  onTap: () => _onItemTapped(2),
-                ),
-                ListTile(
-                  title: const Text('Settings'),
-                  leading: Icon(Icons.home_work_outlined),
-                  selected: _selectedIndex == 3,
-                  onTap: () => _onItemTapped(2),
-                ),
-                ListTile(
-                  title: const Text('Log out'),
-                  leading: Icon(Icons.home_work_outlined),
-                  selected: _selectedIndex == 4,
-                  onTap: () => _onItemTapped(2),
+                const Expanded(child: SearchBarWidget()),
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.3,
+                  height: 50,
+                  decoration: const BoxDecoration(
+                      color: Colors.lightGreen,
+                      borderRadius: BorderRadius.all(Radius.circular(5))),
+                  child: const Row(children: [
+                    CircleImageWidget(
+                      image: "assets/images/Logo.png",
+                    ),
+                    CircleImageWidget(
+                      image: "assets/images/settings.png",
+                    ),
+                    CircleImageWidget(
+                      image: "assets/images/Logo2.png",
+                    ),
+                    Column(
+                      children: [
+                        Text("zakaria al nabulsi"),
+                        //NOTE(ZAK): the number from login
+                        Text("+963 969830277"),
+                      ],
+                    )
+                  ]),
                 )
               ],
             ),
-          ),
-          // Page Content
-          Expanded(
-            child: _pages[_selectedIndex],
-          ),
-        ],
-      ),
-    );
-  }
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-}
-
-class PageOne extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        'Page One Content',
-        style: TextStyle(fontSize: 24),
-      ),
-    );
-  }
-}
-
-class PageFour extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        'Page One Content',
-        style: TextStyle(fontSize: 24),
-      ),
-    );
-  }
-}
-
-class PageFive extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        'Page One Content',
-        style: TextStyle(fontSize: 24),
-      ),
-    );
-  }
-}
-
-class PageTwo extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        'Page Two Content',
-        style: TextStyle(fontSize: 24),
-      ),
-    );
-  }
-}
-
-class PageThree extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        'Page Three Content',
-        style: TextStyle(fontSize: 24),
+          ],
+        ),
       ),
     );
   }
