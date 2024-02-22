@@ -49,10 +49,11 @@ dependencies:
   get_storage: ^2.1.1
   table_calendar: ^3.0.0
   animated_splash_screen: ^1.3.0
-<<<<<<< HEAD
   fluttertoast: ^8.2.4
-=======
->>>>>>> 6cb49abeb288eaa71edb7ec1352fbb69b92ae188
+  path_provider: ^2.1.0
+  permission_handler: ^10.2.0
+  syncfusion_flutter_pdf: ^21.2.4
+  pdf: ^3.10.7
 dev_dependencies:
   flutter_test:
     sdk: flutter

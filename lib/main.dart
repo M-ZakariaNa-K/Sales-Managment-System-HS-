@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
-import 'package:google_fonts/google_fonts.dart';
-import 'package:sales_management_system/Core/Constants/theme.dart';
-=======
 import 'package:sales_management_system/Core/Constants/theme.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sales_management_system/Views/home/home.dart';
+import 'package:sales_management_system/Views/pills/pills.dart';
 
->>>>>>> 6cb49abeb288eaa71edb7ec1352fbb69b92ae188
+import 'Core/Components/widget.dart';
+import 'Models/pills/pills.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -19,6 +17,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    PillsModel pill1 = PillsModel(code: 'code',branch:  'branch',number:  'number',total:  'total');
+    PillsModel pill2 = PillsModel(code: 'code1',branch:  'branch1',number:  'number1',total:  'total1');
+    pills.add(pill1);
+    pills.add(pill2);
     const outlineInputBorder = OutlineInputBorder(
       borderSide: BorderSide(
         width: 1,
@@ -26,14 +28,11 @@ class MyApp extends StatelessWidget {
       ),
     );
     return MaterialApp(
+      locale: Locale('ar'),
       title: 'Sales Management System App',
       // NOTE (From Zakaria): everyone when creating your task page
       // put the home page as your main working screen
-<<<<<<< HEAD
-      // home:,
-=======
-      home: HomePage(),
->>>>>>> 6cb49abeb288eaa71edb7ec1352fbb69b92ae188
+      home: PillsPage(),
       theme: ThemeData(
         useMaterial3: true,
         textTheme: GoogleFonts.robotoTextTheme(),
@@ -41,25 +40,12 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(
           seedColor: ThemeColors.primary,
           secondary: ThemeColors.secondary,
-<<<<<<< HEAD
-          outline: const Color.fromARGB(198, 0, 51, 102),
-=======
-          outline:  ThemeColors.secondary,
->>>>>>> 6cb49abeb288eaa71edb7ec1352fbb69b92ae188
+          outline: ThemeColors.secondary,
         ),
         inputDecorationTheme: const InputDecorationTheme(
           border: outlineInputBorder,
           enabledBorder: outlineInputBorder,
           focusedBorder: outlineInputBorder,
-<<<<<<< HEAD
-          prefixIconColor: Color(0xFF003366),
-          outlineBorder: BorderSide(
-            width: .8,
-            color: Color.fromARGB(198, 0, 51, 102),
-          ),
-          hintStyle: TextStyle(
-            color: Color.fromARGB(198, 0, 51, 102),
-=======
           prefixIconColor: ThemeColors.secondary,
           outlineBorder: BorderSide(
             width: .8,
@@ -67,7 +53,6 @@ class MyApp extends StatelessWidget {
           ),
           hintStyle: TextStyle(
             color: Colors.grey,
->>>>>>> 6cb49abeb288eaa71edb7ec1352fbb69b92ae188
           ),
         ),
       ),

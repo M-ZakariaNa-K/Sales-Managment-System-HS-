@@ -1,3 +1,4 @@
+// ignore: file_names
 import 'package:dio/dio.dart';
 import 'package:sales_management_system/Core/Components/components.dart';
 
@@ -6,7 +7,7 @@ class DioHelper {
 
   static init() {
     dio = Dio(BaseOptions(
-      baseUrl: 'http://10.0.2.2:8000/api/',
+      baseUrl: 'http://127.0.0.1:8000/api/',
       receiveDataWhenStatusError: true,
       // connectTimeout: Duration(seconds: 5 ),
       //   receiveTimeout : Duration(seconds: 3)
@@ -25,8 +26,9 @@ class DioHelper {
     return await dio
         .get(
       path,
-      queryParameters: query ?? null,
+      queryParameters: query,
     )
+        // ignore: body_might_complete_normally_catch_error
         .catchError((e) {
       if (e.response != null) {
         print(e.response?.data);
@@ -38,7 +40,7 @@ class DioHelper {
         print(e.message);
       }
     });
-    ;
+    
   }
 
   static Future<Response> postData({
@@ -73,7 +75,7 @@ class DioHelper {
       String? token}) async {
     var headers = {
       'Accept': 'application/json',
-      'Authorization': 'Bearer ${token}'
+      'Authorization': 'Bearer $token'
     };
     var dio = Dio();
     var response = await dio

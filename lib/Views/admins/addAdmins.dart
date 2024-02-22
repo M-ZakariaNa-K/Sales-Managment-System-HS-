@@ -5,15 +5,15 @@ import 'package:sales_management_system/Core/Components/components.dart';
 import 'package:sales_management_system/Core/Constants/theme.dart';
 
 // ignore: must_be_immutable
-class RegisterScreen extends StatelessWidget {
-  var phoneController = TextEditingController();
-  var nameController = TextEditingController();
-  var emailController = TextEditingController();
-  var passwordController = TextEditingController();
-  var confirmPasswordController = TextEditingController();
+class AddAdminScreen extends StatelessWidget {
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController userNameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
   var formKey = GlobalKey<FormState>();
 
-  RegisterScreen({super.key});
+  AddAdminScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,79 +25,83 @@ class RegisterScreen extends StatelessWidget {
           builder: (AddAdminController controller) => SingleChildScrollView(
             scrollDirection: Axis.vertical,
             child: Container(
-              padding: EdgeInsets.symmetric(vertical: 20, horizontal: 45),
+              padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 45),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(
-                    height: 90,
-                  ),
                   Text(
-                    "30".tr,
+                    "Add a new admin",
+                    textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontFamily: "Poppins",
-                      color: ThemeColors.primary,
-                      fontSize: 25,
-                      fontWeight: FontWeight.w500,
-                    ),
+                        fontSize: 30,
+                        fontWeight: FontWeight.w300,
+                        color: ThemeColors.primary),
                   ),
-                  SizedBox(
+                  defaultTextFormField(
+                      label: 'User Name',
+                      preIcon: const Icon(Icons.person),
+                      validator: (value) {},
+                      controller: userNameController),
+                  const SizedBox(
                     height: 20,
                   ),
-                  Row(
-                    children: [
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Text("12".tr,
-                          style: Theme.of(context).textTheme.labelLarge),
-                    ],
+                  defaultTextFormField(
+                      label: 'Email',
+                      preIcon: const Icon(Icons.email),
+                      validator: (value) {},
+                      controller: emailController),
+                  const SizedBox(
+                    height: 20,
                   ),
+                  defaultTextFormField(
+                      label: 'Phone Number',
+                      preIcon: const Icon(Icons.phone),
+                      validator: (value) {},
+                      controller: phoneController),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  defaultTextFormField(
+                      suffix: IconButton(
+                          onPressed: () {
+                            controller.isSecure();
+                          },
+                          icon: controller.confirmSecureOrNot),
+                      label: 'Password',
+                      preIcon: const Icon(Icons.lock),
+                      validator: (value) {},
+                      controller: passwordController),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  defaultTextFormField(
+                      label: 'Confirm Password',
+                      preIcon: const Icon(Icons.lock),
+                      validator: (value) {},
+                      suffix: IconButton(
+                          onPressed: () {
+                            controller.confirmIsSecure();
+                          },
+                          icon: controller.confirmSecureOrNot),
+                      controller: confirmPasswordController),
+                  const SizedBox(height: 25),
                   defaultButton(
                       function: () {
                         if (formKey.currentState!.validate()) {
                           controller.registerState(
-                            name: nameController.text,
+                            name: userNameController.text,
                             email: emailController.text,
                             phone: phoneController.text,
                             password: passwordController.text,
                           );
                         }
                       },
-                      label: '29'.tr,
+                      label: 'Register',
                       context: context),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: Text(
-                          "28".tr,
-                          overflow: TextOverflow.ellipsis,
-                          softWrap: true,
-                          maxLines: 3,
-                          style: TextStyle(
-                            fontFamily: "Poppins",
-                            color: ThemeColors.primary,
-                          ),
-                        ),
-                      ),
-                      TextButton(
-                        child: Text(
-                          '25'.tr,
-                          style: TextStyle(
-                              fontFamily: "Poppins",
-                              color: ThemeColors.primary,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w700),
-                        ),
-                        onPressed: () {},
-                      ),
-                    ],
-                  )
                 ],
               ),
             ),

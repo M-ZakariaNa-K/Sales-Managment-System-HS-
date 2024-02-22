@@ -1,12 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:sales_management_system/Core/Constants/theme.dart';
 
 abstract class Components {
   Widget defaultButton();
   Widget defaultIconButton();
-  Widget defaultTextField();
   Widget defaultDivider();
 }
+
+Widget defaultDivider() => Container(
+      width: double.infinity,
+      height: 0.4,
+      color: Colors.grey,
+    );
+Widget defaultTextFormField(
+        {label, preIcon, controller, validator, suffix, isSecure}) =>
+    TextFormField(
+      obscureText: true,
+      controller: controller,
+      validator: validator,
+      decoration: InputDecoration(
+        border: const OutlineInputBorder(),
+        prefixIcon: preIcon,
+        labelText: '$label',
+        suffixIcon: suffix,
+      ),
+    );
 
 void showToast({
   required String text,
@@ -21,6 +40,7 @@ void showToast({
         textColor: Colors.white,
         fontSize: 16.0);
 
+// ignore: constant_identifier_names
 enum ToastStates { SUCCESS, ERROR, WARNING }
 
 Color chooseToastColor({required ToastStates state}) {
@@ -43,23 +63,20 @@ Widget defaultButton(
         {required void Function() function, required String label, context}) =>
     Container(
       decoration: BoxDecoration(
-        gradient: LinearGradient(colors: [
-          Color.fromARGB(150, 51, 102, 204),
-          Color.fromARGB(255, 51, 102, 204),
-        ]),
+        color: ThemeColors.primary,
         borderRadius: BorderRadiusDirectional.circular(10),
       ),
       height: 47,
       alignment: AlignmentDirectional.center,
-      width: 300,
+      width: double.infinity,
       child: MaterialButton(
         onPressed: function,
         child: Container(
             width: double.infinity,
             alignment: AlignmentDirectional.center,
             child: Text(
-              "$label",
-              style: TextStyle(color: Colors.white),
+              label,
+              style: const TextStyle(color: Colors.white, fontSize: 25),
             )),
       ),
     );
@@ -70,7 +87,7 @@ Widget defaultIconButton(
         required Icon icon}) =>
     Container(
       decoration: BoxDecoration(
-          gradient: LinearGradient(colors: [
+          gradient: const LinearGradient(colors: [
             Color.fromARGB(150, 51, 102, 204),
             Color.fromARGB(255, 51, 102, 204),
           ]),
@@ -81,12 +98,13 @@ Widget defaultIconButton(
         onPressed: function,
         child: Row(children: [
           icon,
-          SizedBox(
+          const SizedBox(
             width: 10,
           ),
           Text(
             label,
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            style: const TextStyle(
+                color: Colors.white, fontWeight: FontWeight.bold),
           )
         ]),
       ),
