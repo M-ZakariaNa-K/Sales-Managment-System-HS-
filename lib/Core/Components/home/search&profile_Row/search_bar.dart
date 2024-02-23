@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sales_management_system/Core/Constants/theme.dart';
 
 class SearchBarWidget extends StatefulWidget {
   const SearchBarWidget({super.key});
@@ -9,16 +8,16 @@ class SearchBarWidget extends StatefulWidget {
 }
 
 class _SearchBarWidgetState extends State<SearchBarWidget> {
-  final TextEditingController _searchController = TextEditingController();
+  //final TextEditingController _searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
       child: Container(
         height: 50,
         decoration: BoxDecoration(
-          color: Colors.grey.withOpacity(.2),
-          borderRadius: BorderRadius.circular(5.0),
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(30.0),
         ),
         child: TextField(
           decoration: InputDecoration(
@@ -32,7 +31,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
                 borderSide: const BorderSide(
                     color: Color(
                         0xffAFAFAF)), // Set your desired border color here
-                borderRadius: BorderRadius.circular(5.0),
+                borderRadius: BorderRadius.circular(30.0),
               ),
               focusedBorder: OutlineInputBorder(
                 borderSide: const BorderSide(

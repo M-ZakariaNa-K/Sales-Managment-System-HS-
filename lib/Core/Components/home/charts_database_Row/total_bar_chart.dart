@@ -3,14 +3,15 @@ import 'package:sales_management_system/Core/Components/home/charts_database_Row
 import 'package:sales_management_system/Core/Constants/theme.dart';
 
 class TotalBarChart extends StatelessWidget {
-  const TotalBarChart(
-      {super.key,});
+  const TotalBarChart({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
         width: MediaQuery.of(context).size.width * 0.4,
-        height: 320,
+        height: 370,
         padding: const EdgeInsets.all(10),
         margin: const EdgeInsets.symmetric(horizontal: 10),
         decoration: BoxDecoration(

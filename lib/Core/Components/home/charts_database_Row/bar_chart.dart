@@ -70,7 +70,7 @@ class SimpleBarChart extends StatelessWidget {
       charts.Series<OrdinalSales, String>(
         id: 'Sales',
         colorFn: (_, __) => charts.ColorUtil.fromDartColor(
-            ThemeColors.primary), // Change the color to red
+            ThemeColors.secondary), // Change the color to red
         domainFn: (OrdinalSales sales, _) => sales.month,
         measureFn: (OrdinalSales sales, _) => sales.sales,
         data: data,

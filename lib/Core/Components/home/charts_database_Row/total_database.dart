@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sales_management_system/Core/Components/home/charts_database_Row/list_of_items.dart';
+import 'package:sales_management_system/Core/Components/home/custome_elevated_button.dart';
 import 'package:sales_management_system/Core/Constants/theme.dart';
 
 class TotalDatabase extends StatefulWidget {
@@ -13,9 +14,10 @@ class _TotalDatabaseState extends State<TotalDatabase> {
   final TextEditingController databaseTextFildController =
       TextEditingController();
   List<String> databaseOptions = [
-    'Option 1',
-    'Option 2',
-    'Option 3'
+    'zakaria',
+    'abood',
+    'ahmed',
+    'wassem'
   ]; // Sample database options
   List<String> optionOptions = [
     'Option A',
@@ -41,7 +43,7 @@ class _TotalDatabaseState extends State<TotalDatabase> {
         ),
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           // const Text(
@@ -108,65 +110,110 @@ class _TotalDatabaseState extends State<TotalDatabase> {
           //     ],
           //   ),
           // ),
-           
-          Row(
-            children: [
 
-            ],
-          ),
-          SizedBox(
-            width: 200,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Title for the first dropdown
-              
-                // Title for the second dropdown
-                Text(
-                  'Choose Option',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: ThemeColors.primaryTextColor,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(height: 10),
-                // Second Dropdown
-                DropdownButtonFormField<String>(
-                  value: selectedOption,
-                  onChanged: (value) {
-                    setState(() {
-                      selectedOption = value;
-                    });
-                  },
-                  items: optionOptions.map((String option) {
-                    return DropdownMenuItem<String>(
-                      value: option,
-                      child: Text(option),
-                    );
-                  }).toList(),
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    contentPadding: EdgeInsets.symmetric(
-                      vertical: 12.0,
-                      horizontal: 16.0,
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10),
+            child: Center(
+              child: Wrap(
+                children: [
+                  //-----------------------------------------1------------------------------------
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 10.0),
+                    child: SizedBox(
+                      width: 230,
+                      child: DropdownButtonFormField<String>(
+                        elevation: 0,
+                        hint: const Text(
+                          'Choose Database',
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.grey,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        value: selectedDatabase,
+                        onChanged: (value) {
+                          setState(() {
+                            selectedDatabase = value;
+                          });
+                        },
+                        items: databaseOptions.map((String database) {
+                          return DropdownMenuItem<String>(
+                            value: database,
+                            child: Text(database),
+                          );
+                        }).toList(),
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                          contentPadding: EdgeInsets.symmetric(
+                            vertical: 12.0,
+                            horizontal: 16.0,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(height: 20),
-                // ElevatedButton(
-                //   onPressed: () {
-                //     // Handle button press here
-                //   },
-                //   child: Text('Submit'),
-                // ),
-              ],
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  //-----------------------------------------2------------------------------------
+                  SizedBox(
+                    width: 230,
+                    child: DropdownButtonFormField<String>(
+                      elevation: 0,
+                      hint: const Text(
+                        'Choose Option',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.grey,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      value: selectedOption,
+                      onChanged: (value) {
+                        setState(() {
+                          selectedOption = value;
+                        });
+                      },
+                      items: optionOptions.map((String option) {
+                        return DropdownMenuItem<String>(
+                          value: option,
+                          child: Text(option),
+                        );
+                      }).toList(),
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        contentPadding: EdgeInsets.symmetric(
+                          vertical: 12.0,
+                          horizontal: 16.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                  //-----------------------------------------3------------------------------------
+                ],
+              ),
             ),
           ),
 
           //------Data(Number of admins,company total sales for this mounth,the most sold branch)-----
-          const ListOfItems(
-            textColor: ThemeColors.secondaryTextColor,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30.0),
+            child: const ListOfItems(
+              textColor: ThemeColors.secondaryTextColor,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 10.0),
+            child: CustomeElevatedButton(
+                buttonColor: ThemeColors.secondary,
+                buttonChild: Text(
+                  'Submit',
+                  style: TextStyle(
+                    color: ThemeColors.secondaryTextColor,
+                  ),
+                ),
+                onPressed: () {}),
           ),
         ],
       ),

@@ -17,13 +17,16 @@ class CostumeListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: ThemeColors.secondary, borderRadius: BorderRadius.circular(5)),
+        color: ThemeColors.secondary.withOpacity(.4),
+        borderRadius: BorderRadius.circular(5),
+        border: Border.all(color: ThemeColors.secondary, width: 2),
+      ),
       child: ListTile(
         leading: Container(
           width: 40,
           height: 40,
           decoration: BoxDecoration(
-              color: ThemeColors.primary,
+              color: ThemeColors.secondary,
               borderRadius: BorderRadius.circular(5)),
           child: Icon(
             icon,
@@ -34,12 +37,12 @@ class CostumeListTile extends StatelessWidget {
         title: Text(
           title,
           style: const TextStyle(
-            color: ThemeColors.secondaryTextColor,
+            color: ThemeColors.primaryTextColor,
           ),
         ),
         subtitle: Text(subtitle,
             style: const TextStyle(
-              color: ThemeColors.secondaryTextColor,
+              color: ThemeColors.primaryTextColor,
             )),
       ),
     );

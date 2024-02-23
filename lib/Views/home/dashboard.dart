@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:sales_management_system/Core/Components/home/dashhboard/appbar_building.dart';
+import 'package:sales_management_system/Core/Components/home/dashhboard/custome_drawer.dart';
 import 'package:sales_management_system/Core/Constants/theme.dart';
 import 'package:sales_management_system/Views/home/home.dart';
 
 class DashboardPage extends StatefulWidget {
-  const DashboardPage({super.key});
+  const DashboardPage({Key? key}) : super(key: key);
 
   @override
   // ignore: library_private_types_in_public_api
@@ -13,6 +15,7 @@ class DashboardPage extends StatefulWidget {
 class _DashboardPageState extends State<DashboardPage> {
   int _selectedIndex = 0;
   final Color _selectedColor = ThemeColors.primary;
+  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
   final List<Widget> _pages = [
     const HomePage(),
     PageTwo(),
@@ -20,131 +23,33 @@ class _DashboardPageState extends State<DashboardPage> {
     PageFour(),
     PageFive(),
   ];
-
+  bool isDisktopDevice = false;
   @override
   Widget build(BuildContext context) {
+    if (MediaQuery.sizeOf(context).width > 900) {
+      isDisktopDevice = true;
+    } else {
+      isDisktopDevice = false;
+    }
     return Scaffold(
+      key: scaffoldKey,
+      drawer: DrawerWidget(
+        selectedIndex: _selectedIndex,
+        onItemTapped: _onItemTapped,
+        selectedColor: _selectedColor,
+      ),
+     
+      appBar: AppBarBuilding(context, scaffoldKey),
       body: Row(
         children: [
           // Left Bar
-          Container(
-            width: 300,
-            color: ThemeColors.secondary,
-            child: ListView(
-              children: [
-                Image.asset('images/Logo2.png'),
-                //=================================2=======================
-                ListTile(
-                  title: Text(
-                    'Home page',
-                    style: TextStyle(
-                      color: _selectedIndex == 0
-                          ? ThemeColors.primary
-                          : ThemeColors.secondaryTextColor,
-                    ),
-                  ),
-                  tileColor:
-                      _selectedIndex == 0 ? _selectedColor : Colors.transparent,
-                  leading: Icon(
-                    Icons.home_work_outlined,
-                    color: _selectedIndex == 0
-                        ? ThemeColors.primary
-                        : ThemeColors.secondaryTextColor,
-                  ),
-                  selected: _selectedIndex == 0,
-                  onTap: () => _onItemTapped(0),
-                ),
-                //=================================3=======================
-                ListTile(
-                  title: Text(
-                    'Admins',
-                    style: TextStyle(
-                      color: _selectedIndex == 1
-                          ? ThemeColors.primary
-                          : ThemeColors.secondaryTextColor,
-                    ),
-                  ),
-                  tileColor:
-                      _selectedIndex == 1 ? _selectedColor : Colors.transparent,
-                  leading: Image.asset(
-                    "images/administrator.png",
-                    width: 25,
-                    height: 25,
-                    color: _selectedIndex == 1
-                        ? ThemeColors.primary
-                        : ThemeColors.secondaryTextColor,
-                  ),
-                  selected: _selectedIndex == 1,
-                  onTap: () => _onItemTapped(1),
-                ),
-                //========================4=====================
-                ListTile(
-                  title: Text(
-                    'Report',
-                    style: TextStyle(
-                      color: _selectedIndex == 2
-                          ? ThemeColors.primary
-                          : ThemeColors.secondaryTextColor,
-                    ),
-                  ),
-                  tileColor:
-                      _selectedIndex == 2 ? _selectedColor : Colors.transparent,
-                  leading: Icon(
-                    Icons.picture_as_pdf,
-                    color: _selectedIndex == 2
-                        ? ThemeColors.primary
-                        : ThemeColors.secondaryTextColor,
-                  ),
-                  selected: _selectedIndex == 2,
-                  selectedTileColor: _selectedColor,
-                  onTap: () => _onItemTapped(2),
-                ),
-                //========================5=====================
-                ListTile(
-                  title: Text(
-                    'Settings',
-                    style: TextStyle(
-                      color: _selectedIndex == 3
-                          ? ThemeColors.primary
-                          : ThemeColors.secondaryTextColor,
-                    ),
-                  ),
-                  tileColor:
-                      _selectedIndex == 3 ? _selectedColor : Colors.transparent,
-                  leading: Icon(
-                    Icons.home_work_outlined,
-                    color: _selectedIndex == 3
-                        ? ThemeColors.primary
-                        : ThemeColors.secondaryTextColor,
-                  ),
-                  selected: _selectedIndex == 3,
-                  onTap: () => _onItemTapped(3),
-                ),
-                //========================6=====================
-                ListTile(
-                  title: Text(
-                    'Log out',
-                    style: TextStyle(
-                      color: _selectedIndex == 4
-                          ? ThemeColors.primary
-                          : ThemeColors.secondaryTextColor,
-                    ),
-                  ),
-                  tileColor:
-                      _selectedIndex == 2 ? _selectedColor : Colors.transparent,
-                  leading: Icon(
-                    Icons.login_rounded,
-                    color: _selectedIndex == 4
-                        ? ThemeColors.primary
-                        : ThemeColors.secondaryTextColor,
-                  ),
-                  selected: _selectedIndex == 4,
+          isDisktopDevice
+              ? DrawerWidget(
+                  selectedIndex: _selectedIndex,
+                  onItemTapped: _onItemTapped,
                   selectedColor: _selectedColor,
-                  onTap: () => _onItemTapped(4),
                 )
-              ],
-            ),
-          ),
+              : const Text(""),
           // Page Content
           Expanded(
             child: _pages[_selectedIndex],
@@ -200,7 +105,7 @@ class PageFive extends StatelessWidget {
 class PageTwo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Text(
         'Page Two Content',
         style: TextStyle(fontSize: 24),
@@ -220,3 +125,21 @@ class PageThree extends StatelessWidget {
     );
   }
 }
+
+
+
+/*
+
+LayoutBuilder(
+        builder: (context, constraints) {
+          if (constraints.maxWidth < 600) {
+            return _buildDrawerLayout();
+          } else {
+            return _buildWideLayout();
+          }
+        },
+      ),
+    );
+  }
+  
+ */
