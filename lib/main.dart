@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:sales_management_system/Core/Constants/theme.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sales_management_system/Views/home/dashboard.dart';
+import 'package:sales_management_system/Views/pills/pills.dart';
+
+import 'Core/Components/widget.dart';
+import 'Models/pills/pills.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,6 +17,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    PillsModel pill1 = PillsModel(
+        code: 'code', branch: 'branch', number: 'number', total: 'total');
+    PillsModel pill2 = PillsModel(
+        code: 'code1', branch: 'branch1', number: 'number1', total: 'total1');
+    pills.add(pill1);
+    pills.add(pill2);
     const outlineInputBorder = OutlineInputBorder(
       borderSide: BorderSide(
         width: 1,
@@ -21,10 +30,11 @@ class MyApp extends StatelessWidget {
       ),
     );
     return MaterialApp(
+      locale: Locale('ar'),
       title: 'Sales Management System App',
       // NOTE (From Zakaria): everyone when creating your task page
       // put the home page as your main working screen
-      home: DashboardPage(),
+      home: PillsPage(),
       theme: ThemeData(
         useMaterial3: true,
         textTheme: GoogleFonts.robotoTextTheme(),

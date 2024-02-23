@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+# Sales-Managment-System-HS-
+=======
 # sales_management_system
 
 A new Flutter project.
@@ -14,3 +17,4 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+>>>>>>> d215d7713f34d82be050d46ffc32c007275bc690
