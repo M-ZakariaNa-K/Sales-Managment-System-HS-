@@ -17,8 +17,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    PillsModel pill1 = PillsModel(code: 'code',branch:  'branch',number:  'number',total:  'total');
-    PillsModel pill2 = PillsModel(code: 'code1',branch:  'branch1',number:  'number1',total:  'total1');
+    PillsModel pill1 = PillsModel(
+        code: 'code', branch: 'branch', number: 'number', total: 'total');
+    PillsModel pill2 = PillsModel(
+        code: 'code1', branch: 'branch1', number: 'number1', total: 'total1');
     pills.add(pill1);
     pills.add(pill2);
     const outlineInputBorder = OutlineInputBorder(

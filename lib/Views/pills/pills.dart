@@ -33,7 +33,7 @@ class _PillsPageState extends State<PillsPage> {
           Positioned(
             top: 20,
             left: horizontalPadding * 0.2,
-            child: Text(
+            child: const Text(
               'Sales Table',
               style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
             ),
@@ -52,15 +52,6 @@ class _PillsPageState extends State<PillsPage> {
                       width: horizontalPadding * .5,
                       child: Column(
                         children: [
-                          Container(
-                              child: Image.asset(
-                            'images/u.jpg',
-                                
-                          ),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20)
-                          ),
-                          ),
                           PaginatedDataTable(
                             source: dataSource,
                             columns: const [
