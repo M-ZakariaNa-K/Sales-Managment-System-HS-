@@ -30,4 +30,5 @@ class AddAdminController extends GetxController {
   }
 
   void registerState({required String phone, required String name,required String email,required String password}) {}
+
 }
