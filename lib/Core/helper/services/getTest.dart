@@ -1,4 +1,5 @@
-// ignore: file_names
+// ignore_for_file: file_names
+
 import 'package:dio/dio.dart';
 import 'package:sales_management_system/Core/Components/components.dart';
 
@@ -62,6 +63,7 @@ class DioHelper {
       '$baseURL/$query',
       data: data,
     )
+        // ignore: body_might_complete_normally_catch_error
         .catchError((e) {
       if (e.response != null) {
         print(e.response?.data);
@@ -94,6 +96,7 @@ class DioHelper {
         headers: headers,
       ),
     )
+        // ignore: body_might_complete_normally_catch_error
         .catchError((e) {
       if (e.response != null) {
         print(e.response?.data);

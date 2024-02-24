@@ -108,7 +108,7 @@ class LoginScreen extends StatelessWidget {
                                   function: () {
                                     if (formKey.currentState!.validate()) {
                                       controller.loginState(
-                                          phone: userController.text,
+                                          userName: userController.text,
                                           password: passwordController.text);
                                     }
                                   },

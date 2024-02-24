@@ -15,7 +15,6 @@ class AddAdminController extends GetxController {
     update();
   }
 
-  
   void confirmIsSecure() {
     Gg = !Gg;
     secureOrNot = Gg
@@ -29,5 +28,11 @@ class AddAdminController extends GetxController {
     update();
   }
 
-  void registerState({required String phone, required String name,required String email,required String password}) {}
+  void registerState(
+      {required String phone,
+      required String name,
+      required String email,
+      required String password}) {
+        
+      }
 }

@@ -1,6 +1,8 @@
 // ignore: file_names
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sales_management_system/Core/Components/components.dart';
+import 'package:sales_management_system/Core/helper/services/getTest.dart';
 
 class LoginController extends GetxController {
   bool isSecure = true;
@@ -20,5 +22,12 @@ class LoginController extends GetxController {
     update();
   }
 
-  void loginState({required String phone, required String password}) {}
+  void loginState({required String userName, required String password}) {
+    DioHelper.postData(
+        baseURL: 'baseURL',
+        query: 'query',
+        data: {'username': userName, 'password': password}).then((value) {
+      showToast(text: 'Login Successfully', state: ToastStates.SUCCESS);
+    });
+  }
 }

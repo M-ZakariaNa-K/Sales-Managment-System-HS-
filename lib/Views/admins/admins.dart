@@ -13,9 +13,7 @@ class AdminsPage extends StatelessWidget {
     users.add(5);
     users.add(5);
     users.add(5);
-    users.add(5);
-    users.add(5);
-    users.add(5);
+   
 
     final MediaQueryData = MediaQuery.of(context);
     final horizontalPadding = MediaQueryData.size.width;
