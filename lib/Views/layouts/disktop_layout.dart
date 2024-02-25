@@ -15,15 +15,7 @@ class _DisktopLayoutState extends State<DisktopLayout> {
 
   @override
   void initState() {
-    super.initState(
-
-
-
-
-
-
-      
-    );
+    super.initState();
     _databaseTextFildController = TextEditingController();
   }
 

@@ -1,87 +1,89 @@
 import 'package:flutter/material.dart';
+import 'package:dio/dio.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:sales_management_system/Core/Components/home/charts_database_Row/total_bar_chart.dart';
+import 'package:sales_management_system/Core/Components/home/unload_sales_table.dart';
 import 'package:sales_management_system/Core/Constants/theme.dart';
+import 'package:sales_management_system/Core/helper/services/home/getSalesValueMonthly.dart';
+import 'package:sales_management_system/Models/home/get_sales_value_monthly.dart';
 
-class SimpleBarChart extends StatelessWidget {
-  final List<charts.Series<dynamic, String>> seriesList;
-  final bool animate;
-  const SimpleBarChart(this.seriesList, {super.key, required this.animate});
+class BarChartFromAPI extends StatefulWidget {
+  const BarChartFromAPI({Key? key}) : super(key: key);
 
-  factory SimpleBarChart.withSampleData() {
-    return SimpleBarChart(
-      _createSampleData(),
-      animate: true,
-    );
+  @override
+  _BarChartFromAPIState createState() => _BarChartFromAPIState();
+}
+
+class _BarChartFromAPIState extends State<BarChartFromAPI> {
+  List<SalesInMonthModel> _data = [];
+  bool _loading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchData();
+  }
+
+  void _fetchData() async {
+    try {
+      List<SalesInMonthModel> data = await GetSalesValueMonthlyService(Dio())
+          .getSalesValueMonthlyService();
+
+      setState(() {
+        _data = data;
+        _loading = false;
+      });
+    } catch (e) {
+      print('Error fetching data: $e');
+      setState(() {
+        _loading = false;
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return charts.BarChart(
-      seriesList,
-      animate: animate,
-      defaultRenderer: charts.BarRendererConfig(
-        cornerStrategy: const charts.ConstCornerStrategy(
-          5,
-        ), // Rounded corners with a radius of 20
-        barRendererDecorator: charts.BarLabelDecorator<String>(
-          outsideLabelStyleSpec: charts.TextStyleSpec(
-            color: charts.ColorUtil.fromDartColor(Colors
-                .transparent), // Set text color to transparent to hide the labels
-          ),
-          labelPosition: charts.BarLabelPosition.outside,
-          insideLabelStyleSpec: charts.TextStyleSpec(
-            fontSize: 14, // Adjust font size as needed
-            color: charts.ColorUtil.fromDartColor(
-                Colors.white), // Set text color for inside labels
-          ),
-        ),
-
-        minBarLengthPx: 40, // Set the minimum width of bars in pixels
-      ),
-      domainAxis: charts.OrdinalAxisSpec(
-        renderSpec: charts.SmallTickRendererSpec(
-          labelStyle: charts.TextStyleSpec(
-            fontSize: 12, // Adjust font size as needed
-            color: charts.ColorUtil.fromDartColor(Colors
-                .black), // Set text color for domain labels (month labels)
-          ),
-        ),
-      ),
+    return Center(
+      child: _loading
+          ? UnloadedItem(
+              width: MediaQuery.of(context).size.width,
+              height: 370,
+            )
+          : _data.isNotEmpty
+              ? _buildChart()
+              : Text('No data available'),
     );
   }
 
-  static List<charts.Series<OrdinalSales, String>> _createSampleData() {
-    final data = [
-      OrdinalSales('Jan', 45222),
-      OrdinalSales('Feb', 25202),
-      OrdinalSales('Mar', 100000),
-      OrdinalSales('Apr', 7500),
-      OrdinalSales('May', 75000),
-      OrdinalSales('Jun', 3501),
-      OrdinalSales('Jul', 65000),
-      OrdinalSales('Aug', 15222),
-      OrdinalSales('Sep', 9225),
-      OrdinalSales('Oct', 73335),
-      OrdinalSales('Nov', 75334),
-      OrdinalSales('Dec', 15011),
-    ];
-
-    return [
-      charts.Series<OrdinalSales, String>(
+  Widget _buildChart() {
+    List<charts.Series<SalesInMonthModel, String>> series = [
+      charts.Series<SalesInMonthModel, String>(
         id: 'Sales',
-        colorFn: (_, __) => charts.ColorUtil.fromDartColor(
-            ThemeColors.secondary), // Change the color to red
-        domainFn: (OrdinalSales sales, _) => sales.month,
-        measureFn: (OrdinalSales sales, _) => sales.sales,
-        data: data,
-      )
+        data: _data,
+        domainFn: (SalesInMonthModel sales, _) => sales.month.toString(),
+        measureFn: (SalesInMonthModel sales, _) =>
+            double.parse(sales.total.toString()),
+        colorFn: (_, __) => charts.ColorUtil.fromDartColor(ThemeColors.primary),
+        displayName: 'Sales',
+      ),
     ];
+
+    return charts.BarChart(
+      series,
+      animate: true,
+      vertical: true,
+      domainAxis: charts.OrdinalAxisSpec(
+        renderSpec: charts.SmallTickRendererSpec(
+          labelStyle: charts.TextStyleSpec(
+            color: charts.ColorUtil.fromDartColor(
+              ThemeColors.primary,
+            ),
+          ),
+        ),
+      ),
+      defaultRenderer: charts.BarRendererConfig(
+        cornerStrategy: const charts.ConstCornerStrategy(5),
+      ),
+    );
   }
-}
-
-class OrdinalSales {
-  final String month;
-  final int sales;
-
-  OrdinalSales(this.month, this.sales);
 }

@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:sales_management_system/Core/Constants/theme.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sales_management_system/Views/pills/pills.dart';
+import 'package:sales_management_system/Core/helper/services/getTest.dart';
+import 'package:sales_management_system/Views/home/dashboard.dart';
 
 import 'Core/Components/widget.dart';
 import 'Models/pills/pills.dart';
 
 void main() {
+  DioHelper.init(); // Initialize Dio instance
   runApp(const MyApp());
 }
 
@@ -34,7 +36,7 @@ class MyApp extends StatelessWidget {
       title: 'Sales Management System App',
       // NOTE (From Zakaria): everyone when creating your task page
       // put the home page as your main working screen
-      home: PillsPage(),
+      home: DashboardPage(),
       theme: ThemeData(
         useMaterial3: true,
         textTheme: GoogleFonts.robotoTextTheme(),

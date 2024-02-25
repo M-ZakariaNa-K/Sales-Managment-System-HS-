@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:sales_management_system/Core/Components/home/Circle_image.dart';
 import 'package:sales_management_system/Core/Constants/theme.dart';
+import 'package:sales_management_system/Models/home/get_all_branches.dart';
 
 class MobileSalesItem extends StatelessWidget {
-  const MobileSalesItem({super.key});
-  // final int index;
+  const MobileSalesItem({super.key, required this.branch, required this.index});
+  final BranchDataModel branch;
+  final int index;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -35,8 +37,8 @@ class MobileSalesItem extends StatelessWidget {
                   ),
                   width: 40,
                   height: 40,
-                  child: const Text(
-                    "1",
+                  child: Text(
+                    "${index + 1}",
                     style: TextStyle(
                       color: ThemeColors.secondary,
                       fontWeight: FontWeight.bold,
@@ -63,7 +65,7 @@ class MobileSalesItem extends StatelessWidget {
             ],
           ),
           // 2 //----------------------
-          Divider(
+          const Divider(
             thickness: 1,
             height: 20,
             color: ThemeColors.secondary,
@@ -73,8 +75,8 @@ class MobileSalesItem extends StatelessWidget {
             leading: CircleImageWidget(
               image: "images/Profile.png",
             ),
-            title: Text("اسم الفرع"),
-            subtitle: Text("الرقم: 04"),
+            title: Text(branch.branch!),
+            subtitle: Text("${branch.number}"),
           ),
           // // 4 //----------------------
           Row(
@@ -89,7 +91,7 @@ class MobileSalesItem extends StatelessWidget {
               SizedBox(
                 width: 200,
                 child: Text(
-                  "ثمانية وعشرون مليار وأربعة مائة وثمانية وعشرون مليون وخمسة مائة وثلاثة وسبعون ألف وثلاثة مائة وأربعة وخمسون فاصل أربعة إثنان خمسة",
+                  branch.spelledTotal!,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
                 ),
@@ -109,7 +111,7 @@ class MobileSalesItem extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                Text("28428573354.424999"),
+                Text("${branch.totalSales}"),
               ],
             ),
           )

@@ -24,14 +24,14 @@ class _SalesTableImageSliderRowState extends State<SalesTableImageSliderRow> {
         ? Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Padding(
-                padding: EdgeInsets.only(right: 20.0, bottom: 20),
+              Padding(
+                padding: const EdgeInsets.only(right: 20.0, bottom: 20),
                 child: SalesTable(),
               ),
               //===============================================================
               Expanded(
                 child: Container(
-                    height: MediaQuery.of(context).size.height * 0.68,
+                    height: MediaQuery.of(context).size.height * 0.70,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
                       border: Border.all(
@@ -43,8 +43,8 @@ class _SalesTableImageSliderRowState extends State<SalesTableImageSliderRow> {
               )
             ],
           )
-        : const Padding(
-            padding: EdgeInsets.only(right: 0.0, bottom: 20),
+        : Padding(
+            padding: const EdgeInsets.only(right: 0.0, bottom: 20),
             child: SalesTable(),
           );
   }

@@ -37,8 +37,9 @@ class CostumeListTile extends StatelessWidget {
         title: Text(
           title,
           style: const TextStyle(
-            color: ThemeColors.primaryTextColor,
-          ),
+              color: ThemeColors.primaryTextColor,
+              fontWeight: FontWeight.bold,
+              fontSize: 14),
         ),
         subtitle: Text(subtitle,
             style: const TextStyle(

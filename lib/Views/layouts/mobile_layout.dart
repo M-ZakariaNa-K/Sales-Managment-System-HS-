@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sales_management_system/Core/Components/home/charts_database_Row/total_bar_chart.dart';
 import 'package:sales_management_system/Core/Components/home/charts_database_Row/total_database.dart';
-import 'package:sales_management_system/Core/Components/home/sales_table&image_sliderRow/mobile_sales_item.dart';
+import 'package:sales_management_system/Core/Components/home/sales_table&image_sliderRow/mobile_sales_items_list.dart';
 import 'package:sales_management_system/Core/Components/home/search&profile_Row/search_bar.dart';
 
 class MobileLayout extends StatelessWidget {
@@ -33,7 +33,12 @@ class MobileLayout extends StatelessWidget {
           SliverToBoxAdapter(
             child: Padding(
               padding: EdgeInsets.all(10.0),
-              child: MobileSalesItem(),
+              child: MobileSalesItemsList(),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: SizedBox(
+              height: 1,
             ),
           ),
         ],
