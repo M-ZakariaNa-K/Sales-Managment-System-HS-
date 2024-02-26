@@ -12,8 +12,20 @@ class AddAdminScreen extends StatelessWidget {
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
   var formKey = GlobalKey<FormState>();
-
-  AddAdminScreen({super.key});
+  bool isUpdate;
+  AddAdminScreen({
+    super.key,
+    required this.isUpdate,
+    phone = '',
+    userName = '',
+    password = '',
+    confirmPassword = '',
+  }) {
+    phoneController.text = phone;
+    userNameController.text = userName;
+    passwordController.text = password;
+    confirmPasswordController.text = confirmPassword;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -139,15 +151,19 @@ class AddAdminScreen extends StatelessWidget {
                 defaultButton(
                     function: () {
                       if (formKey.currentState!.validate()) {
-                        controller.registerState(
-                          name: userNameController.text,
-                          email: emailController.text,
-                          phone: phoneController.text,
-                          password: passwordController.text,
-                        );
+                        if (!isUpdate) {
+                          controller.registerState(
+                            name: userNameController.text,
+                            email: emailController.text,
+                            phone: phoneController.text,
+                            password: passwordController.text,
+                          );
+                        } else {
+                          //tabe3 al update
+                        }
                       }
                     },
-                    label: 'تسجيل',
+                    label: isUpdate ? 'تعديل' : 'تسجيل',
                     context: context),
                 const SizedBox(
                   height: 40,

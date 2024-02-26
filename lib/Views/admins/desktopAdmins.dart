@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart';
 import 'package:sales_management_system/Controllers/admins/admin.dart';
 import 'package:sales_management_system/Core/Components/components.dart';
 import 'package:sales_management_system/Core/Components/widget.dart';
@@ -8,6 +9,7 @@ import 'package:sales_management_system/Views/admins/addAdmins.dart';
 
 class AdminsDisktopLayout extends StatelessWidget {
   bool isAddAdmin = false;
+  bool isEditAdmin = false;
 
   AdminsDisktopLayout(BuildContext context);
   @override
@@ -47,18 +49,9 @@ class AdminsDisktopLayout extends StatelessWidget {
                               IconButton(
                                 icon: const Icon(Icons.person_add_alt_rounded),
                                 onPressed: () {
-                                  isAddAdmin = !isAddAdmin;
+                                  isAddAdmin = true;
+                                  isEditAdmin =!isEditAdmin;
                                   controller.update();
-                                  //   showDialog(
-                                  //       context: context,
-                                  //       builder: (context) {
-                                  //         return AlertDialog(
-                                  //           content: Container(
-                                  //               width: horizontalPadding * .3,
-                                  //               height: verticalPadding * .7,
-                                  //               child: AddAdminScreen()),
-                                  //         );
-                                  //       });
                                 },
                               ),
                             ]),
@@ -104,7 +97,10 @@ class AdminsDisktopLayout extends StatelessWidget {
                                             ),
                                             const Spacer(),
                                             TextButton(
-                                                onPressed: () {},
+                                                onPressed: () {
+                                                  isAddAdmin = !isAddAdmin;
+                                                  controller.update();
+                                                },
                                                 child: const Text('تعديل')),
                                             SizedBox(
                                               width: horizontalPadding * .0015,
@@ -208,7 +204,7 @@ class AdminsDisktopLayout extends StatelessWidget {
                             height: verticalPadding * .8,
                             duration: const Duration(milliseconds: 300),
                             child: isAddAdmin
-                                ? AddAdminScreen()
+                                ? AddAdminScreen(isUpdate: false)
                                 : const Center(
                                     child: Row(
                                       mainAxisAlignment:

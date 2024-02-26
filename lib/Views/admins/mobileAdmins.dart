@@ -49,7 +49,8 @@ class AdminsMobileLayout extends StatelessWidget {
                                       content: SizedBox(
                                           width: horizontalPadding * .7,
                                           height: verticalPadding * .8,
-                                          child: AddAdminScreen()),
+                                          child:
+                                              AddAdminScreen(isUpdate: false)),
                                     );
                                   });
                             },
@@ -82,7 +83,26 @@ class AdminsMobileLayout extends StatelessWidget {
                                         const Text('Admin Name'),
                                         const Spacer(),
                                         TextButton(
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              showDialog(
+                                                  context: context,
+                                                  builder: (context) {
+                                                    return AlertDialog(
+                                                      title: Text(
+                                                          "تعديل بيانات المستخدم"),
+                                                      content: SizedBox(
+                                                          width:
+                                                              horizontalPadding *
+                                                                  .7,
+                                                          height:
+                                                              verticalPadding *
+                                                                  .8,
+                                                          child: AddAdminScreen(
+                                                            isUpdate: true,
+                                                          )),
+                                                    );
+                                                  });
+                                            },
                                             child: const Text('تعديل')),
                                         SizedBox(
                                           width: horizontalPadding * .0015,

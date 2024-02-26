@@ -12,6 +12,8 @@ class AdminsTabletLayout extends StatelessWidget {
   AdminsTabletLayout(BuildContext context);
   @override
   Widget build(BuildContext context) {
+    String addAdminText = '';
+
     final MediaQueryData = MediaQuery.of(context);
     final horizontalPadding = MediaQueryData.size.width;
     final verticalPadding = MediaQueryData.size.height;
@@ -46,6 +48,7 @@ class AdminsTabletLayout extends StatelessWidget {
                               IconButton(
                                 icon: const Icon(Icons.person_add_alt_rounded),
                                 onPressed: () {
+                                  addAdminText = 'تسجيل مستخدم جديد';
                                   isAddAdmin = !isAddAdmin;
                                   controller.update();
                                   //   showDialog(
@@ -92,7 +95,12 @@ class AdminsTabletLayout extends StatelessWidget {
                                             const Text('Admin number'),
                                             Spacer(),
                                             TextButton(
-                                                onPressed: () {},
+                                                onPressed: () {
+                                                  isAddAdmin = !isAddAdmin;
+                                                  addAdminText =
+                                                      'تعديل بيانات المستخدم';
+                                                  controller.update();
+                                                },
                                                 child: const Text('تعديل')),
                                             SizedBox(
                                               width: horizontalPadding * .0015,
@@ -175,10 +183,10 @@ class AdminsTabletLayout extends StatelessWidget {
                           child: Padding(
                               padding: const EdgeInsets.all(10.0),
                               child: isAddAdmin
-                                  ? const Row(children: [
+                                  ? Row(children: [
                                       Text(
-                                        'تسجيل مستخدم جديد',
-                                        style: TextStyle(
+                                        addAdminText,
+                                        style: const TextStyle(
                                             fontSize: 25,
                                             fontWeight: FontWeight.w300),
                                       ),
@@ -196,7 +204,9 @@ class AdminsTabletLayout extends StatelessWidget {
                             height: verticalPadding * .8,
                             duration: const Duration(milliseconds: 300),
                             child: isAddAdmin
-                                ? AddAdminScreen()
+                                ? AddAdminScreen(
+                                    isUpdate: false,
+                                  )
                                 : const Center(
                                     child: Row(
                                       mainAxisAlignment:

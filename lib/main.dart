@@ -37,11 +37,11 @@ class MyApp extends StatelessWidget {
     );
     return GetMaterialApp(
       //translations: MyLocale(),
-      locale: Locale('ar'),
+      locale: Locale('en'),
       title: 'Sales Management System App',
       // NOTE (From Zakaria): everyone when creating your task page
       // put the home page as your main working screen
-      home: PillsPage(),
+      home: AdminsPage(),
       theme: ThemeData(
         useMaterial3: true,
         textTheme: GoogleFonts.robotoTextTheme(),
