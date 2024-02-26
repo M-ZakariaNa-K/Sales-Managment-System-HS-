@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AddAdminController extends GetxController {
-  bool Gg = true;
+  bool isSecure = true;
   bool checkBox = false;
   Icon secureOrNot = const Icon(Icons.remove_red_eye);
   Icon confirmSecureOrNot = const Icon(Icons.remove_red_eye);
 
-  void isSecure() {
-    Gg = !Gg;
-    secureOrNot = Gg
+  void changeSecure() {
+    isSecure = !isSecure;
+    secureOrNot = isSecure
         ? const Icon(Icons.remove_red_eye)
         : const Icon(Icons.visibility_off);
     update();
@@ -17,8 +17,8 @@ class AddAdminController extends GetxController {
 
   
   void confirmIsSecure() {
-    Gg = !Gg;
-    secureOrNot = Gg
+    isSecure = !isSecure;
+    secureOrNot = isSecure
         ? const Icon(Icons.remove_red_eye)
         : const Icon(Icons.visibility_off);
     update();

@@ -1,8 +1,11 @@
-import 'package:sales_management_system/Core/Components/widget.dart';
-import 'package:sales_management_system/Views/pills/pdfservice.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:get/get.dart';
 import 'package:pdf/widgets.dart' as pw;
+
+import 'package:sales_management_system/Core/Components/custome_elevated_button.dart';
+import 'package:sales_management_system/Core/Components/widget.dart';
+import 'package:sales_management_system/Core/Constants/theme.dart';
+import 'package:sales_management_system/Views/reports/report.dart';
 
 class PillsPage extends StatefulWidget {
   const PillsPage({super.key});
@@ -12,157 +15,137 @@ class PillsPage extends StatefulWidget {
 }
 
 class _PillsPageState extends State<PillsPage> {
-  // ignore: prefer_typing_uninitialized_variables
-  var selectedStartDateRange;
-
-  // ignore: prefer_typing_uninitialized_variables
-  var selectedEndDateRange;
-  final DataTableSource dataSource = MyData();
+  DateTime? selectedStartDateRange;
+  DateTime? selectedEndDateRange;
   final pdf = pw.Document();
-  MyData? data1;
 
   @override
   Widget build(BuildContext context) {
-    // ignore: non_constant_identifier_names
     final MediaQueryData = MediaQuery.of(context);
     final horizontalPadding = MediaQueryData.size.width;
+    final verticalPadding = MediaQueryData.size.height;
+
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Stack(
-        children: [
-          Positioned(
-            top: 20,
-            left: horizontalPadding * 0.2,
-            child: Text(
-              'Sales Table',
-              style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
+      body: Center(
+        child: Container(
+          padding: const EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            color: ThemeColors.secondary,
+            borderRadius: BorderRadius.circular(5),
+            border: Border.all(
+              width: 2,
+              color: Colors.grey,
             ),
           ),
-          Center(
-            child: SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              child: Stack(
-                alignment: Alignment.bottomLeft,
-                children: [
-                  SingleChildScrollView(
-                    scrollDirection: Axis.vertical,
-                    child: Container(
-                      color: Colors.black,
-                      height: horizontalPadding * .4,
-                      width: horizontalPadding * .5,
-                      child: Column(
-                        children: [
-                          Container(
-                              child: Image.asset(
-                            'images/u.jpg',
-                                
-                          ),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20)
-                          ),
-                          ),
-                          PaginatedDataTable(
-                            source: dataSource,
-                            columns: const [
-                              DataColumn(label: Text('Number')),
-                              DataColumn(label: Text('Code')),
-                              DataColumn(label: Text('Branch')),
-                              DataColumn(label: Text('Total')),
-                            ],
-                            columnSpacing: 200,
-                            rowsPerPage: 2,
-                          ),
-                        ],
+          width: horizontalPadding * 0.63,
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'مبيعات الفرع ',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: ThemeColors.primaryTextColor,
                       ),
                     ),
-                  ),
-                  Positioned(
-                    bottom: 15,
-                    child: Row(
+                    Row(
                       children: [
-                        TextButton(
-                          onPressed: () async {
-                            final DateTimeRange? picked =
-                                await showDateRangePicker(
-                              context: context,
-                              initialDateRange: DateTimeRange(
-                                start: DateTime.now(),
-                                end: DateTime.now()
-                                    .add(const Duration(days: 100)),
-                              ),
-                              firstDate: DateTime(2000),
-                              lastDate: DateTime(2100),
-                            );
-                            if (picked != null &&
-                                picked != selectedStartDateRange) {
-                              setState(() {
-                                selectedStartDateRange = picked.start;
-                                selectedEndDateRange = picked.end;
-                              });
-                            }
-                          },
-                          child: Text(
-                            selectedStartDateRange == null
-                                ? 'PickDate'
-                                : '${DateFormat('yyyy-MM-dd').format(selectedStartDateRange)} / ${DateFormat('yyyy-MM-dd').format(selectedEndDateRange)}',
-                            style: const TextStyle(
-                                fontSize: 20, color: Colors.black),
+                        Text("شهر:"),
+                        SizedBox(width: 20),
+                        CustomeElevatedButton(
+                          buttonChild: const Text(
+                            "Export",
+                            style: TextStyle(
+                                color: ThemeColors.secondaryTextColor),
                           ),
+                          buttonColor: ThemeColors.secondary,
+                          onPressed: () {
+                            Get.to(ReportsPage());
+                          },
                         ),
-                        IconButton(
-                            onPressed: () {
-                              showDialog(
-                                  context: context,
-                                  builder: (context) => AlertDialog(
-                                        title: const Text('Save As?'),
-                                        content: Row(
-                                          children: [
-                                            Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: [
-                                                TextButton(
-                                                  onPressed: () {},
-                                                  child: Image.asset(
-                                                    'images/excel.png',
-                                                    height: 150,
-                                                    width: 150,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                            Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: [
-                                                TextButton(
-                                                    onPressed: () {
-                                                      PdfService()
-                                                          .printCustomersPdf(
-                                                              data.cast<
-                                                                  DataCell>());
-                                                    },
-                                                    child: Image.asset(
-                                                      'images/pdf.png',
-                                                      height: 150,
-                                                      width: 150,
-                                                    )),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ));
-                            },
-                            icon: const Icon(
-                              Icons.save,
-                              color: Colors.black,
-                            ))
                       ],
-                    ),
-                  ),
-                ],
+                    )
+                  ],
+                ),
               ),
-            ),
+              SizedBox(
+                width: double.infinity,
+                child: PaginatedDataTable(
+                  headingRowColor:
+                      MaterialStateColor.resolveWith((states) => Colors.white),
+                  // header: const Text(
+                  //   'Sales Table',
+                  //   style: TextStyle(fontWeight: FontWeight.bold),
+                  // ),
+                  //here data.length && numOfBranshes should has same value and put it in pieChart
+                  rowsPerPage: 10, // Number of rows per page
+                  columns: const [
+                    DataColumn(
+                      label: Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'الرقم',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    DataColumn(
+                      label: Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'التاريخ',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    DataColumn(
+                      label: Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'الإجمالي كتابةً',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    DataColumn(
+                      label: Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'الإجمالي رقماً',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                  source: SalesDataSource(),
+                ),
+              ),
+              Text('السعر الاجمالي'),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
@@ -178,22 +161,40 @@ final List<Map<String, dynamic>> data = List.generate(200, (index) {
   };
 });
 
-class MyData extends DataTableSource {
+class SalesDataSource extends DataTableSource {
   @override
   DataRow? getRow(int index) {
-    return DataRow(cells: [
-      DataCell(Text(data[index]['Number'].toString())),
-      DataCell(Text(data[index]['Code'].toString())),
-      DataCell(Text(data[index]['Branch'].toString())),
-      DataCell(Text(data[index]['Total'].toString())),
-    ]);
+    // Implement logic to get data for each row based on index
+    // Return DataRow widget with appropriate data
+    return DataRow(
+        color: MaterialStateColor.resolveWith((states) {
+          // Define color based on MaterialState
+          return Colors.white; // Default color
+        }),
+        cells: [
+          DataCell(Center(child: Text(04.toString()))),
+          DataCell(Center(child: Text('زبلطاني محل '))),
+          DataCell(
+            Center(
+              child: Container(
+                width: 300,
+                child: const Text(
+                  'ثمانية وعشرون مليار وأربعة مائة وثمانية وعشرون مليون وخمسة مائة وثلاثة وسبعون ألف وثلاثة مائة وأربعة وخمسون فاصل أربعة إثنان خمسة',
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
+                ),
+              ),
+            ),
+          ),
+          DataCell(Center(child: Text('28428573354.424999'))),
+        ]);
   }
 
   @override
-  bool get isRowCountApproximate => false;
+  int get rowCount => 50; // Total number of rows
 
   @override
-  int get rowCount => pills.length;
+  bool get isRowCountApproximate => false;
 
   @override
   int get selectedRowCount => 0;

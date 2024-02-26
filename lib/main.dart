@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sales_management_system/Core/Constants/theme.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sales_management_system/Core/helper/shared/LocaleController.dart';
+import 'package:sales_management_system/Views/admins/admins.dart';
+import 'package:sales_management_system/Views/auth/login.dart';
 import 'package:sales_management_system/Views/pills/pills.dart';
+import 'package:sales_management_system/Views/pills/pillsTable.dart';
 
 import 'Core/Components/widget.dart';
 import 'Models/pills/pills.dart';
@@ -17,8 +22,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    PillsModel pill1 = PillsModel(code: 'code',branch:  'branch',number:  'number',total:  'total');
-    PillsModel pill2 = PillsModel(code: 'code1',branch:  'branch1',number:  'number1',total:  'total1');
+    Get.put(LocalController());
+    PillsModel pill1 = PillsModel(
+        code: 'code', branch: 'branch', number: 'number', total: 'total');
+    PillsModel pill2 = PillsModel(
+        code: 'code1', branch: 'branch1', number: 'number1', total: 'total1');
     pills.add(pill1);
     pills.add(pill2);
     const outlineInputBorder = OutlineInputBorder(
@@ -27,7 +35,8 @@ class MyApp extends StatelessWidget {
         color: Color.fromARGB(198, 0, 51, 102),
       ),
     );
-    return MaterialApp(
+    return GetMaterialApp(
+      //translations: MyLocale(),
       locale: Locale('ar'),
       title: 'Sales Management System App',
       // NOTE (From Zakaria): everyone when creating your task page
