@@ -71,7 +71,7 @@ class DioHelper {
 
   static Future postDataWithAuth(
       {required String url,
-      required Map<String, String> data,
+      required Map<String, dynamic> data,
       String? token}) async {
     var headers = {
       'Accept': 'application/json',

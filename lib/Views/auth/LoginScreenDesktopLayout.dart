@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'dart:ui';
 import 'package:sales_management_system/Controllers/auth/loginController.dart';
 import 'package:sales_management_system/Core/Components/components.dart';
 import 'package:sales_management_system/Core/Constants/theme.dart';
 
 // ignore: must_be_immutable
-class LoginScreen extends StatelessWidget {
+class DesktopLayoutLoginScreen extends StatelessWidget {
   var userController = TextEditingController();
   var passwordController = TextEditingController();
   var formKey = GlobalKey<FormState>();
 
-  LoginScreen({super.key});
+  DesktopLayoutLoginScreen(BuildContext context, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +36,7 @@ class LoginScreen extends StatelessWidget {
                   key: formKey,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
+                      borderRadius: const BorderRadius.only(
                           bottomLeft: Radius.circular(20),
                           topLeft: Radius.circular(20)),
                       color: Colors.white.withOpacity(.9),
@@ -45,19 +44,19 @@ class LoginScreen extends StatelessWidget {
                     height: verticalPadding,
                     width: horizontalPadding * 0.4,
                     child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 25),
+                      padding: const EdgeInsets.symmetric(horizontal: 25),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          const Text(
                             'Login To your Account',
                             style: TextStyle(
                                 color: ThemeColors.primary,
                                 fontSize: 25,
                                 fontWeight: FontWeight.w600),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 20,
                           ),
                           TextFormField(
@@ -108,10 +107,10 @@ class LoginScreen extends StatelessWidget {
                             height: 40,
                           ),
                           defaultButton(
-                              function: () {
+                              function: () async {
                                 if (formKey.currentState!.validate()) {
                                   controller.loginState(
-                                      phone: userController.text,
+                                      userName: userController.text,
                                       password: passwordController.text);
                                 }
                               },
@@ -144,7 +143,7 @@ class LoginScreen extends StatelessWidget {
                   width: horizontalPadding * 0.2,
                   decoration: const BoxDecoration(),
                   child: ClipRRect(
-                    borderRadius: BorderRadius.only(
+                    borderRadius: const BorderRadius.only(
                         topRight: Radius.circular(20),
                         bottomRight: Radius.circular(20)),
                     child: Image.asset(

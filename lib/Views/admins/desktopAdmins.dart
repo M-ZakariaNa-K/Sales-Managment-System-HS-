@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart';
-import 'package:sales_management_system/Controllers/admins/admin.dart';
+import 'package:sales_management_system/Controllers/admins/admin_controller.dart';
 import 'package:sales_management_system/Core/Components/components.dart';
 import 'package:sales_management_system/Core/Components/widget.dart';
 import 'package:sales_management_system/Core/Constants/theme.dart';
@@ -50,7 +50,7 @@ class AdminsDisktopLayout extends StatelessWidget {
                                 icon: const Icon(Icons.person_add_alt_rounded),
                                 onPressed: () {
                                   isAddAdmin = true;
-                                  isEditAdmin =!isEditAdmin;
+                                  isEditAdmin = !isEditAdmin;
                                   controller.update();
                                 },
                               ),
@@ -79,19 +79,19 @@ class AdminsDisktopLayout extends StatelessWidget {
                                             const SizedBox(
                                               width: 20,
                                             ),
-                                            const Text('Admin Name'),
+                                            Text(listUserModel!
+                                                .data.users[index].name),
                                             const SizedBox(
                                               width: 20,
                                             ),
-                                            const Text('Admin number'),
+                                            Text(listUserModel!
+                                                .data.users[index].id
+                                                .toString()),
                                             const SizedBox(
                                               width: 20,
                                             ),
-                                            const Text('Last Active'),
-                                            const SizedBox(
-                                              width: 20,
-                                            ),
-                                            const Text('Admin birthday'),
+                                            Text(listUserModel!
+                                                .data.users[index].username),
                                             const SizedBox(
                                               width: 20,
                                             ),
@@ -111,11 +111,16 @@ class AdminsDisktopLayout extends StatelessWidget {
                                                       context: context,
                                                       builder: (context) {
                                                         return AlertDialog(
-                                                          title: const Column(
+                                                          title: Column(
                                                             children: [
                                                               Text(
                                                                   'هل انت متأكد من إزالة المستخدم'),
-                                                              Text('User name'),
+                                                              Text(
+                                                                  listUserModel!
+                                                                      .data
+                                                                      .users[
+                                                                          index]
+                                                                      .name),
                                                             ],
                                                           ),
                                                           content:
@@ -142,7 +147,7 @@ class AdminsDisktopLayout extends StatelessWidget {
                                         )),
                                     separatorBuilder: (context, index) =>
                                         defaultDivider(),
-                                    itemCount: users.length)
+                                    itemCount: listUserModel!.data.users.length)
                                 : const Center(
                                     child: Column(
                                         mainAxisAlignment:

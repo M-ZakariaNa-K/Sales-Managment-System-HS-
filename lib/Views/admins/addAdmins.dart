@@ -6,9 +6,8 @@ import 'package:sales_management_system/Core/Constants/theme.dart';
 
 // ignore: must_be_immutable
 class AddAdminScreen extends StatelessWidget {
-  TextEditingController phoneController = TextEditingController();
   TextEditingController userNameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
   var formKey = GlobalKey<FormState>();
@@ -16,12 +15,12 @@ class AddAdminScreen extends StatelessWidget {
   AddAdminScreen({
     super.key,
     required this.isUpdate,
-    phone = '',
+    name = '',
     userName = '',
     password = '',
     confirmPassword = '',
   }) {
-    phoneController.text = phone;
+    nameController.text = name;
     userNameController.text = userName;
     passwordController.text = password;
     confirmPasswordController.text = confirmPassword;
@@ -53,10 +52,10 @@ class AddAdminScreen extends StatelessWidget {
                   height: 25,
                 ),
                 TextFormField(
-                  controller: emailController,
+                  controller: nameController,
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return 'Email musn\'t be empty';
+                      return 'Name musn\'t be empty';
                     }
                     return null;
                   },
@@ -64,10 +63,10 @@ class AddAdminScreen extends StatelessWidget {
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10)),
                     prefixIcon: const Icon(
-                      Icons.email_outlined,
+                      Icons.person_2,
                       color: ThemeColors.primary,
                     ),
-                    labelText: 'Email',
+                    labelText: 'Name',
                   ),
                 ),
                 const SizedBox(
@@ -153,11 +152,11 @@ class AddAdminScreen extends StatelessWidget {
                       if (formKey.currentState!.validate()) {
                         if (!isUpdate) {
                           controller.registerState(
-                            name: userNameController.text,
-                            email: emailController.text,
-                            phone: phoneController.text,
-                            password: passwordController.text,
-                          );
+                              userName: userNameController.text,
+                              name: nameController.text,
+                              password: passwordController.text,
+                              passwordConfirmation:
+                                  confirmPasswordController.text);
                         } else {
                           //tabe3 al update
                         }

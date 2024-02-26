@@ -1,17 +1,21 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sales_management_system/Core/Constants/theme.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sales_management_system/Core/helper/services/getTest.dart';
 import 'package:sales_management_system/Core/helper/shared/LocaleController.dart';
-import 'package:sales_management_system/Views/admins/admins.dart';
 import 'package:sales_management_system/Views/auth/login.dart';
-import 'package:sales_management_system/Views/pills/pills.dart';
-import 'package:sales_management_system/Views/pills/pillsTable.dart';
+import 'package:window_manager/window_manager.dart';
 
 import 'Core/Components/widget.dart';
 import 'Models/pills/pills.dart';
 
-void main() {
+void main() async {
+// setting min and max with the same size to prevent resizing
+
+  DioHelper.init();
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
@@ -41,7 +45,7 @@ class MyApp extends StatelessWidget {
       title: 'Sales Management System App',
       // NOTE (From Zakaria): everyone when creating your task page
       // put the home page as your main working screen
-      home: AdminsPage(),
+      home: LoginScreen(),
       theme: ThemeData(
         useMaterial3: true,
         textTheme: GoogleFonts.robotoTextTheme(),
