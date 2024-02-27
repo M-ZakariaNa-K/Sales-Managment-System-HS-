@@ -54,7 +54,6 @@ dependencies:
   permission_handler: ^10.2.0
   syncfusion_flutter_pdf: ^21.2.4
   pdf: ^3.10.7
-  window_manager: ^0.3.8
 dev_dependencies:
   flutter_test:
     sdk: flutter
