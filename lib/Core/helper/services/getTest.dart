@@ -1,12 +1,19 @@
-// ignore: file_names
+// ignore_for_file: file_names
+
 import 'package:dio/dio.dart';
 import 'package:sales_management_system/Core/Components/components.dart';
 
+//showTOast: it's like a dialog has a color and text (the text is the
+//response message and the colors is ToastStates.SUCCESSFUL of ToastStates.ERROR)
+//be sure we have the same components
 class DioHelper {
   static late Dio dio;
 
+  //init function should invoke in main function before runApp()
   static init() {
     dio = Dio(BaseOptions(
+      //this URL is Our API and we will write it here and just here
+      //every method in this class has a base url parameter (this API)
       baseUrl: 'http://127.0.0.1:8000/api/',
       receiveDataWhenStatusError: true,
       // connectTimeout: Duration(seconds: 5 ),
@@ -68,7 +75,6 @@ class DioHelper {
       }
     });
   }
-
   static Future postDataWithAuth(
       {required String url,
       required Map<String, dynamic> data,
@@ -107,7 +113,7 @@ class DioHelper {
   }
 
   static Future<Response> putData(
-      {required String url,
+      {required String baseURL,
       Map<String, dynamic>? query,
       required Map<String, dynamic> data,
       String lang = "en",
@@ -117,6 +123,6 @@ class DioHelper {
       'lang': lang,
       'Authorization': token ?? ''
     };
-    return dio.put(url, queryParameters: query, data: data);
+    return dio.put(baseURL, queryParameters: query, data: data);
   }
 }

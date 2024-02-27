@@ -29,12 +29,12 @@ class PdfService {
     );
 
     //Add rows to grid
-    for (final pills in data) {
+    for (int i = 0; i < 100; i++) {
       PdfGridRow row = grid.rows.add();
       row.cells[0].value = 'pills.';
-    row.cells[1].value = 'pills[1]';
-    row.cells[2].value =' pills.email';
-    row.cells[3].value = 'pills.address';
+      row.cells[1].value = 'pills[1]';
+      row.cells[2].value = ' pills.email';
+      row.cells[3].value = 'pills.address';
     }
     //Add rows style
     grid.style = PdfGridStyle(
