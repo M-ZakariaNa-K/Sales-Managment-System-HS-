@@ -21,10 +21,12 @@ class DioHelper {
     ));
   }
 
-  static Future<Response> getData(
+Future<Response> getData(
       {required String path,
       Map<String, dynamic>? query,
+      Map<String, dynamic>? body,
       String? token}) async {
+        
     dio.options.headers = {
       'Accept': 'application/json',
       'Authorization': 'Bearer $token'
@@ -34,6 +36,8 @@ class DioHelper {
         .get(
       path,
       queryParameters: query,
+      data: body
+      
     )
         // ignore: body_might_complete_normally_catch_error
         .catchError((e) {
@@ -75,7 +79,7 @@ class DioHelper {
       }
     });
   }
-  static Future postDataWithAuth(
+  Future postDataWithAuth(
       {required String url,
       required Map<String, dynamic> data,
       String? token}) async {

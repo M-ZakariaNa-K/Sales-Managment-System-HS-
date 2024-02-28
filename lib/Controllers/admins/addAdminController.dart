@@ -37,7 +37,7 @@ class AddAdminController extends GetxController {
       required String name,
       required String password,
       required passwordConfirmation}) {
-    DioHelper.postDataWithAuth(url: 'users/add', data: {
+    DioHelper().postDataWithAuth(url: 'users/add', data: {
       'name': name,
       'username': userName,
       'password': password,

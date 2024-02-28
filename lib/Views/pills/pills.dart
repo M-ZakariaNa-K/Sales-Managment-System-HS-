@@ -26,12 +26,12 @@ class _PillsPageState extends State<PillsPage> {
     final verticalPadding = MediaQueryData.size.height;
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: ThemeColors.secondary,
       body: Center(
         child: Container(
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
-            color: ThemeColors.secondary,
+            color: Colors.white,
             borderRadius: BorderRadius.circular(5),
             border: Border.all(
               width: 2,
@@ -77,8 +77,8 @@ class _PillsPageState extends State<PillsPage> {
               SizedBox(
                 width: double.infinity,
                 child: PaginatedDataTable(
-                  headingRowColor:
-                      MaterialStateColor.resolveWith((states) => Colors.white),
+                  // headingRowColor:
+                  //     MaterialStateColor.resolveWith((states) => Colors.white),
                   // header: const Text(
                   //   'Sales Table',
                   //   style: TextStyle(fontWeight: FontWeight.bold),

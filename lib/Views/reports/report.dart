@@ -25,19 +25,20 @@ class _ReportsPageState extends State<ReportsPage> {
     final verticalPadding = MediaQueryData.size.height;
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: ThemeColors.secondary,
       body: Center(
         child: Container(
           padding: const EdgeInsets.all(10),
+          margin: const EdgeInsets.all(10),
           decoration: BoxDecoration(
-            color: ThemeColors.secondary,
-            borderRadius: BorderRadius.circular(5),
+            color: Colors.red,
+            borderRadius: BorderRadius.circular(10),
             border: Border.all(
               width: 2,
               color: Colors.grey,
             ),
           ),
-          width: horizontalPadding * 0.63,
+          // width: horizontalPadding * 0.63,
           child: Column(
             children: [
               Padding(
@@ -142,9 +143,9 @@ class _ReportsPageState extends State<ReportsPage> {
               SizedBox(
                 width: double.infinity,
                 child: PaginatedDataTable(
-                  headingRowColor:
-                      MaterialStateColor.resolveWith((states) => Colors.white),
-                  // header: const Text(
+                  // headingRowColor:
+                  //     MaterialStateColor.resolveWith((states) => Colors.white),
+                  // // header: const Text(
                   //   'Sales Table',
                   //   style: TextStyle(fontWeight: FontWeight.bold),
                   // ),

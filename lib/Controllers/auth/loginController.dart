@@ -34,7 +34,7 @@ class LoginController extends GetxController {
       token = userModel!.data!.token!;
       print("${token}   GGGGGG");
 
-      await DioHelper.getData(path: 'users/list', token: token).then((value) {
+      await DioHelper().getData(path: 'users/list', token: token).then((value) {
         print("gg");
         listUserModel = ListUserModel.fromJson(value.data);
         print(listUserModel!.data.UsersCount);
