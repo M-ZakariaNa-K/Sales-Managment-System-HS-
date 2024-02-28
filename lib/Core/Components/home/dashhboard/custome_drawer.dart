@@ -74,4 +74,3 @@ class DrawerWidget extends StatelessWidget {
     );
   }
 }
-

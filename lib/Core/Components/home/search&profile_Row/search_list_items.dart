@@ -97,7 +97,7 @@ class _SearchListItemsState extends State<SearchListItems> {
                                 width: 40,
                                 height: 40,
                                 child: Image.asset(
-                                  'images/logo.png',
+                                  'images/Logo2.png',
                                   fit: BoxFit.cover,
                                 ),
                               ),
