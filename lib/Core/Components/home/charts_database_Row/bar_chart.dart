@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
-import 'package:sales_management_system/Core/Components/home/charts_database_Row/total_bar_chart.dart';
 import 'package:sales_management_system/Core/Components/home/unload_sales_table.dart';
 import 'package:sales_management_system/Core/Constants/theme.dart';
 import 'package:sales_management_system/Core/helper/services/home/getSalesValueMonthly.dart';
