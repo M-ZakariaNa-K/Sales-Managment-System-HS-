@@ -26,6 +26,7 @@ class MobileSalesItemsList extends StatelessWidget {
           // If data is successfully fetched, build the list of MobileSalesItem widgets
           List<BranchDataModel> data = snapshot.data!;
           return ListView.builder(
+            shrinkWrap: true,
             scrollDirection: Axis.vertical,
             physics: const NeverScrollableScrollPhysics(),
             itemCount: data.length,
@@ -36,6 +37,11 @@ class MobileSalesItemsList extends StatelessWidget {
               );
             },
           );
+          //     ListView(
+          //         children: List.generate(
+          //   data.length,
+          //   (index) => MobileSalesItem(branch: data[index], index: index),
+          // ));
         }
       },
     );

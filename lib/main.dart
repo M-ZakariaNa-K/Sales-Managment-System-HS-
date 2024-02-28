@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sales_management_system/Core/Constants/theme.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sales_management_system/Core/helper/services/getTest.dart';
@@ -14,6 +15,7 @@ void main() {
 
 // NOTICE: Do not play anything else
 
+// ignore: must_be_immutable
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -31,12 +33,13 @@ class MyApp extends StatelessWidget {
         color: ThemeColors.secondary,
       ),
     );
-    return MaterialApp(
-      locale: Locale('ar'),
+    return GetMaterialApp(
+      locale: const Locale('ar'),
       title: 'Sales Management System App',
       // NOTE (From Zakaria): everyone when creating your task page
       // put the home page as your main working screen
       home: DashboardPage(),
+
       theme: ThemeData(
         useMaterial3: true,
         textTheme: GoogleFonts.robotoTextTheme(),

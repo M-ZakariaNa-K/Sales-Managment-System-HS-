@@ -33,6 +33,7 @@ class _SalesTableState extends State<SalesTable> {
     // Cancel the timer when the widget is disposed
     super.dispose();
   }
+
   // Method to fetch all sales data
   Future<void> _fetchAllSalesData() async {
     List<BranchDataModel> newData =
@@ -62,12 +63,13 @@ class _SalesTableState extends State<SalesTable> {
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 10.0, horizontal: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
-                        'Sales Table',
+                        'جدول المبيعات',
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -80,8 +82,8 @@ class _SalesTableState extends State<SalesTable> {
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 10.0),
                             child: CustomeElevatedButton(
-                              buttonChild: Text(
-                                "All",
+                              buttonChild: const Text(
+                                "الكل",
                                 style: TextStyle(color: Colors.white),
                               ),
                               buttonColor: isAllPressed
@@ -100,8 +102,8 @@ class _SalesTableState extends State<SalesTable> {
                             ),
                           ),
                           CustomeElevatedButton(
-                            buttonChild: Text(
-                              "New",
+                            buttonChild: const Text(
+                              "الأكثر بيعاً",
                               style: TextStyle(color: Colors.white),
                             ),
                             buttonColor: isNewPressed

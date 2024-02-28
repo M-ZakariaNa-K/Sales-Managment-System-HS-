@@ -72,8 +72,9 @@ class MobileSalesItem extends StatelessWidget {
           ),
           // 3 //----------------------
           ListTile(
+            contentPadding: EdgeInsets.zero,
             leading: CircleImageWidget(
-              image: "images/Profile.png",
+              image: "images/logo.png",
             ),
             title: Text(branch.branch!),
             subtitle: Text("${branch.number}"),

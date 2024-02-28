@@ -24,8 +24,8 @@ class _SalesTableImageSliderRowState extends State<SalesTableImageSliderRow> {
         ? Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(right: 20.0, bottom: 20),
+              const Padding(
+                padding:  EdgeInsets.only(left: 20.0, bottom: 20),
                 child: SalesTable(),
               ),
               //===============================================================

@@ -38,7 +38,7 @@ class _DashboardPageState extends State<DashboardPage> {
         onItemTapped: _onItemTapped,
         selectedColor: _selectedColor,
       ),
-     
+      
       appBar: AppBarBuilding(context, scaffoldKey),
       body: Row(
         children: [
@@ -49,7 +49,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   onItemTapped: _onItemTapped,
                   selectedColor: _selectedColor,
                 )
-              : const Text(""),
+              : const SizedBox(),
           // Page Content
           Expanded(
             child: _pages[_selectedIndex],

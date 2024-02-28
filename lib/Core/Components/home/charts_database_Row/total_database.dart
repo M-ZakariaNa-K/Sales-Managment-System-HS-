@@ -6,8 +6,11 @@ import 'package:sales_management_system/Core/Components/home/charts_database_Row
 import 'package:sales_management_system/Core/Components/home/custome_elevated_button.dart';
 import 'package:sales_management_system/Core/Components/home/unload_sales_table.dart';
 import 'package:sales_management_system/Core/Constants/theme.dart';
+import 'package:sales_management_system/Core/helper/services/home/get_database_name_service.dart';
 import 'package:sales_management_system/Core/helper/services/home/get_databases_list_service.dart';
 import 'package:sales_management_system/Core/helper/services/home/post_update_database_service.dart';
+import 'package:sales_management_system/Core/helper/shared/shared.dart';
+import 'package:sales_management_system/Models/home/get_database_name_model.dart';
 import 'package:sales_management_system/Models/home/get_databases_list_model.dart';
 
 class TotalDatabase extends StatefulWidget {
@@ -18,19 +21,27 @@ class TotalDatabase extends StatefulWidget {
 }
 
 class _TotalDatabaseState extends State<TotalDatabase> {
-  final TextEditingController databaseTextFildController =
-      TextEditingController();
+  late Future<GetDatabsNameModel> _adminDatabaseFuture;
+  late Future<GetDatabsNameModel> _userDatabaseFuture;
+  late Future<List<GetDatabasesListDataModel>> _future;
   String? selectedDatabase1;
   String? selectedDatabase2;
-  late Timer _timer;
   bool _isButtonVisible = false;
+  bool _isDisposed = false; // Add this variable
 
   @override
   void initState() {
     super.initState();
+    _adminDatabaseFuture = GetDatabsNameService(Dio())
+        .getDatabsNameService(baseUrl: 'databases/get-admin');
+    _userDatabaseFuture = GetDatabsNameService(Dio())
+        .getDatabsNameService(baseUrl: 'databases/get-users');
+    _future = GetDatabasesListService(Dio()).getDatabasesListService();
+
     // Show the button after 3 seconds
-    _timer = Timer(const Duration(seconds: 3), () {
-      if (mounted) {
+    Future.delayed(const Duration(seconds: 3), () {
+      if (!_isDisposed) {
+        // Check if the widget is disposed before calling setState
         setState(() {
           _isButtonVisible = true;
         });
@@ -40,14 +51,15 @@ class _TotalDatabaseState extends State<TotalDatabase> {
 
   @override
   void dispose() {
-    // Cancel the timer when the widget is disposed
-    _timer.cancel();
+    _isDisposed = true; // Set _isDisposed to true when the widget is disposed
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: MediaQuery.of(context).size.width * 0.4,
+      height: 370,
       constraints: const BoxConstraints(
         minHeight: 320, // Set your minimum height here
       ),
@@ -70,142 +82,32 @@ class _TotalDatabaseState extends State<TotalDatabase> {
               child: Wrap(
                 children: [
                   //-----------------------------------------1------------------------------------
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 10.0),
-                    child: SizedBox(
-                      width: 230,
-                      child: FutureBuilder(
-                          future: GetDatabasesListService(Dio())
-                              .getDatabasesListService(),
-                          builder: (context, snapshot) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting) {
-                              return const UnloadedItem(
-                                width: 230,
-                                height: 49,
-                              );
-                            } else if (snapshot.hasError) {
-                              print('Error: ${snapshot.error}');
-                              return Center(
-                                child: Text('Error: ${snapshot.error}'),
-                              );
-                            } else if (snapshot.hasData) {
-                              List<GetDatabasesListDataModel> data =
-                                  snapshot.data!;
-                              List<String> databaseOptions = data
-                                  .map((database) => database.databaseName)
-                                  .toList();
-                              return DropdownButtonFormField<String>(
-                                elevation: 0,
-                                hint: Text(
-                                  selectedDatabase1 != null
-                                      ? '$selectedDatabase1'
-                                      : "Admin's Database...",
-                                  style: const TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.grey,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                value: selectedDatabase1,
-                                onChanged: (value) {
-                                  setState(() {
-                                    selectedDatabase1 = value;
-                                  });
-                                },
-                                items: databaseOptions.map((String database) {
-                                  return DropdownMenuItem<String>(
-                                    value: database,
-                                    child: Text(database),
-                                  );
-                                }).toList(),
-                                decoration: const InputDecoration(
-                                  border: OutlineInputBorder(),
-                                  contentPadding: EdgeInsets.symmetric(
-                                    vertical: 12.0,
-                                    horizontal: 16.0,
-                                  ),
-                                ),
-                              );
-                            } else {
-                              return const Center(
-                                  child: Text('No data available'));
-                            }
-                          }),
-                    ),
+                  FutureBuilder(
+                    future: _adminDatabaseFuture,
+                    builder:
+                        (context, AsyncSnapshot<GetDatabsNameModel> snapshot) {
+                      return _buildDropDown(
+                          selectedDatabase1, snapshot.data?.name);
+                    },
                   ),
                   const SizedBox(
                     width: 10,
                   ),
                   //-----------------------------------------2------------------------------------
-                  SizedBox(
-                    width: 230,
-                    child: FutureBuilder(
-                        future: GetDatabasesListService(Dio())
-                            .getDatabasesListService(),
-                        builder: (context, snapshot) {
-                          if (snapshot.connectionState ==
-                              ConnectionState.waiting) {
-                            return const UnloadedItem(
-                              width: 230,
-                              height: 49,
-                            );
-                          } else if (snapshot.hasError) {
-                            print('Error: ${snapshot.error}');
-                            return Center(
-                              child: Text('Error: ${snapshot.error}'),
-                            );
-                          } else if (snapshot.hasData) {
-                            List<GetDatabasesListDataModel> data =
-                                snapshot.data!;
-                            List<String> databaseOptions = data
-                                .map((database) => database.databaseName)
-                                .toList();
-                            return DropdownButtonFormField<String>(
-                              elevation: 0,
-                              hint: Text(
-                                selectedDatabase2 != null
-                                    ? '$selectedDatabase2'
-                                    : "User's Database...",
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.grey,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              value: selectedDatabase2,
-                              onChanged: (value) {
-                                setState(() {
-                                  selectedDatabase2 = value;
-                                });
-                              },
-                              items: databaseOptions.map((String database) {
-                                return DropdownMenuItem<String>(
-                                  value: database,
-                                  child: Text(database),
-                                );
-                              }).toList(),
-                              decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
-                                contentPadding: EdgeInsets.symmetric(
-                                  vertical: 12.0,
-                                  horizontal: 16.0,
-                                ),
-                              ),
-                            );
-                          } else {
-                            return const Center(
-                                child: Text('No data available'));
-                          }
-                        }),
+                  FutureBuilder(
+                    future: _userDatabaseFuture,
+                    builder:
+                        (context, AsyncSnapshot<GetDatabsNameModel> snapshot) {
+                      return _buildDropDown(
+                          selectedDatabase2, snapshot.data?.name);
+                    },
                   ),
-                  //-----------------------------------------3------------------------------------
                 ],
               ),
             ),
           ),
 
-          //------Data(Number of admins,company total sales for this mounth,the most sold branch)-----
+          //------Data(Number of admins,company total sales for this month,the most sold branch)-----
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 30.0),
             child: ListOfItems(
@@ -223,24 +125,85 @@ class _TotalDatabaseState extends State<TotalDatabase> {
               child: CustomeElevatedButton(
                 buttonColor: ThemeColors.secondary,
                 buttonChild: const Text(
-                  'Submit',
+                  'تحديث',
                   style: TextStyle(
                     color: ThemeColors.secondaryTextColor,
                   ),
                 ),
                 onPressed: () {
-                  //Update Sales Table Data depend on selectedDatabase
-                  PostUpdateDatabaseService(Dio(), selectedDatabase1!)
-                      .postUpdateAdminDatabaseService(
-                          baseURL: "databases/set-admin");
-                  PostUpdateDatabaseService(Dio(), selectedDatabase2)
-                      .postUpdateAdminDatabaseService(
-                          baseURL: "databases/set-users");
+                  // Update Sales Table Data depend on selectedDatabase
+                  if (selectedDatabase1 != null) {
+                    PostUpdateDatabaseService(Dio(), selectedDatabase1!)
+                        .postUpdateAdminDatabaseService(
+                            baseURL: "databases/set-admin");
+                  }
+                  if (selectedDatabase2 != null) {
+                    PostUpdateDatabaseService(Dio(), selectedDatabase2!)
+                        .postUpdateAdminDatabaseService(
+                            baseURL: "databases/set-users");
+                  }
                 },
               ),
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildDropDown(String? selectedValue, String? hintText) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 5.0),
+      child: FutureBuilder(
+        future: _future,
+        builder:
+            (context, AsyncSnapshot<List<GetDatabasesListDataModel>> snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const UnloadedItem(width: 230, height: 49);
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else {
+            List<String> databaseOptions = snapshot.data
+                    ?.map((database) => database.databaseName)
+                    .toList() ??
+                [];
+            return SizedBox(
+              width: 230,
+              child: DropdownButtonFormField<String>(
+                elevation: 0,
+                hint: Text(
+                  hintText ?? "",
+                  style: const TextStyle(
+                    fontSize: 16,
+                    color: Colors.grey,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                value: selectedValue,
+                onChanged: (value) {
+                  setState(() {
+                    selectedValue = value;
+                  });
+                },
+                items: !isUser
+                    ? databaseOptions.map((String database) {
+                        return DropdownMenuItem<String>(
+                          value: database,
+                          child: Text(database),
+                        );
+                      }).toList()
+                    : [],
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  contentPadding: EdgeInsets.symmetric(
+                    vertical: 12.0,
+                    horizontal: 16.0,
+                  ),
+                ),
+              ),
+            );
+          }
+        },
       ),
     );
   }

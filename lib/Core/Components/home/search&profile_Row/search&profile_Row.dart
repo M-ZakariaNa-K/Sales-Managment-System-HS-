@@ -10,10 +10,14 @@ class SearchProfileRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Row(
       mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(child: SearchBarWidget()),
-        CustomProfileContainer(
-          textColor: Colors.black,
+        Padding(
+          padding: EdgeInsets.symmetric(vertical: 20.0),
+          child: CustomProfileContainer(
+            textColor: Colors.black,
+          ),
         ),
       ],
     );

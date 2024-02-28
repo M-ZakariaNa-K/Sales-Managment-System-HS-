@@ -20,17 +20,17 @@ class DrawerWidget extends StatelessWidget {
       color: ThemeColors.secondary,
       child: ListView(
         children: [
-          // Container(
-          //   padding: const EdgeInsets.symmetric(vertical: 20),
-          //   width: 170,
-          //   height: 170,
-          //   child: Image.asset(
-          //     'images/Logo2.png',
-          //     width: 50,
-          //   ),
-          // ),
+          Container(
+            padding: const EdgeInsets.symmetric(vertical: 20),
+            width: 170,
+            height: 170,
+            child: Image.asset(
+              'images/Logo2.png',
+              width: 50,
+            ),
+          ),
           DrawerItem(
-            title: 'H O M E  P A G E',
+            title: 'الصفحة الرئيسية',
             icon: Icons.home_work_outlined,
             index: 0,
             selectedIndex: selectedIndex,
@@ -38,7 +38,7 @@ class DrawerWidget extends StatelessWidget {
             selectedColor: selectedColor,
           ),
           DrawerItem(
-            title: 'A D M I N S',
+            title: 'المستخدمين',
             icon: Icons.person_2_outlined,
             index: 1,
             selectedIndex: selectedIndex,
@@ -46,7 +46,7 @@ class DrawerWidget extends StatelessWidget {
             selectedColor: selectedColor,
           ),
           DrawerItem(
-            title: 'R E P O R T S',
+            title: 'التقارير',
             icon: Icons.picture_as_pdf_outlined,
             index: 2,
             selectedIndex: selectedIndex,
@@ -54,7 +54,7 @@ class DrawerWidget extends StatelessWidget {
             selectedColor: selectedColor,
           ),
           DrawerItem(
-            title: 'S E T T I N G S',
+            title: 'الإعدادات',
             icon: Icons.settings,
             index: 3,
             selectedIndex: selectedIndex,
@@ -62,7 +62,7 @@ class DrawerWidget extends StatelessWidget {
             selectedColor: selectedColor,
           ),
           DrawerItem(
-            title: 'L O G O U T',
+            title: 'تسجيل الخروج',
             icon: Icons.logout,
             index: 4,
             selectedIndex: selectedIndex,
@@ -74,3 +74,4 @@ class DrawerWidget extends StatelessWidget {
     );
   }
 }
+

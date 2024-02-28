@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class UnloadedItem extends StatelessWidget {
-  const UnloadedItem({super.key, required this.width, @required this.height});
-  final double width;
+  const UnloadedItem({super.key, @required this.width, @required this.height});
+  final double? width;
   final double? height;
   @override
   Widget build(BuildContext context) {

@@ -13,14 +13,14 @@ AppBar? AppBarBuilding(
             onTap: () {
               scaffoldKey.currentState!.openDrawer();
             },
-            child: Icon(
+            child: const Icon(
               Icons.menu,
               color: Colors.white,
             ),
           ),
           actions: [
             Padding(
-              padding: const EdgeInsets.only(right: 20, top: 10),
+              padding: EdgeInsets.only(right: 20, top: 10),
               child: CustomProfileContainer(
                 textColor: Colors.white,
               ),

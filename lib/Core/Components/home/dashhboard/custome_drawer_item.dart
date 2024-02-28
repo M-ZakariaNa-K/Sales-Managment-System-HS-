@@ -20,33 +20,42 @@ class DrawerItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      decoration: BoxDecoration(
-        color: selectedIndex == index && selectedIndex != 4
-            ? ThemeColors.primary
-            : ThemeColors.secondary,
-      ),
-      child: ListTile(
-        title: FittedBox(
-          fit: BoxFit.scaleDown,
-          child: Text(
-            title,
-            style: TextStyle(
-              color: index == 4
-                  ? ThemeColors.primary
-                  : ThemeColors.secondaryTextColor,
-            ),
+    return GestureDetector(
+      onTap: () => onItemTapped(index),
+      child: AnimatedContainer(
+        duration: Duration(milliseconds: 300), // Duration of the animation
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        decoration: BoxDecoration(
+          color: selectedIndex == index && selectedIndex != 4
+              ? ThemeColors.primary
+              : ThemeColors.secondary,
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(10),
+            bottomLeft: Radius.circular(10),
           ),
         ),
-        tileColor: selectedIndex == index ? selectedColor : Colors.transparent,
-        leading: Icon(
-          icon,
-          color:
-              index == 4 ? ThemeColors.primary : ThemeColors.secondaryTextColor,
+        child: ListTile(
+          title: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              title,
+              style: TextStyle(
+                color: index == 4
+                    ? ThemeColors.primary
+                    : ThemeColors.secondaryTextColor,
+              ),
+            ),
+          ),
+          tileColor:
+              selectedIndex == index ? selectedColor : Colors.transparent,
+          leading: Icon(
+            icon,
+            color: index == 4
+                ? ThemeColors.primary
+                : ThemeColors.secondaryTextColor,
+          ),
+          selected: selectedIndex == index,
         ),
-        selected: selectedIndex == index,
-        onTap: () => onItemTapped(index),
       ),
     );
   }

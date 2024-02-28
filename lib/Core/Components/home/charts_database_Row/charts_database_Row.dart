@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sales_management_system/Core/Components/home/charts_database_Row/total_bar_chart.dart';
 import 'package:sales_management_system/Core/Components/home/charts_database_Row/total_database.dart';
+import 'package:sales_management_system/Core/helper/shared/shared.dart';
 
 class ChartsDatabaseRow extends StatefulWidget {
   const ChartsDatabaseRow({
@@ -17,9 +18,9 @@ class _ChartsDatabaseRowState extends State<ChartsDatabaseRow> {
     return const Row(
       children: [
         //1
-        TotalBarChart(),
+        Expanded(child: TotalBarChart()),
         // 2 //----------------------------------to choose database----------------------------
-        Expanded(child: TotalDatabase()),
+        TotalDatabase(),
       ],
     );
   }
