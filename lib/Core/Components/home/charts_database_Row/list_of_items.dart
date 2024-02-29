@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sales_management_system/Core/Components/home/charts_database_Row/costume_listtile.dart';
 import 'package:sales_management_system/Core/Components/home/unload_sales_table.dart';
 import 'package:sales_management_system/Core/helper/services/home/get_all_sales_value_service.dart';
@@ -41,12 +42,12 @@ class ListOfItems extends StatelessWidget {
               } else if (snapshot.hasData) {
                 List<AllSalesValuesDataModel>? data = snapshot.data;
                 return CostumeListTile(
-                  title: "إجمالي المبيعات",
+                  title: "52".tr,
                   subtitle: data![0].total,
                   icon: Icons.insert_chart_outlined_outlined,
                 );
               } else {
-                return const Center(child: Text('No data available'));
+                return  Center(child: Text('48'.tr));
               }
             },
           ),
@@ -68,12 +69,12 @@ class ListOfItems extends StatelessWidget {
                 } else if (snapshot.hasData) {
                   GetGreatestBranchValueDataModel data = snapshot.data!;
                   return CostumeListTile(
-                    title: "الفرع الأكثر بيعاً",
+                    title: "51".tr,
                     subtitle: "${data.branch} / ${data.totalSales}",
                     icon: Icons.area_chart_outlined,
                   );
                 } else {
-                  return const Center(child: Text('No data available'));
+                  return  Center(child: Text('48'.tr));
                 }
               }),
           //======================================================================
@@ -93,12 +94,12 @@ class ListOfItems extends StatelessWidget {
                 } else if (snapshot.hasData) {
                   GetNumOfBranchsModel data = snapshot.data!;
                   return CostumeListTile(
-                    title: "إجمالي الفروع",
+                    title: "50".tr,
                     subtitle: "${data.data}",
                     icon: Icons.list_alt,
                   );
                 } else {
-                  return const Center(child: Text('No data available'));
+                  return  Center(child: Text('51'.tr));
                 }
               }),
         ],

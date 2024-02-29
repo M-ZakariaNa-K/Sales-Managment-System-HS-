@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sales_management_system/Core/Constants/theme.dart';
 import 'package:sales_management_system/Core/helper/services/getTest.dart';
+import 'package:sales_management_system/Core/helper/shared/Locale.dart';
 import 'package:sales_management_system/Core/helper/shared/LocaleController.dart';
 import 'package:sales_management_system/Views/home/dashboard.dart';
 import 'package:sales_management_system/Views/reports/report.dart';
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       //translations: MyLocale(),
       locale: const Locale('ar'),
+      translations: MyLocale(),
       title: 'Sales Management System App',
       // NOTE (From Zakaria): everyone when creating your task page
       // put the home page as your main working screen

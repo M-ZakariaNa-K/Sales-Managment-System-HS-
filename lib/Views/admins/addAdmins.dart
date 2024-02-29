@@ -40,7 +40,7 @@ class AddAdminScreen extends StatelessWidget {
           child: Container(
             decoration: (BoxDecoration(
                 color: Colors.white.withOpacity(0.8),
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                     bottomLeft: Radius.circular(25),
                     bottomRight: Radius.circular(25)))),
             padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 45),
@@ -48,14 +48,14 @@ class AddAdminScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 25,
                 ),
                 TextFormField(
                   controller: nameController,
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return 'Name musn\'t be empty';
+                      return '29'.tr;
                     }
                     return null;
                   },
@@ -66,7 +66,7 @@ class AddAdminScreen extends StatelessWidget {
                       Icons.person_2,
                       color: ThemeColors.primary,
                     ),
-                    labelText: 'Name',
+                    labelText: '28'.tr,
                   ),
                 ),
                 const SizedBox(
@@ -75,7 +75,7 @@ class AddAdminScreen extends StatelessWidget {
                 TextFormField(
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return 'UserName musn\'t be empty';
+                      return '24'.tr;
                     }
                     return null;
                   },
@@ -86,7 +86,7 @@ class AddAdminScreen extends StatelessWidget {
                       Icons.person_outline,
                       color: ThemeColors.primary,
                     ),
-                    labelText: 'UserName',
+                    labelText: '12'.tr,
                   ),
                 ),
                 const SizedBox(
@@ -95,7 +95,7 @@ class AddAdminScreen extends StatelessWidget {
                 TextFormField(
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return 'Password musn\'t be empty';
+                      return '23'.tr;
                     }
                     return null;
                   },
@@ -107,7 +107,7 @@ class AddAdminScreen extends StatelessWidget {
                       Icons.lock,
                       color: ThemeColors.primary,
                     ),
-                    labelText: 'Password',
+                    labelText: '22'.tr,
                     suffixIcon: IconButton(
                       icon: controller.secureOrNot,
                       onPressed: () {
@@ -122,7 +122,7 @@ class AddAdminScreen extends StatelessWidget {
                 TextFormField(
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return 'Passwords not Matching';
+                      return '33'.tr;
                     }
                     return null;
                   },
@@ -134,7 +134,7 @@ class AddAdminScreen extends StatelessWidget {
                       Icons.lock,
                       color: ThemeColors.primary,
                     ),
-                    labelText: 'Confirm Password',
+                    labelText: '16'.tr,
                     suffixIcon: IconButton(
                       icon: controller.secureOrNot,
                       onPressed: () {
@@ -162,7 +162,7 @@ class AddAdminScreen extends StatelessWidget {
                         }
                       }
                     },
-                    label: isUpdate ? 'تعديل' : 'تسجيل',
+                    label: isUpdate ? '27'.tr : '26'.tr,
                     context: context),
                 const SizedBox(
                   height: 40,

@@ -32,9 +32,9 @@ class AdminsMobileLayout extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Row(children: [
-                          const Text(
-                            'جدول المستخدمين',
-                            style: TextStyle(
+                           Text(
+                            '7'.tr,
+                            style:const TextStyle(
                                 fontSize: 25, fontWeight: FontWeight.w300),
                           ),
                           const Spacer(),
@@ -53,7 +53,7 @@ class AdminsMobileLayout extends StatelessWidget {
                                               },
                                               icon: Icon(Icons.arrow_back)),
                                           Spacer(),
-                                          Text("Add new User"),
+                                          Text("8".tr),
                                         ],
                                       ),
                                       content: SizedBox(
@@ -90,7 +90,7 @@ class AdminsMobileLayout extends StatelessWidget {
                                         const SizedBox(
                                           width: 20,
                                         ),
-                                        const Text('Admin Name'),
+                                        Text('9'.tr),
                                         const Spacer(),
                                         TextButton(
                                             onPressed: () {
@@ -99,7 +99,7 @@ class AdminsMobileLayout extends StatelessWidget {
                                                   builder: (context) {
                                                     return AlertDialog(
                                                       title: Text(
-                                                          "تعديل بيانات المستخدم"),
+                                                          "12".tr),
                                                       content: SizedBox(
                                                           width:
                                                               horizontalPadding *
@@ -113,7 +113,7 @@ class AdminsMobileLayout extends StatelessWidget {
                                                     );
                                                   });
                                             },
-                                            child: const Text('تعديل')),
+                                            child: Text('10'.tr)),
                                         SizedBox(
                                           width: horizontalPadding * .0015,
                                         ),
@@ -123,47 +123,47 @@ class AdminsMobileLayout extends StatelessWidget {
                                                   context: context,
                                                   builder: (context) {
                                                     return AlertDialog(
-                                                      title: const Column(
+                                                      title:  Column(
                                                         children: [
                                                           Text(
-                                                              'هل انت متأكد من إزالة المستخدم'),
-                                                          Text('User name'),
+                                                              '18'.tr),
+                                                          Text('9'.tr),
                                                         ],
                                                       ),
                                                       content: Row(children: [
                                                         TextButton(
                                                             onPressed: () {},
-                                                            child: const Text(
-                                                                'تأكيد')),
+                                                            child:  Text(
+                                                                '17'.tr)),
                                                         TextButton(
                                                             onPressed: () {
                                                               Navigator.pop(
                                                                   context);
                                                             },
-                                                            child: const Text(
-                                                                'تراجع'))
+                                                            child:  Text(
+                                                                '19'.tr))
                                                       ]),
                                                     );
                                                   });
                                             },
-                                            child: const Text('حذف'))
+                                            child:  Text('30'.tr))
                                       ],
                                     )),
                                 separatorBuilder: (context, index) =>
                                     defaultDivider(),
                                 itemCount: users.length)
-                            : const Center(
+                            : Center(
                                 child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Icon(
+                                      const Icon(
                                         Icons.person_add,
                                         size: 45,
                                         color: Colors.grey,
                                       ),
                                       Text(
-                                        'لم تقم بإضافة مستخدمين بعد',
-                                        style: TextStyle(
+                                        '32'.tr,
+                                        style:const  TextStyle(
                                             fontSize: 45, color: Colors.grey),
                                       )
                                     ]),

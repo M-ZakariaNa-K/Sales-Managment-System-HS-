@@ -47,9 +47,9 @@ class MobileLayoutLoginScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            'Login To your Account',
-                            style: TextStyle(
+                           Text(
+                            '20'.tr,
+                            style:const TextStyle(
                                 color: ThemeColors.primary,
                                 fontSize: 25,
                                 fontWeight: FontWeight.w600),
@@ -60,7 +60,7 @@ class MobileLayoutLoginScreen extends StatelessWidget {
                           TextFormField(
                             validator: (value) {
                               if (value!.isEmpty) {
-                                return 'UserName musn\'t be empty';
+                                return '24'.tr;
                               }
                               return null;
                             },
@@ -71,7 +71,7 @@ class MobileLayoutLoginScreen extends StatelessWidget {
                                 Icons.person,
                                 color: ThemeColors.primary,
                               ),
-                              labelText: 'UserName',
+                              labelText: '12'.tr,
                             ),
                           ),
                           const SizedBox(
@@ -80,7 +80,7 @@ class MobileLayoutLoginScreen extends StatelessWidget {
                           TextFormField(
                             validator: (value) {
                               if (value!.isEmpty) {
-                                return 'Password musn\'t be empty';
+                                return '23'.tr;
                               }
                               return null;
                             },
@@ -92,7 +92,7 @@ class MobileLayoutLoginScreen extends StatelessWidget {
                                 Icons.lock,
                                 color: ThemeColors.primary,
                               ),
-                              labelText: 'Password',
+                              labelText: '22'.tr,
                               suffixIcon: IconButton(
                                 icon: controller.secureOrNot,
                                 onPressed: () {
@@ -112,7 +112,7 @@ class MobileLayoutLoginScreen extends StatelessWidget {
                                       password: passwordController.text);
                                 }
                               },
-                              label: 'Login',
+                              label: '25'.tr,
                               context: context),
                           const SizedBox(
                             height: 20,

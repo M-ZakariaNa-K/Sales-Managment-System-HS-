@@ -46,9 +46,9 @@ class AdminsDisktopLayout extends StatelessWidget {
                             child: Padding(
                               padding: const EdgeInsets.all(10.0),
                               child: Row(children: [
-                                const Text(
-                                  'جدول المستخدمين',
-                                  style: TextStyle(
+                                 Text(
+                                  '7'.tr,
+                                  style: const TextStyle(
                                       fontSize: 25,
                                       fontWeight: FontWeight.w300),
                                 ),
@@ -91,7 +91,7 @@ class AdminsDisktopLayout extends StatelessWidget {
                                                 width: horizontalPadding *
                                                     0.5 *
                                                     0.15,
-                                                child: Text(
+                                                child: const Text(
                                                     overflow:
                                                         TextOverflow.ellipsis,
                                                     maxLines: 1,
@@ -104,7 +104,7 @@ class AdminsDisktopLayout extends StatelessWidget {
                                                 width: horizontalPadding *
                                                     0.5 *
                                                     0.15,
-                                                child: Text(
+                                                child: const Text(
                                                     overflow:
                                                         TextOverflow.ellipsis,
                                                     "listUserModel!.data.users[index].id.toString()"),
@@ -116,7 +116,7 @@ class AdminsDisktopLayout extends StatelessWidget {
                                                 width: horizontalPadding *
                                                     0.5 *
                                                     0.15,
-                                                child: Text(
+                                                child: const Text(
                                                     "listUserModel!.data.users[index].username"),
                                               ),
                                               const Spacer(),
@@ -129,7 +129,7 @@ class AdminsDisktopLayout extends StatelessWidget {
                                                       isAddAdmin = !isAddAdmin;
                                                       controller.update();
                                                     },
-                                                    child: const Text('تعديل')),
+                                                    child:  Text('10'.tr)),
                                               ),
                                               SizedBox(
                                                 width:
@@ -144,9 +144,9 @@ class AdminsDisktopLayout extends StatelessWidget {
                                                             return AlertDialog(
                                                               title: Column(
                                                                 children: [
+                                                                   Text(
+                                                                      '18'.tr),
                                                                   const Text(
-                                                                      'هل انت متأكد من إزالة المستخدم'),
-                                                                  Text(
                                                                       "listUserModel!.data.users[index].name"),
                                                                 ],
                                                               ),
@@ -158,21 +158,21 @@ class AdminsDisktopLayout extends StatelessWidget {
                                                                           controller
                                                                               .removeUser();
                                                                         },
-                                                                        child: const Text(
-                                                                            'تأكيد')),
+                                                                        child:  const Text(
+                                                                            '17')),
                                                                     TextButton(
                                                                         onPressed:
                                                                             () {
                                                                           Navigator.pop(
                                                                               context);
                                                                         },
-                                                                        child: const Text(
-                                                                            'تراجع'))
+                                                                        child: Text(
+                                                                            '19'.tr))
                                                                   ]),
                                                             );
                                                           });
                                                     },
-                                                    child: const Text('حذف')),
+                                                    child: Text('30'.tr)),
                                               )
                                             ],
                                           )),
@@ -181,19 +181,19 @@ class AdminsDisktopLayout extends StatelessWidget {
                                       itemCount:
                                           /*listUserModel!.data.users.length*/ users
                                               .length)
-                                  : const Center(
+                                  : Center(
                                       child: Column(
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
                                           children: [
-                                            Icon(
+                                            const Icon(
                                               Icons.person_add,
                                               size: 45,
                                               color: Colors.grey,
                                             ),
                                             Text(
-                                              'لم تقم بإضافة مستخدمين بعد',
-                                              style: TextStyle(
+                                              '32'.tr,
+                                              style: const TextStyle(
                                                   fontSize: 45,
                                                   color: Colors.grey),
                                             )
@@ -221,10 +221,10 @@ class AdminsDisktopLayout extends StatelessWidget {
                             child: Padding(
                                 padding: const EdgeInsets.all(10.0),
                                 child: isAddAdmin
-                                    ? const Row(children: [
+                                    ?  Row(children: [
                                         Text(
-                                          'تسجيل مستخدم جديد',
-                                          style: TextStyle(
+                                          '8'.tr,
+                                          style: const TextStyle(
                                               fontSize: 25,
                                               fontWeight: FontWeight.w300),
                                         ),
@@ -243,7 +243,7 @@ class AdminsDisktopLayout extends StatelessWidget {
                               duration: const Duration(milliseconds: 300),
                               child: isAddAdmin
                                   ? AddAdminScreen(isUpdate: false)
-                                  : const Center(
+                                  :  Center(
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
@@ -251,15 +251,14 @@ class AdminsDisktopLayout extends StatelessWidget {
                                           Expanded(
                                             child: Text(
                                               textAlign: TextAlign.center,
-                                              locale: Locale('en'),
-                                              "لإضافة مستخدم جديد إضغط على الرمز",
-                                              style: TextStyle(
+                                              "14".tr,
+                                              style: const TextStyle(
                                                   color: Colors.grey,
                                                   fontSize: 25,
                                                   fontWeight: FontWeight.bold),
                                             ),
                                           ),
-                                          Icon(
+                                          const Icon(
                                             Icons.person_add_alt_1_rounded,
                                             color: Colors.grey,
                                           ),

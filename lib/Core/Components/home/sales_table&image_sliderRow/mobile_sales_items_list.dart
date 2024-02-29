@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sales_management_system/Core/Components/home/sales_table&image_sliderRow/mobile_sales_item.dart';
 import 'package:sales_management_system/Core/Components/home/unload_sales_table.dart';
 import 'package:sales_management_system/Core/helper/services/home/get_all_branchesServices.dart';
@@ -26,11 +27,11 @@ class MobileSalesItemsList extends StatelessWidget {
           // If data is successfully fetched, build the list of MobileSalesItem widgets
           List<BranchDataModel> data = snapshot.data!;
           BranchDataModel b1 = BranchDataModel(
-              branch: 'branch',
-              number: 'number',
-              guid: 'guid',
-              spelledTotal: 'spelledTotal',
-              totalSales: 'totalSales');
+              branch: '34'.tr,
+              number: '35'.tr,
+              guid: '36'.tr,
+              spelledTotal: '37'.tr,
+              totalSales: '38'.tr);
           data.add(b1);
           data.add(b1);
           data.add(b1);

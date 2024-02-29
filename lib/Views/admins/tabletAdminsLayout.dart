@@ -40,16 +40,16 @@ class AdminsTabletLayout extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Row(children: [
-                              const Text(
-                                'جدول المستخدمين',
-                                style: TextStyle(
+                              Text(
+                                '7'.tr,
+                                style: const TextStyle(
                                     fontSize: 25, fontWeight: FontWeight.w300),
                               ),
                               const Spacer(),
                               IconButton(
                                 icon: const Icon(Icons.person_add_alt_rounded),
                                 onPressed: () {
-                                  addAdminText = 'تسجيل مستخدم جديد';
+                                  addAdminText = '8'.tr;
                                   isAddAdmin = !isAddAdmin;
                                   controller.update();
                                 },
@@ -79,7 +79,7 @@ class AdminsTabletLayout extends StatelessWidget {
                                             const SizedBox(
                                               width: 20,
                                             ),
-                                            const Text('Admin Name'),
+                                            Text('9'.tr),
                                             const SizedBox(
                                               width: 20,
                                             ),
@@ -88,11 +88,10 @@ class AdminsTabletLayout extends StatelessWidget {
                                             TextButton(
                                                 onPressed: () {
                                                   isAddAdmin = !isAddAdmin;
-                                                  addAdminText =
-                                                      'تعديل بيانات المستخدم';
+                                                  addAdminText = '12'.tr;
                                                   controller.update();
                                                 },
-                                                child: const Text('تعديل')),
+                                                child: Text('10'.tr)),
                                             SizedBox(
                                               width: horizontalPadding * .0015,
                                             ),
@@ -102,11 +101,10 @@ class AdminsTabletLayout extends StatelessWidget {
                                                       context: context,
                                                       builder: (context) {
                                                         return AlertDialog(
-                                                          title: const Column(
+                                                          title: Column(
                                                             children: [
-                                                              Text(
-                                                                  'هل انت متأكد من إزالة المستخدم'),
-                                                              Text('User name'),
+                                                              Text('18'.tr),
+                                                              Text('9'.tr),
                                                             ],
                                                           ),
                                                           content:
@@ -114,39 +112,38 @@ class AdminsTabletLayout extends StatelessWidget {
                                                             TextButton(
                                                                 onPressed:
                                                                     () {},
-                                                                child: const Text(
-                                                                    'تأكيد')),
+                                                                child: Text(
+                                                                    '17'.tr)),
                                                             TextButton(
                                                                 onPressed: () {
                                                                   Navigator.pop(
                                                                       context);
                                                                 },
-                                                                child:
-                                                                    const Text(
-                                                                        'تراجع'))
+                                                                child: Text(
+                                                                    '19'.tr))
                                                           ]),
                                                         );
                                                       });
                                                 },
-                                                child: const Text('حذف'))
+                                                child: Text('30'.tr))
                                           ],
                                         )),
                                     separatorBuilder: (context, index) =>
                                         defaultDivider(),
                                     itemCount: users.length)
-                                : const Center(
+                                : Center(
                                     child: Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
-                                          Icon(
+                                          const Icon(
                                             Icons.person_add,
                                             size: 45,
                                             color: Colors.grey,
                                           ),
                                           Text(
-                                            'لم تقم بإضافة مستخدمين بعد',
-                                            style: TextStyle(
+                                            '32'.tr,
+                                            style: const TextStyle(
                                                 fontSize: 45,
                                                 color: Colors.grey),
                                           )
@@ -198,20 +195,20 @@ class AdminsTabletLayout extends StatelessWidget {
                                 ? AddAdminScreen(
                                     isUpdate: false,
                                   )
-                                : const Center(
+                                : Center(
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
-                                        Icon(
+                                        const Icon(
                                           Icons.person_add_alt_1_rounded,
                                           color: Colors.grey,
                                         ),
                                         Expanded(
                                           child: Text(
-                                            locale: Locale('ar'),
-                                            "لإضافة مستخدم جديد إضغط على الرمز ",
-                                            style: TextStyle(
+                                            locale: const Locale('ar'),
+                                            "14".tr,
+                                            style: const TextStyle(
                                                 color: Colors.grey,
                                                 fontSize: 20,
                                                 fontWeight: FontWeight.bold),

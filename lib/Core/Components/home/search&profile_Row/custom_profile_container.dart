@@ -1,6 +1,7 @@
 // CustomProfileContainer
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sales_management_system/Core/Components/home/unload_sales_table.dart';
 import 'package:sales_management_system/Core/Constants/theme.dart';
 import 'package:sales_management_system/Core/helper/services/home/get_profile_service.dart';
@@ -71,7 +72,7 @@ class CustomProfileContainer extends StatelessWidget {
               ),
             );
           } else {
-            return const Text("Not Available...");
+            return Text("41".tr);
           }
         });
   }
