@@ -38,8 +38,7 @@ class MyApp extends StatelessWidget {
       title: 'Sales Management System App',
       // NOTE (From Zakaria): everyone when creating your task page
       // put the home page as your main working screen
-      home: DashboardPage(),
-
+      home: const DashboardPage(),
       theme: ThemeData(
         useMaterial3: true,
         textTheme: GoogleFonts.robotoTextTheme(),

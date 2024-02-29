@@ -26,9 +26,21 @@ class _SearchListItemsState extends State<SearchListItems> {
             .getsearchapp(query: widget.searchController.text),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CupertinoActivityIndicator(
-                color: ThemeColors.primary,
+            return Container(
+              decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey,
+                      offset: Offset(0.5, 0.5),
+                      blurRadius: 10,
+                    )
+                  ]),
+              child: const Center(
+                child: CupertinoActivityIndicator(
+                  color: ThemeColors.primary,
+                ),
               ),
             );
           } else if (snapshot.hasError) {
