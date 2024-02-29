@@ -45,7 +45,17 @@ class AdminsMobileLayout extends StatelessWidget {
                                   context: context,
                                   builder: (context) {
                                     return AlertDialog(
-                                      title: Text("Add new User"),
+                                      title: Row(
+                                        children: [
+                                          IconButton(
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                              },
+                                              icon: Icon(Icons.arrow_back)),
+                                          Spacer(),
+                                          Text("Add new User"),
+                                        ],
+                                      ),
                                       content: SizedBox(
                                           width: horizontalPadding * .7,
                                           height: verticalPadding * .8,

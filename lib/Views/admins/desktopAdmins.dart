@@ -25,7 +25,7 @@ class AdminsDisktopLayout extends StatelessWidget {
         alignment: Alignment.center,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: Colors.red,
+          color: Colors.white.withOpacity(.8),
         ),
         child: SingleChildScrollView(
           child: GetBuilder<AdminController>(
@@ -85,78 +85,102 @@ class AdminsDisktopLayout extends StatelessWidget {
                                                 child: Icon(Icons.person),
                                               ),
                                               const SizedBox(
-                                                width: 20,
+                                                width: 30,
                                               ),
-                                              Text(listUserModel!
-                                                  .data.users[index].name),
-                                              const SizedBox(
-                                                width: 20,
+                                              Container(
+                                                width: horizontalPadding *
+                                                    0.5 *
+                                                    0.15,
+                                                child: Text(
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    maxLines: 1,
+                                                    "listUserModel!.data.users[index].name"),
                                               ),
-                                              Text(listUserModel!
-                                                  .data.users[index].id
-                                                  .toString()),
                                               const SizedBox(
-                                                width: 20,
+                                                width: 30,
                                               ),
-                                              Text(listUserModel!
-                                                  .data.users[index].username),
+                                              Container(
+                                                width: horizontalPadding *
+                                                    0.5 *
+                                                    0.15,
+                                                child: Text(
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    "listUserModel!.data.users[index].id.toString()"),
+                                              ),
                                               const SizedBox(
-                                                width: 20,
+                                                width: 30,
+                                              ),
+                                              Container(
+                                                width: horizontalPadding *
+                                                    0.5 *
+                                                    0.15,
+                                                child: Text(
+                                                    "listUserModel!.data.users[index].username"),
                                               ),
                                               const Spacer(),
-                                              TextButton(
-                                                  onPressed: () {
-                                                    isAddAdmin = !isAddAdmin;
-                                                    controller.update();
-                                                  },
-                                                  child: const Text('تعديل')),
+                                              Container(
+                                                width: horizontalPadding *
+                                                    0.5 *
+                                                    0.15,
+                                                child: TextButton(
+                                                    onPressed: () {
+                                                      isAddAdmin = !isAddAdmin;
+                                                      controller.update();
+                                                    },
+                                                    child: const Text('تعديل')),
+                                              ),
                                               SizedBox(
                                                 width:
                                                     horizontalPadding * .0015,
                                               ),
-                                              TextButton(
-                                                  onPressed: () {
-                                                    showDialog(
-                                                        context: context,
-                                                        builder: (context) {
-                                                          return AlertDialog(
-                                                            title: Column(
-                                                              children: [
-                                                                Text(
-                                                                    'هل انت متأكد من إزالة المستخدم'),
-                                                                Text(listUserModel!
-                                                                    .data
-                                                                    .users[
-                                                                        index]
-                                                                    .name),
-                                                              ],
-                                                            ),
-                                                            content:
-                                                                Row(children: [
-                                                              TextButton(
-                                                                  onPressed:
-                                                                      () {},
-                                                                  child: const Text(
-                                                                      'تأكيد')),
-                                                              TextButton(
-                                                                  onPressed:
-                                                                      () {
-                                                                    Navigator.pop(
-                                                                        context);
-                                                                  },
-                                                                  child: const Text(
-                                                                      'تراجع'))
-                                                            ]),
-                                                          );
-                                                        });
-                                                  },
-                                                  child: const Text('حذف'))
+                                              Container(
+                                                child: TextButton(
+                                                    onPressed: () {
+                                                      showDialog(
+                                                          context: context,
+                                                          builder: (context) {
+                                                            return AlertDialog(
+                                                              title: Column(
+                                                                children: [
+                                                                  const Text(
+                                                                      'هل انت متأكد من إزالة المستخدم'),
+                                                                  Text(
+                                                                      "listUserModel!.data.users[index].name"),
+                                                                ],
+                                                              ),
+                                                              content: Row(
+                                                                  children: [
+                                                                    TextButton(
+                                                                        onPressed:
+                                                                            () {
+                                                                          controller
+                                                                              .removeUser();
+                                                                        },
+                                                                        child: const Text(
+                                                                            'تأكيد')),
+                                                                    TextButton(
+                                                                        onPressed:
+                                                                            () {
+                                                                          Navigator.pop(
+                                                                              context);
+                                                                        },
+                                                                        child: const Text(
+                                                                            'تراجع'))
+                                                                  ]),
+                                                            );
+                                                          });
+                                                    },
+                                                    child: const Text('حذف')),
+                                              )
                                             ],
                                           )),
                                       separatorBuilder: (context, index) =>
                                           defaultDivider(),
                                       itemCount:
-                                          listUserModel!.data.users.length)
+                                          /*listUserModel!.data.users.length*/ users
+                                              .length)
                                   : const Center(
                                       child: Column(
                                           mainAxisAlignment:
@@ -230,14 +254,14 @@ class AdminsDisktopLayout extends StatelessWidget {
                                               locale: Locale('en'),
                                               "لإضافة مستخدم جديد إضغط على الرمز",
                                               style: TextStyle(
-                                                  color: Colors.white,
+                                                  color: Colors.grey,
                                                   fontSize: 25,
                                                   fontWeight: FontWeight.bold),
                                             ),
                                           ),
                                           Icon(
                                             Icons.person_add_alt_1_rounded,
-                                            color: Colors.white,
+                                            color: Colors.grey,
                                           ),
                                         ],
                                       ),

@@ -17,7 +17,7 @@ class MyLocale implements Translations {
           "11": "حذف المستخدم",
           "12": "تعديل بيانات المستخدم",
           "13": "ادخل معلومات المستخدم",
-          "14": "البريد الالكتروني",
+          "14": "لإضافة مستخدم جديد إضغط على الرمز",
           "15": "كلمة المرور الحالية",
           "16": "تأكيد كلمة المرور",
           "17": "تأكيد",
@@ -25,6 +25,7 @@ class MyLocale implements Translations {
           "22": "كلمة المرور",
           "25": "تسجيل الدخول",
           "31": "كلمة المرور الجديدة",
+          "32": "لم تقم بإضافة مستخدمين بعد",
         },
         "en": {
           "1": "home",
@@ -40,7 +41,7 @@ class MyLocale implements Translations {
           "11": "Edit your Password",
           "12": "User Name",
           "13": "Phone",
-          "14": "Email",
+          "14": "To add new user click on",
           "15": "Current Password",
           "16": "Confirm your password",
           "17": "Confirm",
@@ -48,6 +49,7 @@ class MyLocale implements Translations {
           "22": "Password",
           "25": "Log in",
           "31": "New Password",
+          "32": "You didn\'t add users yes",
         }
       };
 }

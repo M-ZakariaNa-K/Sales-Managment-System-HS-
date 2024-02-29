@@ -32,14 +32,14 @@ class MobileSalesItem extends StatelessWidget {
                 child: Container(
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(2000)),
+                    borderRadius: const BorderRadius.all(Radius.circular(2000)),
                     border: Border.all(color: ThemeColors.secondary, width: 2),
                   ),
                   width: 40,
                   height: 40,
                   child: Text(
                     "${index + 1}",
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: ThemeColors.secondary,
                       fontWeight: FontWeight.bold,
                     ),
@@ -73,7 +73,7 @@ class MobileSalesItem extends StatelessWidget {
           // 3 //----------------------
           ListTile(
             contentPadding: EdgeInsets.zero,
-            leading: CircleImageWidget(
+            leading: const CircleImageWidget(
               image: "images/logo.png",
             ),
             title: Text(branch.branch!),

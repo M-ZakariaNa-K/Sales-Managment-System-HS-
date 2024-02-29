@@ -9,11 +9,12 @@ import 'package:sales_management_system/Views/admins/addAdmins.dart';
 class AdminsTabletLayout extends StatelessWidget {
   bool isAddAdmin = false;
 
-  AdminsTabletLayout(BuildContext context);
+  AdminsTabletLayout(BuildContext context, {super.key});
   @override
   Widget build(BuildContext context) {
     String addAdminText = '';
 
+    // ignore: non_constant_identifier_names
     final MediaQueryData = MediaQuery.of(context);
     final horizontalPadding = MediaQueryData.size.width;
     final verticalPadding = MediaQueryData.size.height;
@@ -29,9 +30,9 @@ class AdminsTabletLayout extends StatelessWidget {
                     Column(
                       children: [
                         Container(
-                          decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.2),
-                              borderRadius: const BorderRadius.only(
+                          decoration: const BoxDecoration(
+                              color: ThemeColors.primary,
+                              borderRadius: BorderRadius.only(
                                   topLeft: Radius.circular(25),
                                   topRight: Radius.circular(25))),
                           width: horizontalPadding * 0.5,
@@ -51,16 +52,6 @@ class AdminsTabletLayout extends StatelessWidget {
                                   addAdminText = 'تسجيل مستخدم جديد';
                                   isAddAdmin = !isAddAdmin;
                                   controller.update();
-                                  //   showDialog(
-                                  //       context: context,
-                                  //       builder: (context) {
-                                  //         return AlertDialog(
-                                  //           content: Container(
-                                  //               width: horizontalPadding * .3,
-                                  //               height: verticalPadding * .7,
-                                  //               child: AddAdminScreen()),
-                                  //         );
-                                  //       });
                                 },
                               ),
                             ]),
@@ -93,7 +84,7 @@ class AdminsTabletLayout extends StatelessWidget {
                                               width: 20,
                                             ),
                                             const Text('Admin number'),
-                                            Spacer(),
+                                            const Spacer(),
                                             TextButton(
                                                 onPressed: () {
                                                   isAddAdmin = !isAddAdmin;
@@ -214,14 +205,14 @@ class AdminsTabletLayout extends StatelessWidget {
                                       children: [
                                         Icon(
                                           Icons.person_add_alt_1_rounded,
-                                          color: Colors.white,
+                                          color: Colors.grey,
                                         ),
                                         Expanded(
                                           child: Text(
                                             locale: Locale('ar'),
                                             "لإضافة مستخدم جديد إضغط على الرمز ",
                                             style: TextStyle(
-                                                color: Colors.white,
+                                                color: Colors.grey,
                                                 fontSize: 20,
                                                 fontWeight: FontWeight.bold),
                                           ),

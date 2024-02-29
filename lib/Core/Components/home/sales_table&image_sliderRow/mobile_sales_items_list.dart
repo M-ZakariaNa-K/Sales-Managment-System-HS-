@@ -25,6 +25,15 @@ class MobileSalesItemsList extends StatelessWidget {
         } else {
           // If data is successfully fetched, build the list of MobileSalesItem widgets
           List<BranchDataModel> data = snapshot.data!;
+          BranchDataModel b1 = BranchDataModel(
+              branch: 'branch',
+              number: 'number',
+              guid: 'guid',
+              spelledTotal: 'spelledTotal',
+              totalSales: 'totalSales');
+          data.add(b1);
+          data.add(b1);
+          data.add(b1);
           return ListView.builder(
             shrinkWrap: true,
             scrollDirection: Axis.vertical,

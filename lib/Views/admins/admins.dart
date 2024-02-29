@@ -8,9 +8,13 @@ class AdminsPage extends StatelessWidget {
   const AdminsPage({super.key});
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     bool isAddAdmin = false;
-    
+    users.add(4);
+    users.add(4);
+    users.add(4);
+    users.add(4);
+    users.add(4);
     final MediaQueryData = MediaQuery.of(context);
     final horizontalPadding = MediaQueryData.size.width;
     final verticalPadding = MediaQueryData.size.height;

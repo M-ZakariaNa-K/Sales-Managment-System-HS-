@@ -13,6 +13,7 @@ class DashboardPage extends StatefulWidget {
   // ignore: library_private_types_in_public_api
   _DashboardPageState createState() => _DashboardPageState();
 }
+
 class _DashboardPageState extends State<DashboardPage> {
   int _selectedIndex = 0;
   final Color _selectedColor = ThemeColors.primary;
@@ -20,7 +21,7 @@ class _DashboardPageState extends State<DashboardPage> {
   final List<Widget> _pages = [
     const HomePage(),
     const AdminsPage(),
-    const ReportsPage(),
+    ReportsPage(),
   ];
   bool isDisktopDevice = false;
 

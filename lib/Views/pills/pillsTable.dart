@@ -1,5 +1,4 @@
 import 'package:sales_management_system/Core/Components/widget.dart';
-import 'package:sales_management_system/Views/pills/pdfservice.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -135,10 +134,7 @@ class _PillsPageState extends State<PillsPages> {
                                               children: [
                                                 TextButton(
                                                     onPressed: () {
-                                                      PdfService()
-                                                          .printCustomersPdf(
-                                                              data.cast<
-                                                                  DataCell>());
+                                                    
                                                     },
                                                     child: Image.asset(
                                                       'images/pdf.png',
