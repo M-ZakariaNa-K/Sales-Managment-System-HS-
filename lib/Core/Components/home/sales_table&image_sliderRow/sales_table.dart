@@ -249,7 +249,7 @@ class SalesDataSource extends DataTableSource {
         child: ElevatedButton(
           onPressed: () {
             Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => PillsPage()));
+                .push(MaterialPageRoute(builder: (context) => PillsPage(context)));
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: ThemeColors.secondary

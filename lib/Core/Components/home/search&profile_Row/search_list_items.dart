@@ -78,7 +78,7 @@ class _SearchListItemsState extends State<SearchListItems> {
                               Navigator.push(context,
                                   MaterialPageRoute(builder: (context) {
                                 //Here should has the Id of branch i pressed
-                                return PillsPage();
+                                return PillsPage(context);
                               }));
                             },
                             title: Text(
@@ -122,7 +122,7 @@ class _SearchListItemsState extends State<SearchListItems> {
                               Navigator.push(context,
                                   MaterialPageRoute(builder: (context) {
                                 //Here should has the Id of branch i pressed
-                                return PillsPage();
+                                return PillsPage(context);
                               }));
                             },
                             title: Text(

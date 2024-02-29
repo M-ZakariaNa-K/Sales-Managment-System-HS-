@@ -33,10 +33,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       //translations: MyLocale(),
       locale: const Locale('ar'),
-      title: 'Sales Management System App',
+      title: 'Hussin Al-Nasser',
       // NOTE (From Zakaria): everyone when creating your task page
       // put the home page as your main working screen
-      home: ReportsPage(),
+      home: DashboardPage(),
       theme: ThemeData(
         useMaterial3: true,
         textTheme: GoogleFonts.robotoTextTheme(),
