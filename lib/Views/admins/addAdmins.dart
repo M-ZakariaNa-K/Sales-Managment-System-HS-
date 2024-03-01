@@ -73,6 +73,7 @@ class AddAdminScreen extends StatelessWidget {
                   height: 40,
                 ),
                 TextFormField(
+                  controller: userNameController,
                   validator: (value) {
                     if (value!.isEmpty) {
                       return '24'.tr;
@@ -93,6 +94,7 @@ class AddAdminScreen extends StatelessWidget {
                   height: 40,
                 ),
                 TextFormField(
+                  controller: passwordController,
                   validator: (value) {
                     if (value!.isEmpty) {
                       return '23'.tr;
@@ -120,6 +122,7 @@ class AddAdminScreen extends StatelessWidget {
                   height: 40,
                 ),
                 TextFormField(
+                  controller: confirmPasswordController,
                   validator: (value) {
                     if (value!.isEmpty) {
                       return '33'.tr;
@@ -151,13 +154,14 @@ class AddAdminScreen extends StatelessWidget {
                     function: () {
                       if (formKey.currentState!.validate()) {
                         if (!isUpdate) {
-                          controller.registerState(
+                          controller.registerState(context,
                               userName: userNameController.text,
                               name: nameController.text,
                               password: passwordController.text,
                               passwordConfirmation:
                                   confirmPasswordController.text);
                         } else {
+                          print("ggg00");
                           //tabe3 al update
                         }
                       }

@@ -5,6 +5,7 @@ import 'package:sales_management_system/Core/Constants/theme.dart';
 import 'package:sales_management_system/Core/helper/services/getTest.dart';
 import 'package:sales_management_system/Core/helper/shared/Locale.dart';
 import 'package:sales_management_system/Core/helper/shared/LocaleController.dart';
+import 'package:sales_management_system/Views/auth/login.dart';
 import 'package:sales_management_system/Views/home/dashboard.dart';
 import 'package:sales_management_system/Views/reports/report.dart';
 
@@ -33,12 +34,12 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       //translations: MyLocale(),
-      locale: const Locale('ar'),
+      locale: const Locale('en'),
       translations: MyLocale(),
       title: 'Sales Management System App',
       // NOTE (From Zakaria): everyone when creating your task page
       // put the home page as your main working screen
-      home: DashboardPage(),
+      home: LoginScreen(),
       theme: ThemeData(
         useMaterial3: true,
         textTheme: GoogleFonts.robotoTextTheme(),

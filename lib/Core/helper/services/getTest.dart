@@ -21,24 +21,18 @@ class DioHelper {
     ));
   }
 
-Future<Response> getData(
+  Future<Response> getData(
       {required String path,
       Map<String, dynamic>? query,
       Map<String, dynamic>? body,
       String? token}) async {
-        
     dio.options.headers = {
       'Accept': 'application/json',
       'Authorization': 'Bearer $token'
     };
 
     return await dio
-        .get(
-      path,
-      queryParameters: query,
-      data: body
-      
-    )
+        .get(path, data: body)
         // ignore: body_might_complete_normally_catch_error
         .catchError((e) {
       if (e.response != null) {
@@ -51,15 +45,15 @@ Future<Response> getData(
         print(e.message);
       }
     });
-    
   }
 
-  static Future<Response> postData({
+  static Future<Response> postData({token,
     required String url,
     required Map<String, dynamic> data,
   }) async {
     dio.options.headers = {
       'Accept': 'application/json',
+      'Authorization': 'Bearer $token'
     };
 
     return dio
@@ -79,6 +73,7 @@ Future<Response> getData(
       }
     });
   }
+
   Future postDataWithAuth(
       {required String url,
       required Map<String, dynamic> data,
@@ -90,7 +85,7 @@ Future<Response> getData(
     var dio = Dio();
     var response = await dio
         .request(
-      'http://10.0.2.2:8000/api/$url',
+      '$url',
       data: FormData.fromMap(data),
       options: Options(
         method: 'POST',
@@ -128,5 +123,31 @@ Future<Response> getData(
       'Authorization': token ?? ''
     };
     return dio.put(baseURL, queryParameters: query, data: data);
+  }
+
+  Future<Response> deletData(
+      {required String path,
+      Map<String, dynamic>? query,
+      Map<String, dynamic>? body,
+      String? token}) async {
+    dio.options.headers = {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token'
+    };
+
+    return await dio
+        .delete(path, data: body)
+        // ignore: body_might_complete_normally_catch_error
+        .catchError((e) {
+      if (e.response != null) {
+        print(e.response?.data);
+        showToast(text: '${e.response.data}', state: ToastStates.WARNING);
+        print(e.response?.headers);
+        print(e.response?.requestOptions);
+        print(e.response?.statusCode);
+      } else {
+        print(e.message);
+      }
+    });
   }
 }

@@ -66,8 +66,8 @@ class AdminsTabletLayout extends StatelessWidget {
                           width: horizontalPadding * 0.5,
                           height: verticalPadding * 0.8,
                           child: Padding(
-                            padding: const EdgeInsets.all(5.0),
-                            child: users.isNotEmpty
+                            padding: EdgeInsets.all(5.0),
+                            child: listUserModel!.data.users.isNotEmpty
                                 ? ListView.separated(
                                     itemBuilder: (context, index) => SizedBox(
                                         height: 60,
@@ -79,7 +79,8 @@ class AdminsTabletLayout extends StatelessWidget {
                                             const SizedBox(
                                               width: 20,
                                             ),
-                                            Text('9'.tr),
+                                            Text(listUserModel!
+                                                .data.users[index].username),
                                             const SizedBox(
                                               width: 20,
                                             ),
@@ -104,14 +105,27 @@ class AdminsTabletLayout extends StatelessWidget {
                                                           title: Column(
                                                             children: [
                                                               Text('18'.tr),
-                                                              Text('9'.tr),
+                                                              Text(
+                                                                  listUserModel!
+                                                                      .data
+                                                                      .users[
+                                                                          index]
+                                                                      .name),
                                                             ],
                                                           ),
                                                           content:
                                                               Row(children: [
                                                             TextButton(
-                                                                onPressed:
-                                                                    () {},
+                                                                onPressed: () {
+                                                                  controller.removeUser(
+                                                                      id: listUserModel!
+                                                                          .data
+                                                                          .users[
+                                                                              index]
+                                                                          .id);
+                                                                  Navigator.pop(
+                                                                      context);
+                                                                },
                                                                 child: Text(
                                                                     '17'.tr)),
                                                             TextButton(
@@ -130,7 +144,7 @@ class AdminsTabletLayout extends StatelessWidget {
                                         )),
                                     separatorBuilder: (context, index) =>
                                         defaultDivider(),
-                                    itemCount: users.length)
+                                    itemCount: listUserModel!.data.UsersCount)
                                 : Center(
                                     child: Column(
                                         mainAxisAlignment:

@@ -7,11 +7,18 @@ import 'package:sales_management_system/Core/Components/widget.dart';
 import 'package:sales_management_system/Core/Constants/theme.dart';
 import 'package:sales_management_system/Views/admins/addAdmins.dart';
 
-class AdminsDisktopLayout extends StatelessWidget {
+class AdminsDisktopLayout extends StatefulWidget {
+  AdminsDisktopLayout(BuildContext context, {super.key});
+
+  @override
+  State<AdminsDisktopLayout> createState() => _AdminsDisktopLayoutState();
+}
+
+class _AdminsDisktopLayoutState extends State<AdminsDisktopLayout> {
   bool isAddAdmin = false;
+  int userIndex = 0;
   bool isEditAdmin = false;
 
-  AdminsDisktopLayout(BuildContext context);
   @override
   Widget build(BuildContext context) {
     final MediaQueryData = MediaQuery.of(context);
@@ -30,7 +37,7 @@ class AdminsDisktopLayout extends StatelessWidget {
         child: SingleChildScrollView(
           child: GetBuilder<AdminController>(
               init: AdminController(),
-  builder: (AdminController controller) => Row(
+              builder: (AdminController controller) => Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Column(
@@ -46,7 +53,7 @@ class AdminsDisktopLayout extends StatelessWidget {
                             child: Padding(
                               padding: const EdgeInsets.all(10.0),
                               child: Row(children: [
-                                 Text(
+                                Text(
                                   '7'.tr,
                                   style: const TextStyle(
                                       fontSize: 25,
@@ -75,114 +82,121 @@ class AdminsDisktopLayout extends StatelessWidget {
                             height: verticalPadding * 0.8,
                             child: Padding(
                               padding: const EdgeInsets.all(10.0),
-                              child: users.isNotEmpty
+                              child: listUserModel!.data.users.isNotEmpty
                                   ? ListView.separated(
-                                      itemBuilder: (context, index) => SizedBox(
-                                          height: 60,
-                                          child: Row(
-                                            children: [
-                                              const CircleAvatar(
-                                                child: Icon(Icons.person),
-                                              ),
-                                              const SizedBox(
-                                                width: 30,
-                                              ),
-                                              Container(
-                                                width: horizontalPadding *
-                                                    0.5 *
-                                                    0.15,
-                                                child: const Text(
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    maxLines: 1,
-                                                    listUserModel!.data
-                                                        .users[index].name
-                                                        ),
-                                              ),
-                                              const SizedBox(
-                                                width: 30,
-                                              ),
-                                              Container(
-                                                width: horizontalPadding *
-                                                    0.5 *
-                                                    0.15,
-                                                child: const Text(
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    "listUserModel!.data.users[index].id.toString()"),
-                                              ),
-                                              const SizedBox(
-                                                width: 30,
-                                              ),
-                                              Container(
-                                                width: horizontalPadding *
-                                                    0.5 *
-                                                    0.15,
-                                                child: const Text(
-                                                    "listUserModel!.data.users[index].username"),
-                                              ),
-                                              const Spacer(),
-                                              Container(
-                                                width: horizontalPadding *
-                                                    0.5 *
-                                                    0.15,
-                                                child: TextButton(
-                                                    onPressed: () {
-                                                      isAddAdmin = !isAddAdmin;
-                                                      controller.update();
-                                                    },
-                                                    child:  Text('10'.tr)),
-                                              ),
-                                              SizedBox(
-                                                width:
-                                                    horizontalPadding * .0015,
-                                              ),
-                                              Container(
-                                                child: TextButton(
-                                                    onPressed: () {
-                                                      showDialog(
-                                                          context: context,
-                                                          builder: (context) {
-                                                            return AlertDialog(
-                                                              title: Column(
-                                                                children: [
-                                                                   Text(
-                                                                      '18'.tr),
-                                                                  const Text(
-                                                                      "listUserModel!.data.users[index].name"),
-                                                                ],
-                                                              ),
-                                                              content: Row(
+                                      itemBuilder: (context, index) {
+                                        userIndex = index;
+                                        return SizedBox(
+                                            height: 60,
+                                            child: Row(
+                                              children: [
+                                                const CircleAvatar(
+                                                  child: Icon(Icons.person),
+                                                ),
+                                                const SizedBox(
+                                                  width: 30,
+                                                ),
+                                                Container(
+                                                  width: horizontalPadding *
+                                                      0.5 *
+                                                      0.15,
+                                                  child: Text(
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                      maxLines: 1,
+                                                      listUserModel!.data
+                                                          .users[index].name),
+                                                ),
+                                                const SizedBox(
+                                                  width: 30,
+                                                ),
+                                                Container(
+                                                  width: horizontalPadding *
+                                                      0.5 *
+                                                      0.15,
+                                                  child: Text(
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                      listUserModel!
+                                                          .data.users[index].id
+                                                          .toString()),
+                                                ),
+                                                const SizedBox(
+                                                  width: 30,
+                                                ),
+                                                Container(
+                                                  width: horizontalPadding *
+                                                      0.5 *
+                                                      0.15,
+                                                  child: Text(listUserModel!
+                                                      .data
+                                                      .users[index]
+                                                      .username),
+                                                ),
+                                                const Spacer(),
+                                                Container(
+                                                  width: horizontalPadding *
+                                                      0.5 *
+                                                      0.15,
+                                                  child: TextButton(
+                                                      onPressed: () {
+                                                        isAddAdmin =
+                                                            !isAddAdmin;
+                                                        controller.update();
+                                                      },
+                                                      child: Text('10'.tr)),
+                                                ),
+                                                SizedBox(
+                                                  width:
+                                                      horizontalPadding * .0015,
+                                                ),
+                                                Container(
+                                                  child: TextButton(
+                                                      onPressed: () {
+                                                        showDialog(
+                                                            context: context,
+                                                            builder: (context) {
+                                                              return AlertDialog(
+                                                                title: Column(
                                                                   children: [
-                                                                    TextButton(
-                                                                        onPressed:
-                                                                            () {
-                                                                          controller
-                                                                              .removeUser();
-                                                                        },
-                                                                        child:  const Text(
-                                                                            '17')),
-                                                                    TextButton(
-                                                                        onPressed:
-                                                                            () {
-                                                                          Navigator.pop(
-                                                                              context);
-                                                                        },
-                                                                        child: Text(
-                                                                            '19'.tr))
-                                                                  ]),
-                                                            );
-                                                          });
-                                                    },
-                                                    child: Text('30'.tr)),
-                                              )
-                                            ],
-                                          )),
+                                                                    Text('18'
+                                                                        .tr),
+                                                                    Text(listUserModel!
+                                                                        .data
+                                                                        .users[
+                                                                            index]
+                                                                        .name),
+                                                                  ],
+                                                                ),
+                                                                content: Row(
+                                                                    children: [
+                                                                      TextButton(
+                                                                          onPressed:
+                                                                              () {
+                                                                            controller.removeUser(id: listUserModel!.data.users[index].id);
+                                                                            Navigator.pop(context);
+                                                                          },
+                                                                          child:
+                                                                              Text('17'.tr)),
+                                                                      TextButton(
+                                                                          onPressed:
+                                                                              () {
+                                                                            Navigator.pop(context);
+                                                                          },
+                                                                          child:
+                                                                              Text('19'.tr))
+                                                                    ]),
+                                                              );
+                                                            });
+                                                      },
+                                                      child: Text('30'.tr)),
+                                                )
+                                              ],
+                                            ));
+                                      },
                                       separatorBuilder: (context, index) =>
                                           defaultDivider(),
-                                      itemCount:
-                                          /*listUserModel!.data.users.length*/ users
-                                              .length)
+                                      itemCount: listUserModel!.data.UsersCount)
                                   : Center(
                                       child: Column(
                                           mainAxisAlignment:
@@ -223,7 +237,7 @@ class AdminsDisktopLayout extends StatelessWidget {
                             child: Padding(
                                 padding: const EdgeInsets.all(10.0),
                                 child: isAddAdmin
-                                    ?  Row(children: [
+                                    ? Row(children: [
                                         Text(
                                           '8'.tr,
                                           style: const TextStyle(
@@ -244,8 +258,14 @@ class AdminsDisktopLayout extends StatelessWidget {
                               height: verticalPadding * .8,
                               duration: const Duration(milliseconds: 300),
                               child: isAddAdmin
-                                  ? AddAdminScreen(isUpdate: false)
-                                  :  Center(
+                                  ? AddAdminScreen(
+                                      isUpdate: isEditAdmin,
+                                      name: listUserModel!
+                                          .data.users[userIndex].name,
+                                      userName: listUserModel!
+                                          .data.users[userIndex].username,
+                                    )
+                                  : Center(
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,

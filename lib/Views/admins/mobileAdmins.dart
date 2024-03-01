@@ -4,6 +4,7 @@ import 'package:sales_management_system/Controllers/admins/admin_controller.dart
 import 'package:sales_management_system/Core/Components/components.dart';
 import 'package:sales_management_system/Core/Components/widget.dart';
 import 'package:sales_management_system/Core/Constants/theme.dart';
+import 'package:sales_management_system/Models/admins/users_model.dart';
 import 'package:sales_management_system/Views/admins/addAdmins.dart';
 
 class AdminsMobileLayout extends StatelessWidget {
@@ -32,9 +33,9 @@ class AdminsMobileLayout extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Row(children: [
-                           Text(
+                          Text(
                             '7'.tr,
-                            style:const TextStyle(
+                            style: const TextStyle(
                                 fontSize: 25, fontWeight: FontWeight.w300),
                           ),
                           const Spacer(),
@@ -51,8 +52,9 @@ class AdminsMobileLayout extends StatelessWidget {
                                               onPressed: () {
                                                 Navigator.pop(context);
                                               },
-                                              icon: Icon(Icons.arrow_back)),
-                                          Spacer(),
+                                              icon:
+                                                  const Icon(Icons.arrow_back)),
+                                          const Spacer(),
                                           Text("8".tr),
                                         ],
                                       ),
@@ -90,7 +92,8 @@ class AdminsMobileLayout extends StatelessWidget {
                                         const SizedBox(
                                           width: 20,
                                         ),
-                                        Text('9'.tr),
+                                        Text(listUserModel!
+                                            .data.users[index].username),
                                         const Spacer(),
                                         TextButton(
                                             onPressed: () {
@@ -98,8 +101,7 @@ class AdminsMobileLayout extends StatelessWidget {
                                                   context: context,
                                                   builder: (context) {
                                                     return AlertDialog(
-                                                      title: Text(
-                                                          "12".tr),
+                                                      title: Text("12".tr),
                                                       content: SizedBox(
                                                           width:
                                                               horizontalPadding *
@@ -113,7 +115,7 @@ class AdminsMobileLayout extends StatelessWidget {
                                                     );
                                                   });
                                             },
-                                            child: Text('10'.tr)),
+                                            child: Text('Edit User Info'.tr)),
                                         SizedBox(
                                           width: horizontalPadding * .0015,
                                         ),
@@ -123,35 +125,40 @@ class AdminsMobileLayout extends StatelessWidget {
                                                   context: context,
                                                   builder: (context) {
                                                     return AlertDialog(
-                                                      title:  Column(
+                                                      title: Column(
                                                         children: [
-                                                          Text(
-                                                              '18'.tr),
-                                                          Text('9'.tr),
+                                                          Text('18'.tr),
+                                                          Text(listUserModel!
+                                                              .data
+                                                              .users[index]
+                                                              .name),
                                                         ],
                                                       ),
                                                       content: Row(children: [
                                                         TextButton(
-                                                            onPressed: () {},
-                                                            child:  Text(
-                                                                '17'.tr)),
+                                                            onPressed: () {
+                                                               controller.removeUser(id: listUserModel!.data.users[index].id);
+                                                                      Navigator.pop(context); 
+                                                            },
+                                                            child:
+                                                                Text('17'.tr)),
                                                         TextButton(
                                                             onPressed: () {
                                                               Navigator.pop(
                                                                   context);
                                                             },
-                                                            child:  Text(
-                                                                '19'.tr))
+                                                            child:
+                                                                Text('19'.tr))
                                                       ]),
                                                     );
                                                   });
                                             },
-                                            child:  Text('30'.tr))
+                                            child: Text('30'.tr))
                                       ],
                                     )),
                                 separatorBuilder: (context, index) =>
                                     defaultDivider(),
-                                itemCount: users.length)
+                                itemCount: listUserModel!.data.UsersCount)
                             : Center(
                                 child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
@@ -163,7 +170,7 @@ class AdminsMobileLayout extends StatelessWidget {
                                       ),
                                       Text(
                                         '32'.tr,
-                                        style:const  TextStyle(
+                                        style: const TextStyle(
                                             fontSize: 45, color: Colors.grey),
                                       )
                                     ]),

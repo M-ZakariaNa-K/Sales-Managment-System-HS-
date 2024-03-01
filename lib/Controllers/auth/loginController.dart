@@ -28,8 +28,9 @@ class LoginController extends GetxController {
 
   void loginState({required String userName, required String password}) {
     DioHelper.postData(
-        url: 'login',
-        data: {'username': userName, 'password': password}).then((value) async {
+            url: 'login',
+            data: {'username': 'M_zakaria_K', 'password': '123456'})
+        .then((value) async {
       userModel = UserModel.fromJson(value.data);
       token = userModel!.data!.token!;
       print("${token}   GGGGGG");
@@ -38,10 +39,13 @@ class LoginController extends GetxController {
         print("gg");
         listUserModel = ListUserModel.fromJson(value.data);
         print(listUserModel!.data.UsersCount);
+        showToast(text: 'text', state: ToastStates.SUCCESS);
+      }).catchError((e) {
+        showToast(text: e.toString(), state: ToastStates.ERROR);
       });
 
-      Get.to(AdminsPage());
       showToast(text: 'Logged in Successfully', state: ToastStates.SUCCESS);
-    });
+      Get.to(AdminsPage());
+    }).catchError((e) {});
   }
 }
