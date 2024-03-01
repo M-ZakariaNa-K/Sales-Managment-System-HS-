@@ -40,14 +40,19 @@ class ListOfItems extends StatelessWidget {
                   child: Text('Error: ${snapshot.error}'),
                 );
               } else if (snapshot.hasData) {
-                List<AllSalesValuesDataModel>? data = snapshot.data;
-                return CostumeListTile(
+                List<AllSalesValuesDataModel> data = snapshot.data!;
+
+                return
+                    // data.isNotEmpty
+                    //     ?
+                    CostumeListTile(
                   title: "52".tr,
-                  subtitle: data![0].total,
+                  subtitle: data.isNotEmpty ? data[0].total : "null",
                   icon: Icons.insert_chart_outlined_outlined,
                 );
+                // : Text("no data");
               } else {
-                return  Center(child: Text('48'.tr));
+                return Center(child: Text('48'.tr));
               }
             },
           ),
@@ -74,7 +79,7 @@ class ListOfItems extends StatelessWidget {
                     icon: Icons.area_chart_outlined,
                   );
                 } else {
-                  return  Center(child: Text('48'.tr));
+                  return Center(child: Text('48'.tr));
                 }
               }),
           //======================================================================
@@ -99,7 +104,7 @@ class ListOfItems extends StatelessWidget {
                     icon: Icons.list_alt,
                   );
                 } else {
-                  return  Center(child: Text('51'.tr));
+                  return Center(child: Text('51'.tr));
                 }
               }),
         ],
