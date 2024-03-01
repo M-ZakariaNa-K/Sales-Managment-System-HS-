@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:pdf/widgets.dart' as pw;
 
-class PillsPages extends StatefulWidget {
-  const PillsPages({super.key});
+class DesktopLayoutPillsTable extends StatefulWidget {
+  const DesktopLayoutPillsTable({super.key});
 
   @override
-  State<PillsPages> createState() => _PillsPageState();
+  State<DesktopLayoutPillsTable> createState() => _PillsPageState();
 }
 
-class _PillsPageState extends State<PillsPages> {
+class _PillsPageState extends State<DesktopLayoutPillsTable> {
   // ignore: prefer_typing_uninitialized_variables
   var selectedStartDateRange;
 

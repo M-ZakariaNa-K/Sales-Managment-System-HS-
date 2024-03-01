@@ -162,9 +162,6 @@ class _MobileLayoutReportsPageState extends State<MobileLayoutReportsPage> {
                             guid: '36'.tr,
                             spelledTotal: '37'.tr,
                             totalSales: '38'.tr);
-                        data.add(b1);
-                        data.add(b1);
-                        data.add(b1);
                         return ListView.builder(
                           shrinkWrap: true,
                           scrollDirection: Axis.vertical,
