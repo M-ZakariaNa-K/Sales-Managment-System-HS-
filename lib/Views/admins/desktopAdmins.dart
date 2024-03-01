@@ -30,7 +30,7 @@ class AdminsDisktopLayout extends StatelessWidget {
         child: SingleChildScrollView(
           child: GetBuilder<AdminController>(
               init: AdminController(),
-              builder: (AdminController controller) => Row(
+  builder: (AdminController controller) => Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Column(
@@ -96,7 +96,9 @@ class AdminsDisktopLayout extends StatelessWidget {
                                                     overflow:
                                                         TextOverflow.ellipsis,
                                                     maxLines: 1,
-                                                    "listUserModel!.data.users[index].name"),
+                                                    listUserModel!.data
+                                                        .users[index].name
+                                                        ),
                                               ),
                                               const SizedBox(
                                                 width: 30,
