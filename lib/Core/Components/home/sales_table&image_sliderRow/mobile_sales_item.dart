@@ -56,7 +56,7 @@ class MobileSalesItem extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {},
-                child:  Text(
+                child: Text(
                   "44".tr,
                   style: TextStyle(
                     color: Colors.white,
@@ -75,7 +75,7 @@ class MobileSalesItem extends StatelessWidget {
           ListTile(
             contentPadding: EdgeInsets.zero,
             leading: const CircleImageWidget(
-              image: "images/logo.png",
+              image: "images/Profile.png",
             ),
             title: Text(branch.branch!),
             subtitle: Text("${branch.number}"),
@@ -86,7 +86,7 @@ class MobileSalesItem extends StatelessWidget {
             children: [
               Text(
                 "37".tr,
-                style:const TextStyle(
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -107,9 +107,9 @@ class MobileSalesItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                 Text(
+                Text(
                   "38".tr,
-                  style:const TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
                 ),

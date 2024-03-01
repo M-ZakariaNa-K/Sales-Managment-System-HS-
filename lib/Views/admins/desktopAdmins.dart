@@ -73,7 +73,8 @@ class AdminsDisktopLayout extends StatelessWidget {
                                     bottomRight: Radius.circular(25))),
                             width: horizontalPadding * 0.5,
                             height: verticalPadding * 0.8,
-                            child: Padding(
+                            child: Padding
+                            (
                               padding: const EdgeInsets.all(10.0),
                               child: users.isNotEmpty
                                   ? ListView.separated(
@@ -87,7 +88,7 @@ class AdminsDisktopLayout extends StatelessWidget {
                                               const SizedBox(
                                                 width: 30,
                                               ),
-                                              Container(
+                                              SizedBox(
                                                 width: horizontalPadding *
                                                     0.5 *
                                                     0.15,
@@ -100,7 +101,7 @@ class AdminsDisktopLayout extends StatelessWidget {
                                               const SizedBox(
                                                 width: 30,
                                               ),
-                                              Container(
+                                              SizedBox(
                                                 width: horizontalPadding *
                                                     0.5 *
                                                     0.15,
@@ -112,7 +113,7 @@ class AdminsDisktopLayout extends StatelessWidget {
                                               const SizedBox(
                                                 width: 30,
                                               ),
-                                              Container(
+                                              SizedBox(
                                                 width: horizontalPadding *
                                                     0.5 *
                                                     0.15,
@@ -120,7 +121,7 @@ class AdminsDisktopLayout extends StatelessWidget {
                                                     "listUserModel!.data.users[index].username"),
                                               ),
                                               const Spacer(),
-                                              Container(
+                                              SizedBox(
                                                 width: horizontalPadding *
                                                     0.5 *
                                                     0.15,
@@ -135,45 +136,43 @@ class AdminsDisktopLayout extends StatelessWidget {
                                                 width:
                                                     horizontalPadding * .0015,
                                               ),
-                                              Container(
-                                                child: TextButton(
-                                                    onPressed: () {
-                                                      showDialog(
-                                                          context: context,
-                                                          builder: (context) {
-                                                            return AlertDialog(
-                                                              title: Column(
+                                              TextButton(
+                                                  onPressed: () {
+                                                    showDialog(
+                                                        context: context,
+                                                        builder: (context) {
+                                                          return AlertDialog(
+                                                            title: Column(
+                                                              children: [
+                                                                 Text(
+                                                                    '18'.tr),
+                                                                const Text(
+                                                                    "listUserModel!.data.users[index].name"),
+                                                              ],
+                                                            ),
+                                                            content: Row(
                                                                 children: [
-                                                                   Text(
-                                                                      '18'.tr),
-                                                                  const Text(
-                                                                      "listUserModel!.data.users[index].name"),
-                                                                ],
-                                                              ),
-                                                              content: Row(
-                                                                  children: [
-                                                                    TextButton(
-                                                                        onPressed:
-                                                                            () {
-                                                                          controller
-                                                                              .removeUser();
-                                                                        },
-                                                                        child:  const Text(
-                                                                            '17')),
-                                                                    TextButton(
-                                                                        onPressed:
-                                                                            () {
-                                                                          Navigator.pop(
-                                                                              context);
-                                                                        },
-                                                                        child: Text(
-                                                                            '19'.tr))
-                                                                  ]),
-                                                            );
-                                                          });
-                                                    },
-                                                    child: Text('30'.tr)),
-                                              )
+                                                                  TextButton(
+                                                                      onPressed:
+                                                                          () {
+                                                                        controller
+                                                                            .removeUser();
+                                                                      },
+                                                                      child:  const Text(
+                                                                          '17')),
+                                                                  TextButton(
+                                                                      onPressed:
+                                                                          () {
+                                                                        Navigator.pop(
+                                                                            context);
+                                                                      },
+                                                                      child: Text(
+                                                                          '19'.tr))
+                                                                ]),
+                                                          );
+                                                        });
+                                                  },
+                                                  child: Text('30'.tr))
                                             ],
                                           )),
                                       separatorBuilder: (context, index) =>
