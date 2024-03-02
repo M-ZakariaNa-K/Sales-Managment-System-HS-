@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:sales_management_system/Core/Components/widget.dart';
 import 'package:sales_management_system/Core/helper/shared/shared.dart';
 import 'package:sales_management_system/Models/home/get_sales_value_monthly.dart';
 
@@ -9,7 +10,7 @@ class GetSalesValueMonthlyService {
   Future<List<SalesInMonthModel>> getSalesValueMonthlyService() async {
     try {
       dio.options.headers = {
-        'Authorization': 'Bearer $tokenVar',
+        'Authorization': 'Bearer $token',
       };
 
       Response response = await dio.get(

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sales_management_system/Core/Components/home/Circle_image.dart';
 import 'package:sales_management_system/Core/Constants/theme.dart';
 import 'package:sales_management_system/Models/home/get_all_branches.dart';
 
 class MobileSalesItem extends StatelessWidget {
   const MobileSalesItem({super.key, required this.branch, required this.index});
-  final BranchDataModel branch;
+  final dynamic branch;
   final int index;
   @override
   Widget build(BuildContext context) {
@@ -32,14 +33,14 @@ class MobileSalesItem extends StatelessWidget {
                 child: Container(
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(2000)),
+                    borderRadius: const BorderRadius.all(Radius.circular(2000)),
                     border: Border.all(color: ThemeColors.secondary, width: 2),
                   ),
                   width: 40,
                   height: 40,
                   child: Text(
                     "${index + 1}",
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: ThemeColors.secondary,
                       fontWeight: FontWeight.bold,
                     ),
@@ -55,8 +56,8 @@ class MobileSalesItem extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {},
-                child: const Text(
-                  "التفاصيل",
+                child: Text(
+                  "44".tr,
                   style: TextStyle(
                     color: Colors.white,
                   ),
@@ -73,8 +74,8 @@ class MobileSalesItem extends StatelessWidget {
           // 3 //----------------------
           ListTile(
             contentPadding: EdgeInsets.zero,
-            leading: CircleImageWidget(
-              image: "images/logo.png",
+            leading: const CircleImageWidget(
+              image: "images/Profile.png",
             ),
             title: Text(branch.branch!),
             subtitle: Text("${branch.number}"),
@@ -83,9 +84,9 @@ class MobileSalesItem extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
-                "الإجمالي كتابةً",
-                style: TextStyle(
+              Text(
+                "37".tr,
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -106,9 +107,9 @@ class MobileSalesItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
-                  "الإجمالي رقماً",
-                  style: TextStyle(
+                Text(
+                  "38".tr,
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
                 ),

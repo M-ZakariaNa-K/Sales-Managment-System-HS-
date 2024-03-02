@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sales_management_system/Core/Components/home/custome_elevated_button.dart';
 import 'package:sales_management_system/Core/Components/home/unload_sales_table.dart';
 import 'package:sales_management_system/Core/Constants/theme.dart';
@@ -68,8 +69,8 @@ class _SalesTableState extends State<SalesTable> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text(
-                        'جدول المبيعات',
+                       Text(
+                        '2'.tr,
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -82,9 +83,9 @@ class _SalesTableState extends State<SalesTable> {
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 10.0),
                             child: CustomeElevatedButton(
-                              buttonChild: const Text(
-                                "الكل",
-                                style: TextStyle(color: Colors.white),
+                              buttonChild:  Text(
+                                "46".tr,
+                                style: const TextStyle(color: Colors.white),
                               ),
                               buttonColor: isAllPressed
                                   ? ThemeColors.secondary
@@ -102,9 +103,9 @@ class _SalesTableState extends State<SalesTable> {
                             ),
                           ),
                           CustomeElevatedButton(
-                            buttonChild: const Text(
-                              "الأكثر بيعاً",
-                              style: TextStyle(color: Colors.white),
+                            buttonChild:  Text(
+                              "45".tr,
+                              style: const TextStyle(color: Colors.white),
                             ),
                             buttonColor: isNewPressed
                                 ? ThemeColors.secondary
@@ -133,15 +134,15 @@ class _SalesTableState extends State<SalesTable> {
                   width: double.infinity,
                   child: PaginatedDataTable(
                     rowsPerPage: 10, // Number of rows per page
-                    columns: const [
+                    columns:  [
                       DataColumn(
                         label: Expanded(
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                'الرقم',
-                                style: TextStyle(fontWeight: FontWeight.bold),
+                                '35'.tr,
+                                style: const TextStyle(fontWeight: FontWeight.bold),
                               ),
                             ],
                           ),
@@ -153,8 +154,8 @@ class _SalesTableState extends State<SalesTable> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                'الفرع',
-                                style: TextStyle(fontWeight: FontWeight.bold),
+                                '34'.tr,
+                                style: const TextStyle(fontWeight: FontWeight.bold),
                               ),
                             ],
                           ),
@@ -166,8 +167,8 @@ class _SalesTableState extends State<SalesTable> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                'الإجمالي كتابةً',
-                                style: TextStyle(fontWeight: FontWeight.bold),
+                                '37'.tr,
+                                style: const TextStyle(fontWeight: FontWeight.bold),
                               ),
                             ],
                           ),
@@ -179,8 +180,8 @@ class _SalesTableState extends State<SalesTable> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                'الإجمالي رقماً',
-                                style: TextStyle(fontWeight: FontWeight.bold),
+                                '38'.tr,
+                                style: const TextStyle(fontWeight: FontWeight.bold),
                               ),
                             ],
                           ),
@@ -192,8 +193,8 @@ class _SalesTableState extends State<SalesTable> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                'التفاصيل',
-                                style: TextStyle(fontWeight: FontWeight.bold),
+                                '44'.tr,
+                                style: const TextStyle(fontWeight: FontWeight.bold),
                               ),
                             ],
                           ),
@@ -249,7 +250,7 @@ class SalesDataSource extends DataTableSource {
         child: ElevatedButton(
           onPressed: () {
             Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => PillsPage()));
+                .push(MaterialPageRoute(builder: (context) => PillsPage(context)));
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: ThemeColors.secondary
@@ -258,9 +259,9 @@ class SalesDataSource extends DataTableSource {
               borderRadius: BorderRadius.circular(3), // Set border radius
             ),
           ),
-          child: const Text(
-            'رؤية التفاصيل...',
-            style: TextStyle(color: Colors.white), // Set text color to white
+          child:  Text(
+            '43'.tr,
+            style: const TextStyle(color: Colors.white), // Set text color to white
           ),
         ),
       )),

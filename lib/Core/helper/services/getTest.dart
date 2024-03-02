@@ -1,4 +1,5 @@
-// ignore: file_names
+// ignore_for_file: file_names
+
 import 'package:dio/dio.dart';
 import 'package:sales_management_system/Core/Components/components.dart';
 
@@ -20,8 +21,8 @@ class DioHelper {
     ));
   }
 
-   Future<Response> getData(
-      {required String baseURL,
+  Future<Response> getData(
+      {required String path,
       Map<String, dynamic>? query,
       Map<String, dynamic>? body,
       String? token}) async {
@@ -32,12 +33,7 @@ class DioHelper {
     };
 
     return await dio
-        .get(
-      baseURL,
-      queryParameters: query,
-      data: body
-      
-    )
+        .get(path, data: body)
         // ignore: body_might_complete_normally_catch_error
         .catchError((e) {
       if (e.response != null) {
@@ -52,9 +48,8 @@ class DioHelper {
     });
   }
 
-  Future<Response> postData({
-    required String baseURL,
-    required String token,
+  static Future<Response> postData({token,
+    required String url,
     required Map<String, dynamic> data,
   }) async {
     dio.options.headers = {
@@ -64,7 +59,7 @@ class DioHelper {
 
     return dio
         .post(
-      baseURL,
+      url,
       data: data,
     )
         .catchError((e) {
@@ -80,10 +75,9 @@ class DioHelper {
     });
   }
 
-  static Future postDataWithAuth(
-      {required String baseURL,
-      required String query,
-      required Map<String, String> data,
+  Future postDataWithAuth(
+      {required String url,
+      required Map<String, dynamic> data,
       String? token}) async {
     var headers = {
       'Accept': 'application/json',
@@ -92,7 +86,7 @@ class DioHelper {
     var dio = Dio();
     var response = await dio
         .request(
-      '$baseURL/$query',
+      '$url',
       data: FormData.fromMap(data),
       options: Options(
         method: 'POST',
@@ -130,5 +124,31 @@ class DioHelper {
       'Authorization': token ?? ''
     };
     return dio.put(baseURL, queryParameters: query, data: data);
+  }
+
+  Future<Response> deletData(
+      {required String path,
+      Map<String, dynamic>? query,
+      Map<String, dynamic>? body,
+      String? token}) async {
+    dio.options.headers = {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token'
+    };
+
+    return await dio
+        .delete(path, data: body)
+        // ignore: body_might_complete_normally_catch_error
+        .catchError((e) {
+      if (e.response != null) {
+        print(e.response?.data);
+        showToast(text: '${e.response.data}', state: ToastStates.WARNING);
+        print(e.response?.headers);
+        print(e.response?.requestOptions);
+        print(e.response?.statusCode);
+      } else {
+        print(e.message);
+      }
+    });
   }
 }

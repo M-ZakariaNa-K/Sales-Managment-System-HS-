@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:sales_management_system/Core/Components/home/dashhboard/appbar_building.dart';
 import 'package:sales_management_system/Core/Components/home/dashhboard/custome_drawer.dart';
 import 'package:sales_management_system/Core/Constants/theme.dart';
+import 'package:sales_management_system/Views/admins/admins.dart';
 import 'package:sales_management_system/Views/home/home.dart';
+import 'package:sales_management_system/Views/reports/report.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({Key? key}) : super(key: key);
@@ -18,12 +20,11 @@ class _DashboardPageState extends State<DashboardPage> {
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
   final List<Widget> _pages = [
     const HomePage(),
-    PageTwo(),
-    PageThree(),
-    PageFour(),
-    PageFive(),
+    const AdminsPage(),
+    ReportsPage(),
   ];
   bool isDisktopDevice = false;
+
   @override
   Widget build(BuildContext context) {
     if (MediaQuery.sizeOf(context).width > 900) {
@@ -38,7 +39,6 @@ class _DashboardPageState extends State<DashboardPage> {
         onItemTapped: _onItemTapped,
         selectedColor: _selectedColor,
       ),
-      
       appBar: AppBarBuilding(context, scaffoldKey),
       body: Row(
         children: [
@@ -65,81 +65,3 @@ class _DashboardPageState extends State<DashboardPage> {
     });
   }
 }
-
-class PageOne extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        'Page One Content',
-        style: TextStyle(fontSize: 24),
-      ),
-    );
-  }
-}
-
-class PageFour extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        'Page One Content',
-        style: TextStyle(fontSize: 24),
-      ),
-    );
-  }
-}
-
-class PageFive extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        'Page One Content',
-        style: TextStyle(fontSize: 24),
-      ),
-    );
-  }
-}
-
-class PageTwo extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text(
-        'Page Two Content',
-        style: TextStyle(fontSize: 24),
-      ),
-    );
-  }
-}
-
-class PageThree extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        'Page Three Content',
-        style: TextStyle(fontSize: 24),
-      ),
-    );
-  }
-}
-
-
-
-/*
-
-LayoutBuilder(
-        builder: (context, constraints) {
-          if (constraints.maxWidth < 600) {
-            return _buildDrawerLayout();
-          } else {
-            return _buildWideLayout();
-          }
-        },
-      ),
-    );
-  }
-  
- */

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sales_management_system/Core/Components/home/dashhboard/custome_drawer_item.dart';
 import 'package:sales_management_system/Core/Constants/theme.dart';
 
@@ -30,7 +31,7 @@ class DrawerWidget extends StatelessWidget {
             ),
           ),
           DrawerItem(
-            title: 'الصفحة الرئيسية',
+            title: '1'.tr,
             icon: Icons.home_work_outlined,
             index: 0,
             selectedIndex: selectedIndex,
@@ -38,7 +39,7 @@ class DrawerWidget extends StatelessWidget {
             selectedColor: selectedColor,
           ),
           DrawerItem(
-            title: 'المستخدمين',
+            title: '47'.tr,
             icon: Icons.person_2_outlined,
             index: 1,
             selectedIndex: selectedIndex,
@@ -46,7 +47,7 @@ class DrawerWidget extends StatelessWidget {
             selectedColor: selectedColor,
           ),
           DrawerItem(
-            title: 'التقارير',
+            title: '4'.tr,
             icon: Icons.picture_as_pdf_outlined,
             index: 2,
             selectedIndex: selectedIndex,
@@ -54,19 +55,11 @@ class DrawerWidget extends StatelessWidget {
             selectedColor: selectedColor,
           ),
           DrawerItem(
-            title: 'الإعدادات',
-            icon: Icons.settings,
-            index: 3,
-            selectedIndex: selectedIndex,
-            onItemTapped: onItemTapped,
-            selectedColor: selectedColor,
-          ),
-          DrawerItem(
-            title: 'تسجيل الخروج',
+            title: '9'.tr,
             icon: Icons.logout,
             index: 4,
             selectedIndex: selectedIndex,
-            onItemTapped: onItemTapped,
+            onItemTapped: (value) {},
             selectedColor: selectedColor,
           ),
         ],

@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:sales_management_system/Core/Components/widget.dart';
 import 'package:sales_management_system/Core/helper/services/getTest.dart';
-import 'package:sales_management_system/Core/helper/shared/shared.dart';
 import 'package:sales_management_system/Models/home/get_profile_model.dart';
 
 class GetprofileService {
@@ -12,8 +12,8 @@ class GetprofileService {
     try {
       // Make sure the URL is correct and accessible
       Response response = await DioHelper().getData(
-        token: tokenVar,
-        baseURL: "users/get-current",
+        token: token,
+        path: "users/get-current",
       );
       if (response.statusCode == 200) {
         // Parse the JSON response data

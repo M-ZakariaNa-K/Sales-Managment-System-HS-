@@ -117,37 +117,35 @@ class _TotalDatabaseState extends State<TotalDatabase> {
           //-----------------------------------------4------------------------------------
 
           // Widget that appears after 3 seconds
-          _isButtonVisible
-              ? AnimatedOpacity(
-                  opacity: _isButtonVisible ? 1.0 : 0.0,
-                  duration: Duration(milliseconds: 500),
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 10.0),
-                    child: CustomeElevatedButton(
-                      buttonColor: ThemeColors.secondary,
-                      buttonChild: const Text(
-                        'تحديث',
-                        style: TextStyle(
-                          color: ThemeColors.secondaryTextColor,
-                        ),
-                      ),
-                      onPressed: () {
-                        // Update Sales Table Data depend on selectedDatabase
-                        if (selectedDatabase1 != null) {
-                          PostUpdateDatabaseService(Dio(), selectedDatabase1!)
-                              .postUpdateAdminDatabaseService(
-                                  baseURL: "databases/set-admin");
-                        }
-                        if (selectedDatabase2 != null) {
-                          PostUpdateDatabaseService(Dio(), selectedDatabase2!)
-                              .postUpdateAdminDatabaseService(
-                                  baseURL: "databases/set-users");
-                        }
-                      },
-                    ),
+          AnimatedOpacity(
+            opacity: _isButtonVisible ? 1.0 : 0.0,
+            duration: Duration(milliseconds: 500),
+            child: Padding(
+              padding: const EdgeInsets.only(top: 10.0),
+              child: CustomeElevatedButton(
+                buttonColor: ThemeColors.secondary,
+                buttonChild: const Text(
+                  'تحديث',
+                  style: TextStyle(
+                    color: ThemeColors.secondaryTextColor,
                   ),
-                )
-              : const UnloadedItem(width: 90, height: 30),
+                ),
+                onPressed: () {
+                  // Update Sales Table Data depend on selectedDatabase
+                  if (selectedDatabase1 != null) {
+                    PostUpdateDatabaseService(Dio(), selectedDatabase1!)
+                        .postUpdateAdminDatabaseService(
+                            baseURL: "databases/set-admin");
+                  }
+                  if (selectedDatabase2 != null) {
+                    PostUpdateDatabaseService(Dio(), selectedDatabase2!)
+                        .postUpdateAdminDatabaseService(
+                            baseURL: "databases/set-users");
+                  }
+                },
+              ),
+            ),
+          ),
         ],
       ),
     );

@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:sales_management_system/Core/Components/widget.dart';
 import 'package:sales_management_system/Core/helper/services/getTest.dart';
-import 'package:sales_management_system/Core/helper/shared/shared.dart';
 import 'package:sales_management_system/Models/home/get_all_branches.dart';
 
 class GetAllBranchesService {
@@ -12,8 +12,8 @@ class GetAllBranchesService {
     try {
       // Make sure the URL is correct and accessible
   Response response = await DioHelper().getData(
-        token: tokenVar,
-        baseURL: "branches-Sales/All-branches",
+        token: token,
+        path: "branches-Sales/All-branches",
       );
       if (response.statusCode == 200) {
         // Parse the JSON response data

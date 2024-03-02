@@ -1,8 +1,7 @@
-import 'package:another_carousel_pro/another_carousel_pro.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:sales_management_system/Core/Components/home/unload_sales_table.dart';
+import 'package:get/get.dart';
 import 'package:sales_management_system/Core/Constants/theme.dart';
 import 'package:sales_management_system/Core/helper/services/home/get_search_data_service.dart';
 import 'package:sales_management_system/Models/home/get_search_data_model.dart';
@@ -90,7 +89,7 @@ class _SearchListItemsState extends State<SearchListItems> {
                               Navigator.push(context,
                                   MaterialPageRoute(builder: (context) {
                                 //Here should has the Id of branch i pressed
-                                return PillsPage();
+                                return PillsPage(context);
                               }));
                             },
                             title: Text(
@@ -134,7 +133,7 @@ class _SearchListItemsState extends State<SearchListItems> {
                               Navigator.push(context,
                                   MaterialPageRoute(builder: (context) {
                                 //Here should has the Id of branch i pressed
-                                return PillsPage();
+                                return PillsPage(context);
                               }));
                             },
                             title: Text(
@@ -174,7 +173,7 @@ class _SearchListItemsState extends State<SearchListItems> {
               );
             }
           } else {
-            return const Text("Branch not Found :/");
+            return Text("39".tr);
           }
         },
       ),

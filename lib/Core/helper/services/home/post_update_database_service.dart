@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:sales_management_system/Core/Components/widget.dart';
 import 'package:sales_management_system/Core/helper/services/getTest.dart';
-import 'package:sales_management_system/Core/helper/shared/shared.dart';
 
 class PostUpdateDatabaseService {
   final Dio dio;
@@ -11,9 +11,9 @@ class PostUpdateDatabaseService {
 
   Future<dynamic> postUpdateAdminDatabaseService(
       {required String baseURL}) async {
-    Response response = await DioHelper().postData(
-      baseURL: baseURL,
-      token: tokenVar,
+    Response response = await DioHelper().postDataWithAuth(
+      url: baseURL,
+      token: token,
       data: {
         "name": choosenDatabase ?? "",
       },

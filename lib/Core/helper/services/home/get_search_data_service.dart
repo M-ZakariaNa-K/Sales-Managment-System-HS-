@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:sales_management_system/Core/Components/widget.dart';
 import 'package:sales_management_system/Core/helper/shared/shared.dart';
 import 'package:sales_management_system/Models/home/get_search_data_model.dart';
 
@@ -8,7 +9,7 @@ class SearchAppService {
 
   Future<GetSearchDataModel> getsearchapp({required String query}) async {
     dio.options.headers = {
-      'Authorization': 'Bearer $tokenVar',
+      'Authorization': 'Bearer $token',
     };
 
     // Add connectTimeout and receiveTimeout to handle timeouts

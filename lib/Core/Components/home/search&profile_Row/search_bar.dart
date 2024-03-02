@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sales_management_system/Core/Components/home/search&profile_Row/search_list_items.dart';
 
 class SearchBarWidget extends StatefulWidget {
@@ -30,7 +31,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
               controller: searchController,
               onChanged: _performSearch,
               decoration: InputDecoration(
-                hintText: 'ابحث هنا...',
+                hintText: '42'.tr,
                 hintStyle: const TextStyle(
                   color: Color(0xffAFAFAF),
                 ),
