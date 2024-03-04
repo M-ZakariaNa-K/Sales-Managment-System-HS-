@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sales_management_system/Core/Components/components.dart';
 import 'package:sales_management_system/Core/Components/home/dashhboard/custome_drawer_item.dart';
+import 'package:sales_management_system/Core/Components/widget.dart';
 import 'package:sales_management_system/Core/Constants/theme.dart';
+import 'package:sales_management_system/Core/helper/services/getTest.dart';
+import 'package:sales_management_system/Views/auth/login.dart';
 
 class DrawerWidget extends StatelessWidget {
   final int selectedIndex;
@@ -59,7 +63,17 @@ class DrawerWidget extends StatelessWidget {
             icon: Icons.logout,
             index: 4,
             selectedIndex: selectedIndex,
-            onItemTapped: (value) {},
+            onItemTapped: (value) {
+              DioHelper()
+                  .getData(path: 'users/logout', token: token)
+                  .then((value) {
+                Get.to(LoginScreen());
+                token = '';
+                showToast(
+                    text: "Logged out Successfully",
+                    state: ToastStates.SUCCESS);
+              });
+            },
             selectedColor: selectedColor,
           ),
         ],

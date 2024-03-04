@@ -52,7 +52,7 @@ class CustomProfileContainer extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        data.name,
+                  data.name,
                         style: TextStyle(
                           color: textColor, // Change text color if needed
                           fontSize: 15,

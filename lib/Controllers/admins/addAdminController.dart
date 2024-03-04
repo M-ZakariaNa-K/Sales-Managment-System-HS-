@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sales_management_system/Controllers/admins/admin_controller.dart';
@@ -38,13 +40,14 @@ class AddAdminController extends GetxController {
       {required String userName,
       required String name,
       required String password,
-      required passwordConfirmation}) {
+      required passwordConfirmation,
+      required permissions}) {
     DioHelper.postData(token: token, url: 'users/add', data: {
       'name': name,
       'username': userName,
       'password': password,
       'confirm_password': passwordConfirmation,
-      "permissions": ["export-pdf"]
+      "permissions": permissions
     }).then((value) async {
       newUserModel = NewUserModel.fromJson(value.data);
       await DioHelper().getData(path: 'users/list', token: token).then((value) {
@@ -61,4 +64,30 @@ class AddAdminController extends GetxController {
       showToast(text: e.toString(), state: ToastStates.ERROR);
     });
   }
+
+  void editUserInformation(
+      {required String userName,
+      required String name,
+      required String password,
+      required passwordConfirmation,
+      required permissions}) {
+         DioHelper.postData(token: token, url: 'users/edit', data: {
+      'name': name,
+      'username': userName,
+      'password': password,
+      'confirm_password': passwordConfirmation,
+      "permissions": permissions
+    }).then((value) async {
+      newUserModel = NewUserModel.fromJson(value.data);
+      await DioHelper().getData(path: 'users/list', token: token).then((value) {
+        showToast(text: 'text', state: ToastStates.SUCCESS);
+      }).catchError((e) {
+        showToast(text: e.toString(), state: ToastStates.ERROR);
+      });
+      AdminController().update();
+      showToast(text: 'User Edit Successfully', state: ToastStates.SUCCESS);
+    }).catchError((e) {
+      showToast(text: e.toString(), state: ToastStates.ERROR);
+    });
+    }
 }

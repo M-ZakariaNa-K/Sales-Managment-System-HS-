@@ -35,6 +35,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       //translations: MyLocale(),
       locale: const Locale('en'),
+      locale: const Locale('en'),
       translations: MyLocale(),
       title: 'Sales Management System App',
       // NOTE (From Zakaria): everyone when creating your task page

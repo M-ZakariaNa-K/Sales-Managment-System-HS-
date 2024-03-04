@@ -1,12 +1,13 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pdf/widgets.dart' as pw;
-import 'package:sales_management_system/Core/Components/components.dart';
-
 import 'package:sales_management_system/Core/Components/custome_elevated_button.dart';
-import 'package:sales_management_system/Core/Components/home/Circle_image.dart';
-import 'package:sales_management_system/Core/Components/home/sales_table&image_sliderRow/mobile_sales_items_list.dart';
-import 'package:sales_management_system/Core/Components/widget.dart';
+import 'package:sales_management_system/Core/Components/home/sales_table&image_sliderRow/mobile_sales_item.dart';
+import 'package:sales_management_system/Core/Components/home/unload_sales_table.dart';
+
 import 'package:sales_management_system/Core/Constants/theme.dart';
+import 'package:sales_management_system/Core/helper/services/home/get_all_branchesServices.dart';
 import 'package:sales_management_system/Models/home/get_all_branches.dart';
 
 class MobileLayoutReportsPage extends StatefulWidget {
@@ -36,12 +37,15 @@ class _MobileLayoutReportsPageState extends State<MobileLayoutReportsPage> {
         padding: const EdgeInsets.all(10.0),
         child: Center(
           child: Container(
+            decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.all(Radius.circular(10))),
             child: Column(
               children: [
                 Container(
-                  decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(.8),
-                      borderRadius: const BorderRadius.only(
+                  decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(15),
                           topRight: Radius.circular(15))),
                   width: horizontalPadding * .9,
@@ -49,11 +53,20 @@ class _MobileLayoutReportsPageState extends State<MobileLayoutReportsPage> {
                   child: Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: Row(children: [
-                      Text("التقرير الشهري"),
+                      const Text(
+                        "التقرير الشهري",
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
+                      ),
                       Spacer(),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: ElevatedButton(
+                        child: Container(
+                          width: horizontalPadding * .001,
+                          child: CustomeElevatedButton(
+                            buttonChild: const Text('Export'),
+                            buttonColor: ThemeColors.secondary,
                             onPressed: () {
                               showDialog(
                                   context: context,
@@ -90,89 +103,86 @@ class _MobileLayoutReportsPageState extends State<MobileLayoutReportsPage> {
                                         ),
                                       ));
                             },
-                            child: Text('Export')),
+                          ),
+                        ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: ElevatedButton(
-                            onPressed: () async {
-                              final DateTimeRange? picked =
-                                  await showDateRangePicker(
-                                context: context,
-                                initialDateRange: DateTimeRange(
-                                  start: DateTime.now(),
-                                  end: DateTime.now()
-                                      .add(const Duration(days: 100)),
-                                ),
-                                firstDate: DateTime(2000),
-                                lastDate: DateTime(2100),
-                              );
-                              if (picked != null &&
-                                  // ignore: unrelated_type_equality_checks
-                                  picked != selectedStartDateRange) {
-                                setState(() {
-                                  selectedStartDateRange = picked.start;
-                                  selectedEndDateRange = picked.end;
-                                });
-                              }
-                            },
-                            child: Text('Pick a date')),
+                      CustomeElevatedButton(
+                        buttonChild: const Text(
+                          'Pick a date',
+                          style:
+                              TextStyle(color: ThemeColors.secondaryTextColor),
+                        ),
+                        buttonColor: ThemeColors.secondary,
+                        onPressed: () async {
+                          final DateTimeRange? picked =
+                              await showDateRangePicker(
+                            context: context,
+                            initialDateRange: DateTimeRange(
+                              start: DateTime.now(),
+                              end:
+                                  DateTime.now().add(const Duration(days: 100)),
+                            ),
+                            firstDate: DateTime(2000),
+                            lastDate: DateTime(2100),
+                          );
+                          if (picked != null &&
+                              // ignore: unrelated_type_equality_checks
+                              picked != selectedStartDateRange) {
+                            setState(() {
+                              selectedStartDateRange = picked.start;
+                              selectedEndDateRange = picked.end;
+                            });
+                          }
+                        },
                       ),
                     ]),
                   ),
                 ),
-                Container(
-                  decoration:
-                      BoxDecoration(color: Colors.white.withOpacity(.8)),
-                  width: horizontalPadding * .9,
-                  child: Padding(
-                    padding: const EdgeInsets.all(18.0),
-                    child: Row(
-                      children: [
-                        Text("الفرع"),
-                        Spacer(),
-                        Text("السعر الإجمالي"),
-                        Spacer(),
-                        Text('Code'),
-                        Spacer(),
-                        Text('الشهر')
-                      ],
-                    ),
-                  ),
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(.8),
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(15),
-                        bottomRight: Radius.circular(15),
-                      )),
-                  width: horizontalPadding * .9,
-                  height: verticalPadding * .5,
-                  child: ListView.builder(
-                    itemBuilder: (context, index) => Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        padding: EdgeInsets.all(10),
-                        width: horizontalPadding * .7,
-                        height: verticalPadding * .1,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Text('اسم الفرع'),
-                              Spacer(),
-                              Text('السعر الإجمالي'),
-                              Spacer(),
-                              Text('الرمز'),
-                              Spacer(),
-                              Text('الشهر'),
-                            ]),
-                      ),
-                    ),
-                    itemCount: 5,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child: FutureBuilder(
+                    future:
+                        GetAllBranchesService(Dio()).getAllBranchesService(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        // While data is loading, return a loading indicator or any other placeholder widget
+                        return UnloadedItem(
+                          width: MediaQuery.of(context).size.width,
+                          height: 250,
+                        );
+                      } else if (snapshot.hasError) {
+                        // If there is an error, display an error message
+                        return Text('Error: ${snapshot.error}');
+                      } else {
+                        // If data is successfully fetched, build the list of MobileSalesItem widgets
+                        List<BranchDataModel> data = snapshot.data!;
+                        BranchDataModel b1 = BranchDataModel(
+                            branch: '34'.tr,
+                            number: '35'.tr,
+                            guid: '36'.tr,
+                            spelledTotal: '37'.tr,
+                            totalSales: '38'.tr);
+                        return ListView.builder(
+                          shrinkWrap: true,
+                          scrollDirection: Axis.vertical,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: data.length,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 10.0),
+                              child: MobileSalesItem(
+                                  branch: data[index], index: index),
+                            );
+                          },
+                        );
+                        //     ListView(
+                        //         children: List.generate(
+                        //   data.length,
+                        //   (index) => MobileSalesItem(branch: data[index], index: index),
+                        // ));
+                      }
+                    },
                   ),
                 )
               ],

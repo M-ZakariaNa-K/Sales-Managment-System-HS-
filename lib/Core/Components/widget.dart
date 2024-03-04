@@ -10,3 +10,5 @@ String token = '';
 UserModel? userModel;
 NewUserModel? newUserModel;
 ListUserModel? listUserModel;
+bool isDataLoading = false;
+bool isLoadingFaild = false;

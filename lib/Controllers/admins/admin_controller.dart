@@ -67,4 +67,20 @@ class AdminController extends GetxController {
       showToast(text: 'Something went wrong', state: ToastStates.WARNING);
     });
   }
+
+  Future<void> getUserList() async {
+    isDataLoading = true;
+    await DioHelper()
+        .getData(path: 'users/list', token: tokenVar)
+        .then((value) {
+      listUserModel = ListUserModel.fromJson(value.data);
+      // Notify UI that data has changed
+      update();
+    }).catchError((e) {
+      isLoadingFaild = true;
+      isDataLoading = false;
+      print("gg");
+      update();
+    });
+  }
 }

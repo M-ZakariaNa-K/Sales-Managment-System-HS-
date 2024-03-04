@@ -10,22 +10,14 @@ class AdminsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool isAddAdmin = false;
-    users.add(4);
-    users.add(4);
-    users.add(4);
-    users.add(4);
-    users.add(4);
     final MediaQueryData = MediaQuery.of(context);
     final horizontalPadding = MediaQueryData.size.width;
     final verticalPadding = MediaQueryData.size.height;
     return LayoutBuilder(builder: (context, constraints) {
-      if (horizontalPadding <= 1000) {
+      if (horizontalPadding <= 600) {
         return AdminsMobileLayout(context);
-      } else if (horizontalPadding < 1250) {
-        return AdminsTabletLayout(context);
-      } else {
+      } else
         return AdminsDisktopLayout(context);
-      }
     });
   }
 }
