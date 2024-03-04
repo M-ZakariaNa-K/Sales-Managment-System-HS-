@@ -49,9 +49,9 @@ class DesktopLayoutLoginScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                           Text(
+                          Text(
                             '20'.tr,
-                            style:const TextStyle(
+                            style: const TextStyle(
                                 color: ThemeColors.primary,
                                 fontSize: 25,
                                 fontWeight: FontWeight.w600),
@@ -60,6 +60,7 @@ class DesktopLayoutLoginScreen extends StatelessWidget {
                             height: 20,
                           ),
                           TextFormField(
+                            controller: userController,
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return '24'.tr;
@@ -80,6 +81,7 @@ class DesktopLayoutLoginScreen extends StatelessWidget {
                             height: 40,
                           ),
                           TextFormField(
+                            controller: passwordController,
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return '23'.tr;

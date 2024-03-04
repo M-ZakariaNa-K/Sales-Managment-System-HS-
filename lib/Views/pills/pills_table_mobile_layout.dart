@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import 'package:sales_management_system/Core/Constants/theme.dart';

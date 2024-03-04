@@ -38,10 +38,13 @@ class LoginController extends GetxController {
         print("gg");
         listUserModel = ListUserModel.fromJson(value.data);
         print(listUserModel!.data.UsersCount);
+        showToast(text: 'text', state: ToastStates.SUCCESS);
+      }).catchError((e) {
+        showToast(text: e.toString(), state: ToastStates.ERROR);
       });
 
-      Get.to(AdminsPage());
       showToast(text: 'Logged in Successfully', state: ToastStates.SUCCESS);
-    });
+      Get.to(AdminsPage());
+    }).catchError((e) {});
   }
 }
