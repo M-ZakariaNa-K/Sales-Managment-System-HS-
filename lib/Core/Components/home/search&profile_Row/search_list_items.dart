@@ -89,7 +89,12 @@ class _SearchListItemsState extends State<SearchListItems> {
                               Navigator.push(context,
                                   MaterialPageRoute(builder: (context) {
                                 //Here should has the Id of branch i pressed
-                                return PillsPage(context);
+                                return PillsPage(
+                                  context,
+                                  total: nameBranches[index].totalSales,
+                                  guid: nameBranches[index].guid,
+                                  branchName: nameBranches[index].name,
+                                );
                               }));
                             },
                             title: Text(
@@ -133,7 +138,12 @@ class _SearchListItemsState extends State<SearchListItems> {
                               Navigator.push(context,
                                   MaterialPageRoute(builder: (context) {
                                 //Here should has the Id of branch i pressed
-                                return PillsPage(context);
+                                return PillsPage(
+                                  context,
+                                  total: nameBranches[index].totalSales,
+                                  guid: numberBranches[index].guid,
+                                  branchName: nameBranches[index].name,
+                                );
                               }));
                             },
                             title: Text(
@@ -148,11 +158,11 @@ class _SearchListItemsState extends State<SearchListItems> {
                             leading: ClipRRect(
                               borderRadius:
                                   const BorderRadius.all(Radius.circular(10)),
-                              child: Container(
+                              child: SizedBox(
                                 width: 40,
                                 height: 40,
                                 child: Image.asset(
-                                  'images/logo.png',
+                                  'images/Logo2.png',
                                   fit: BoxFit.cover,
                                 ),
                               ),

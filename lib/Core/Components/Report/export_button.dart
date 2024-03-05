@@ -11,19 +11,37 @@ import 'package:sales_management_system/Core/Constants/theme.dart';
 import 'package:sales_management_system/Core/helper/shared/shared.dart';
 
 class ExportButton extends StatelessWidget {
-  const ExportButton({
-    Key? key,
-    required this.startDate,
-    required this.endDate,
-  }) : super(key: key);
-  final String startDate;
-  final String endDate;
-  Future<void> _downloadExcel(BuildContext context) async {
-    try {
-      // Replace 'YOUR_API_ENDPOINT' with your actual API endpoint
+  const ExportButton(
+      {Key? key,
+      required this.pdfUrl,
+      required this.excelUrl,
+      @required this.scaffoldKey})
+      : super(key: key);
 
-      String apiEndpoint =
-          'http://127.0.0.1:8000/api/branches-Sales/ExcelForm?start_date=$startDate&end_date=$endDate';
+  final String excelUrl;
+  final String pdfUrl;
+  final dynamic scaffoldKey;
+  Future<void> _downloadExcel(BuildContext context, String apiExcelEndpoint,
+      String apiPdfEndpoint) async {
+    try {
+      // Show a loading indicator while downloading
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          duration: const Duration(seconds: 2),
+          backgroundColor: ThemeColors.primary,
+          content: Row(
+            children: [
+              const CircularProgressIndicator(
+                color: ThemeColors.secondary,
+              ),
+              const SizedBox(width: 10),
+              Text("Downloading Excel file...".tr),
+            ],
+          ),
+        ),
+      );
+
+      String apiEndpoint = excelUrl;
 
       // Make a GET request using Dio
 
@@ -66,10 +84,24 @@ class ExportButton extends StatelessWidget {
 
   Future<void> _downloadPdf(BuildContext context) async {
     try {
-      // Replace 'YOUR_API_ENDPOINT' with your actual API endpoint
+      // Show a loading indicator while downloading
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          duration: const Duration(seconds: 2),
+          backgroundColor: ThemeColors.primary,
+          content: Row(
+            children: [
+              const CircularProgressIndicator(
+                color: ThemeColors.secondary,
+              ),
+              const SizedBox(width: 10),
+              Text("Downloading PDF file...".tr),
+            ],
+          ),
+        ),
+      );
 
-      String apiEndpoint =
-          'http://127.0.0.1:8000/api/branches-Sales/PDFForm?start_date=$startDate&end_date=$endDate';
+      String apiEndpoint = pdfUrl;
 
       // Make a GET request using Dio
 
@@ -98,7 +130,7 @@ class ExportButton extends StatelessWidget {
       // Revoke the URL to release memory
       html.Url.revokeObjectUrl(url);
     } catch (error) {
-      print('Error downloading Excel file: $error');
+      print('Error downloading Pdf file: $error');
       // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -115,21 +147,25 @@ class ExportButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomeElevatedButton(
-        buttonChild: const Text(
-          "Export",
-          style: TextStyle(color: ThemeColors.secondaryTextColor),
+        buttonChild:Text(
+          "Export".tr,
+          style:const  TextStyle(color: ThemeColors.secondaryTextColor),
         ),
         buttonColor: !isUser ? ThemeColors.secondary : Colors.grey,
         onPressed: !isUser
             ? () {
                 showDialog(
-                    context: context,
+                    context: scaffoldKey?.currentContext,
                     builder: (context) => AlertDialog(
                           title: Text('Save As?'.tr),
                           content: Row(
                             children: [
                               TextButton(
-                                onPressed: () => _downloadExcel(context),
+                                onPressed: () => _downloadExcel(
+                                  context,
+                                  excelUrl,
+                                  pdfUrl,
+                                ),
                                 child: Image.asset(
                                   'images/excel.png',
                                   height: 90,

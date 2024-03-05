@@ -1,19 +1,17 @@
 import 'package:dio/dio.dart';
 import 'package:sales_management_system/Core/Components/widget.dart';
-import 'package:sales_management_system/Core/helper/shared/shared.dart';
+import 'package:sales_management_system/Core/helper/services/getTest.dart';
 import 'package:sales_management_system/Models/home/get_all_sales_value.dart';
 
-class AllSalesValuesService{
+class AllSalesValuesService {
   final Dio dio;
   AllSalesValuesService(this.dio);
 
   Future<List<AllSalesValuesDataModel>> getAllSalesValues() async {
     try {
-      // Make sure the URL is correct and accessible
-      dio.options.headers = {'Authorization': 'Bearer $token'};
-
-      Response response =
-          await dio.get("$urlVar/api/branches-Sales/getSalesValue");
+      Response response = await DioHelper()
+          .getData(path: "branches-Sales/getSalesValue", token: token);
+      // await dio.get("$urlVar/api/branches-Sales/getSalesValue");
       // Check if the response status code is 200 (OK)
       if (response.statusCode == 200) {
         // Parse the JSON response data
@@ -22,7 +20,7 @@ class AllSalesValuesService{
 
         for (var item in data["data"]) {
           AllSalesValuesDataModel a = AllSalesValuesDataModel(
-         total: item["total"],
+            total: item["total"],
             spelledTotal: item["spelled_total"],
           );
           dataList.add(a);
@@ -40,4 +38,3 @@ class AllSalesValuesService{
     }
   }
 }
-

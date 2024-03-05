@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sales_management_system/Core/Components/home/search&profile_Row/search_list_items.dart';
+import 'package:sales_management_system/Core/Components/pills/Search_pills_list_items.dart';
 
 class SearchBarWidget extends StatefulWidget {
-  const SearchBarWidget({Key? key}) : super(key: key);
-
+  const SearchBarWidget({
+    Key? key,
+    @required this.isInvoices,
+    @required this.guid,
+  }) : super(key: key);
+  final bool? isInvoices;
+  final String? guid;
   @override
   State<SearchBarWidget> createState() => _SearchBarWidgetState();
 }
@@ -59,9 +65,14 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
             ),
           ),
           isSearching
-              ? SearchListItems(
-                  searchController: searchController,
-                )
+              ? widget.isInvoices!
+                  ? SearchPillsListItems(
+                      searchController: searchController,
+                      guid: widget.guid!,
+                    )
+                  : SearchListItems(
+                      searchController: searchController,
+                    )
               : const SizedBox(),
         ],
       ),

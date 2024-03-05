@@ -9,6 +9,8 @@ import 'package:sales_management_system/Core/helper/services/home/get_all_branch
 import 'package:sales_management_system/Models/home/get_all_branches.dart';
 import 'package:sales_management_system/Views/pills/pills.dart';
 
+String publicGuidVar = "";
+
 class SalesTable extends StatefulWidget {
   const SalesTable({Key? key}) : super(key: key);
 
@@ -69,7 +71,7 @@ class _SalesTableState extends State<SalesTable> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                       Text(
+                      Text(
                         '2'.tr,
                         style: TextStyle(
                           fontSize: 20,
@@ -83,7 +85,7 @@ class _SalesTableState extends State<SalesTable> {
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 10.0),
                             child: CustomeElevatedButton(
-                              buttonChild:  Text(
+                              buttonChild: Text(
                                 "46".tr,
                                 style: const TextStyle(color: Colors.white),
                               ),
@@ -103,7 +105,7 @@ class _SalesTableState extends State<SalesTable> {
                             ),
                           ),
                           CustomeElevatedButton(
-                            buttonChild:  Text(
+                            buttonChild: Text(
                               "45".tr,
                               style: const TextStyle(color: Colors.white),
                             ),
@@ -134,7 +136,7 @@ class _SalesTableState extends State<SalesTable> {
                   width: double.infinity,
                   child: PaginatedDataTable(
                     rowsPerPage: 10, // Number of rows per page
-                    columns:  [
+                    columns: [
                       DataColumn(
                         label: Expanded(
                           child: Row(
@@ -142,7 +144,8 @@ class _SalesTableState extends State<SalesTable> {
                             children: [
                               Text(
                                 '35'.tr,
-                                style: const TextStyle(fontWeight: FontWeight.bold),
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold),
                               ),
                             ],
                           ),
@@ -155,7 +158,8 @@ class _SalesTableState extends State<SalesTable> {
                             children: [
                               Text(
                                 '34'.tr,
-                                style: const TextStyle(fontWeight: FontWeight.bold),
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold),
                               ),
                             ],
                           ),
@@ -168,7 +172,8 @@ class _SalesTableState extends State<SalesTable> {
                             children: [
                               Text(
                                 '37'.tr,
-                                style: const TextStyle(fontWeight: FontWeight.bold),
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold),
                               ),
                             ],
                           ),
@@ -181,7 +186,8 @@ class _SalesTableState extends State<SalesTable> {
                             children: [
                               Text(
                                 '38'.tr,
-                                style: const TextStyle(fontWeight: FontWeight.bold),
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold),
                               ),
                             ],
                           ),
@@ -194,7 +200,8 @@ class _SalesTableState extends State<SalesTable> {
                             children: [
                               Text(
                                 '44'.tr,
-                                style: const TextStyle(fontWeight: FontWeight.bold),
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold),
                               ),
                             ],
                           ),
@@ -249,8 +256,18 @@ class SalesDataSource extends DataTableSource {
       DataCell(Center(
         child: ElevatedButton(
           onPressed: () {
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => PillsPage(context)));
+            publicGuidVar = rowData.guid!;
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => PillsPage(
+                                          total:rowData.totalSales,
+
+                  context,
+                  guid: rowData.guid!,
+                  branchName: rowData.branch!,
+                ),
+              ),
+            );
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: ThemeColors.secondary
@@ -259,9 +276,10 @@ class SalesDataSource extends DataTableSource {
               borderRadius: BorderRadius.circular(3), // Set border radius
             ),
           ),
-          child:  Text(
+          child: Text(
             '43'.tr,
-            style: const TextStyle(color: Colors.white), // Set text color to white
+            style:
+                const TextStyle(color: Colors.white), // Set text color to white
           ),
         ),
       )),

@@ -1,36 +1,45 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:pdf/widgets.dart' as pw;
+import 'package:sales_management_system/Views/pills/pills_table_mobile_layout.dart';
+import 'package:sales_management_system/Views/pills/pills_table_desktop_layout.dart';
 
-import 'package:sales_management_system/Core/Components/custome_elevated_button.dart';
-import 'package:sales_management_system/Core/Components/widget.dart';
-import 'package:sales_management_system/Core/Constants/theme.dart';
-import 'package:sales_management_system/Views/reports/report.dart';
+class PillsPage extends StatelessWidget {
+  const PillsPage(
+    BuildContext context, {
+    super.key,
+    required this.guid,
+    required this.branchName,
+    required this.total,
+  });
 
-class PillsPage extends StatefulWidget {
-  const PillsPage(BuildContext context, {super.key});
-
-  @override
-  State<PillsPage> createState() => _PillsPageState();
-}
-
-class _PillsPageState extends State<PillsPage> {
-  DateTime? selectedStartDateRange;
-  DateTime? selectedEndDateRange;
-  final pdf = pw.Document();
+  // DateTime? selectedStartDateRange;
+  final String guid;
+  final String branchName;
+  final dynamic total;
 
   @override
   Widget build(BuildContext context) {
-   
-      final mediaQueryData = MediaQuery.of(context);
+    final mediaQueryData = MediaQuery.of(context);
 
     final horizontalPadding = mediaQueryData.size.width;
 
     return LayoutBuilder(builder: (context, constraints) {
       if (horizontalPadding <= 800) {
-        return PillsPage(context);
+        return MobileLayoutPillsPage(
+          context,
+          guid: guid,
+          branchName: branchName,
+          total: total,
+        );
       } else {
-        return PillsPage(context);
+        return DesktopLayoutPillsPage(
+          
+          context,
+          guid: guid,
+          branchName: branchName,
+          total: total,
+        );
       }
-    }); }
+    });
+  }
 }

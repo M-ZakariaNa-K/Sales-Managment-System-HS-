@@ -8,7 +8,6 @@ import 'package:sales_management_system/Core/Constants/theme.dart';
 import 'package:sales_management_system/Core/helper/services/Report/GetReport2DateService.dart';
 import 'package:sales_management_system/Core/helper/services/home/get_all_branchesServices.dart';
 import 'package:sales_management_system/Core/helper/services/home/get_all_sales_value_service.dart';
-import 'package:sales_management_system/Core/helper/shared/shared.dart';
 import 'package:sales_management_system/Models/home/get_all_branches.dart';
 import 'package:sales_management_system/Models/home/get_all_sales_value.dart';
 import 'package:sales_management_system/Models/reports/GetReport2DateModel.dart';
@@ -24,6 +23,7 @@ class DesktopLayoutReportsPage extends StatefulWidget {
 }
 
 class _DesktopLayoutReportsPageState extends State<DesktopLayoutReportsPage> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   DateTime? selectedStartDateRange;
   DateTime? selectedEndDateRange;
   final pdf = pw.Document();
@@ -71,6 +71,7 @@ class _DesktopLayoutReportsPageState extends State<DesktopLayoutReportsPage> {
   String _twoDigits2(int n) {
     return n.toString().padLeft(2, '0');
   }
+
   //========================================================================================
   @override
   void initState() {
@@ -103,6 +104,7 @@ class _DesktopLayoutReportsPageState extends State<DesktopLayoutReportsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       backgroundColor: ThemeColors.secondary,
       body: Center(
         child: Container(
@@ -124,7 +126,7 @@ class _DesktopLayoutReportsPageState extends State<DesktopLayoutReportsPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text(
-                      'تقرير الفرع',
+                      '',
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -153,16 +155,41 @@ class _DesktopLayoutReportsPageState extends State<DesktopLayoutReportsPage> {
                                 ),
                                 firstDate: DateTime(2000),
                                 lastDate: DateTime(2100),
+                                //TO MAKE THE DIALOG SMALLER
+                                builder: (context, child) {
+                                  return Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: <Widget>[
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(top: 50.0),
+                                        child: SizedBox(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.7,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.45,
+                                          child: child,
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                },
                               );
-
-                              if (picked != null &&
-                                  // ignore: unrelated_type_equality_checks
-                                  picked != selectedStartDateRange) {
-                                setState(() {
-                                  selectedStartDateRange = picked.start;
-                                  selectedEndDateRange = picked.end;
-                                });
+                              if (picked == null) {
+                                //onpressed X
+                                return;
                               }
+                              setState(() {
+                                selectedStartDateRange = picked.start;
+                                selectedEndDateRange = picked.end;
+                              });
+
                               // onDateSaved() async {
                               //   //NOTE(from ZAKARIA): Here we will call the data from API between the 2 selected Date
                               formattedStartDate =
@@ -182,9 +209,12 @@ class _DesktopLayoutReportsPageState extends State<DesktopLayoutReportsPage> {
                             },
                           ),
                         ),
-                      ExportButton(
-                          startDate: formattedStartDate,
-                          endDate: formattedEndDate,
+                        ExportButton(
+                          scaffoldKey: _scaffoldKey,
+                          pdfUrl:
+                              'http://127.0.0.1:8000/api/branches-Sales/PDFForm?start_date=$formattedStartDate&end_date=$formattedEndDate',
+                          excelUrl:
+                              'http://127.0.0.1:8000/api/branches-Sales/ExcelForm?start_date=$formattedStartDate&end_date=$formattedEndDate',
                         )
                       ],
                     )

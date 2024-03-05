@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:sales_management_system/Core/Components/widget.dart';
-import 'package:sales_management_system/Core/helper/shared/shared.dart';
+import 'package:sales_management_system/Core/helper/services/getTest.dart';
 import 'package:sales_management_system/Models/home/get_num_of_branchs.dart';
 
 class GetNumOfBranchsService {
@@ -10,11 +10,8 @@ class GetNumOfBranchsService {
 
   Future<GetNumOfBranchsModel> getNumOfBranchsService() async {
     try {
-      // Make sure the URL is correct and accessible
-      dio.options.headers = {'Authorization': 'Bearer $token'};
-
-      Response response =
-          await dio.get("$urlVar/api/branches-Sales/num-of-branches");
+ Response response = await DioHelper()
+          .getData(path: "branches-Sales/num-of-branches", token: token);
       // Check if the response status code is 200 (OK)
       if (response.statusCode == 200) {
         // Parse the JSON response data

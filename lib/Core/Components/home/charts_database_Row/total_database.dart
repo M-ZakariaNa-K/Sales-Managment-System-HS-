@@ -59,7 +59,7 @@ class _TotalDatabaseState extends State<TotalDatabase> {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width * 0.4,
-      height: 370,
+      // height: 370,
       constraints: const BoxConstraints(
         minHeight: 320, // Set your minimum height here
       ),

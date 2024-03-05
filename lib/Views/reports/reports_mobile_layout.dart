@@ -25,6 +25,7 @@ class MobileLayoutReportsPage extends StatefulWidget {
 }
 
 class _MobileLayoutReportsPageState extends State<MobileLayoutReportsPage> {
+  bool isDataBetween2DateLoading = false;
   DateTime? selectedStartDateRange;
   DateTime? selectedEndDateRange;
   final pdf = pw.Document();
@@ -128,8 +129,6 @@ class _MobileLayoutReportsPageState extends State<MobileLayoutReportsPage> {
                               borderRadius: BorderRadius.only(
                                   topLeft: Radius.circular(15),
                                   topRight: Radius.circular(15))),
-                          // width: horizontalPadding * .9,
-                          // height: verticalPadding * .1,
                           child: Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Row(children: [
@@ -144,9 +143,9 @@ class _MobileLayoutReportsPageState extends State<MobileLayoutReportsPage> {
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 10.0),
                                 child: CustomeElevatedButton(
-                                  buttonChild: const Text(
-                                    'Pick a date',
-                                    style: TextStyle(
+                                  buttonChild: Text(
+                                    'Pick a Date'.tr,
+                                    style: const TextStyle(
                                         color: ThemeColors.secondaryTextColor),
                                   ),
                                   buttonColor: ThemeColors.secondary,
@@ -161,21 +160,51 @@ class _MobileLayoutReportsPageState extends State<MobileLayoutReportsPage> {
                                       ),
                                       firstDate: DateTime(2000),
                                       lastDate: DateTime(2100),
+                                      //TO MAKE THE DIALOG SMALLER
+                                      builder: (context, child) {
+                                        return Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: <Widget>[
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 50.0),
+                                              child: SizedBox(
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.7,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.8,
+                                                child: child,
+                                              ),
+                                            ),
+                                          ],
+                                        );
+                                      },
                                     );
-                                    if (picked != null &&
-                                        // ignore: unrelated_type_equality_checks
-                                        picked != selectedStartDateRange) {
-                                      setState(() {
-                                        selectedStartDateRange = picked.start;
-                                        selectedEndDateRange = picked.end;
-                                      });
+                                    if (picked == null) {
+                                      //onpressed X
+                                      return;
                                     }
+                                    // if (picked != null &&
+                                    //     // ignore: unrelated_type_equality_checks
+                                    //     picked != selectedStartDateRange) {
+                                    setState(() {
+                                      selectedStartDateRange = picked.start;
+                                      selectedEndDateRange = picked.end;
+                                    });
+                                    // }
                                     //   //NOTE(from ZAKARIA): Here we will call the data from API between the 2 selected Date
                                     formattedStartDate =
                                         formatDate(selectedStartDateRange!);
                                     formattedEndDate =
                                         formatDate(selectedEndDateRange!);
-
+                                    isDataBetween2DateLoading = true;
                                     dataBetweenTwoDate =
                                         await GetReport2DateService(Dio())
                                             .getReport2DateService(
@@ -183,42 +212,61 @@ class _MobileLayoutReportsPageState extends State<MobileLayoutReportsPage> {
                                                 endDate: formattedEndDate);
                                     setState(() {
                                       isReportDataDefult = false;
+                                      isDataBetween2DateLoading = false;
                                     });
                                   },
                                 ),
                               ),
                               ExportButton(
-                                startDate: formattedStartDate,
-                                endDate: formattedEndDate,
+                                pdfUrl:
+                                    'http://127.0.0.1:8000/api/branches-Sales/PDFForm?start_date=$formattedStartDate&end_date=$formattedEndDate',
+                                excelUrl:
+                                    'http://127.0.0.1:8000/api/branches-Sales/ExcelForm?start_date=$formattedStartDate&end_date=$formattedEndDate',
                               ),
                             ]),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                          child: ListView.builder(
-                            shrinkWrap: true,
-                            scrollDirection: Axis.vertical,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemCount: selectedStartDateRange == null ||
-                                    selectedEndDateRange == null
-                                ? defultData.length
-                                : dataBetweenTwoDate.length - 1,
-                            itemBuilder: (context, index) {
-                              return Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 10.0),
-                                child: MobileSalesItem(
-                                  branch: selectedStartDateRange == null ||
-                                          selectedEndDateRange == null
-                                      ? defultData[index]
-                                      : dataBetweenTwoDate[index],
-                                  index: index,
+                        isDataBetween2DateLoading
+                            ? Center(
+                                child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 10.0),
+                                child: UnloadedItem(
+                                  width: MediaQuery.of(context).size.width,
+                                  height: 220,
                                 ),
-                              );
-                            },
-                          ),
-                        ),
+                              ))
+                            : Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 10.0),
+                                child: ListView.builder(
+                                  shrinkWrap: true,
+                                  scrollDirection: Axis.vertical,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  itemCount: selectedStartDateRange == null ||
+                                          selectedEndDateRange == null
+                                      ? defultData.length
+                                      :
+                                      //Cause when i choose 2 date, dataBetweenTwoDate.length become 0 while the data are coming from API
+                                      dataBetweenTwoDate.isEmpty
+                                          ? dataBetweenTwoDate.length
+                                          : dataBetweenTwoDate.length - 1,
+                                  itemBuilder: (context, index) {
+                                    return Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 10.0),
+                                      child: MobileSalesItem(
+                                        branch:
+                                            selectedStartDateRange == null ||
+                                                    selectedEndDateRange == null
+                                                ? defultData[index]
+                                                : dataBetweenTwoDate[index],
+                                        index: index,
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
                         Padding(
                           padding: const EdgeInsets.only(bottom: 10.0),
                           child: Text(
@@ -233,7 +281,3 @@ class _MobileLayoutReportsPageState extends State<MobileLayoutReportsPage> {
     );
   }
 }
-
-//  selectedStartDateRange == null ||
-//                               selectedEndDateRange == null
-//                           ? defultData,

@@ -4,6 +4,8 @@ import 'package:sales_management_system/Core/Components/home/Circle_image.dart';
 import 'package:sales_management_system/Core/Constants/theme.dart';
 import 'package:sales_management_system/Models/home/get_all_branches.dart';
 
+import '../../../../Views/pills/pills.dart';
+
 class MobileSalesItem extends StatelessWidget {
   const MobileSalesItem({super.key, required this.branch, required this.index});
   final dynamic branch;
@@ -55,7 +57,18 @@ class MobileSalesItem extends StatelessWidget {
                         BorderRadius.circular(20), // Set border radius
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => PillsPage(
+                        context,
+                        total: branch.totalSales,
+                        guid: branch.guid,
+                        branchName: branch.branch,
+                      ),
+                    ),
+                  );
+                },
                 child: Text(
                   "44".tr,
                   style: TextStyle(

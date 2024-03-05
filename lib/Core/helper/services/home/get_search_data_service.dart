@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:sales_management_system/Core/Components/widget.dart';
-import 'package:sales_management_system/Core/helper/shared/shared.dart';
+import 'package:sales_management_system/Core/helper/services/getTest.dart';
 import 'package:sales_management_system/Models/home/get_search_data_model.dart';
 
 class SearchAppService {
@@ -8,18 +8,13 @@ class SearchAppService {
   final Dio dio;
 
   Future<GetSearchDataModel> getsearchapp({required String query}) async {
-    dio.options.headers = {
-      'Authorization': 'Bearer $token',
-    };
-
     // Add connectTimeout and receiveTimeout to handle timeouts
     dio.options.connectTimeout = Duration(seconds: 30); // 30 seconds
     dio.options.receiveTimeout = Duration(seconds: 20); // 20 seconds
 
     try {
-      Response response = await dio.get(
-        "$urlVar/api/branches-Sales/Search-For?param=$query",
-      );
+       Response response = await DioHelper()
+          .getData(path: "branches-Sales/Search-For?param=$query", token: token);
       if (response.statusCode == 200) {
         Map<String, dynamic> data = response.data;
         List<dynamic> names = data['data']['Name results'] as List<dynamic>;

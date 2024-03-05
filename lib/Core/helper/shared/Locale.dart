@@ -56,7 +56,14 @@ class MyLocale implements Translations {
           "51": "الفرع الاكثر مبيعاً",
           "52": "إجمالي المبيعات",
           "total-price": " :السعر الإجمالي",
-          "Save As?":"حفظ باستخدام:",
+          "Save As?": "حفظ باستخدام:",
+          "Pick a Date": "اختيار التاريخ",
+          "Date": "التاريخ",
+          "total": "الإجمالي",
+                     "Downloading Excel file...":"جاري تنزيل الملف...",
+                     "Downloading PDF file...":"جاري تنزيل الملف...",
+"Export":"تصدير",
+"There Is No invoices In This Branch.":"لا يوجد فواتير لهذا الفرع.",
         },
         "en": {
           "1": "home",
@@ -111,7 +118,14 @@ class MyLocale implements Translations {
           "51": "Most Sales Branch",
           "52": "Total Sales",
           "total-price": "Total Price: ",
-          "Save As?":"Save As...",
+          "Save As?": "Save As...",
+          "Pick a Date": "Pick a Date",
+           "Date":"Date",
+           "total":"Total",
+           "Downloading Excel file...":"Downloading Excel file...",
+           "Downloading PDF file...":"Downloading PDF file...",
+           "Export":"Export",
+           "There Is No invoices In This Branch.":"There Is No invoices In This Branch.",
         }
       };
 }
