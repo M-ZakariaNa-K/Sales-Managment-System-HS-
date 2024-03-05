@@ -308,7 +308,7 @@ class _PillsTableWidgetState extends State<PillsTableWidget> {
               child: Text(
                 "There Is No invoices In This Branch.".tr,
                 style: const TextStyle(
-                  color: Color(0xff003A71),
+                  color: ThemeColors.primary,
                   fontSize: 18,
                 ),
               ),

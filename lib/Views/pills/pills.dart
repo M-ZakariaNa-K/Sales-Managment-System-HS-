@@ -19,27 +19,29 @@ class PillsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final mediaQueryData = MediaQuery.of(context);
+    return DesktopLayoutPillsPage(
+      context,
+      guid: guid,
+      branchName: branchName,
+      total: total,
+    );
+    // LayoutBuilder(builder: (context, constraints) {
+    //   if (horizontalPadding <= 800) {
+    //     return MobileLayoutPillsPage(
+    //       context,
+    //       guid: guid,
+    //       branchName: branchName,
+    //       total: total,
+    //     );
+    //   } else {
+    //     return DesktopLayoutPillsPage(
 
-    final horizontalPadding = mediaQueryData.size.width;
-
-    return LayoutBuilder(builder: (context, constraints) {
-      if (horizontalPadding <= 800) {
-        return MobileLayoutPillsPage(
-          context,
-          guid: guid,
-          branchName: branchName,
-          total: total,
-        );
-      } else {
-        return DesktopLayoutPillsPage(
-          
-          context,
-          guid: guid,
-          branchName: branchName,
-          total: total,
-        );
-      }
-    });
+    //       context,
+    //       guid: guid,
+    //       branchName: branchName,
+    //       total: total,
+    //     );
+    //   }
+    // });
   }
 }
