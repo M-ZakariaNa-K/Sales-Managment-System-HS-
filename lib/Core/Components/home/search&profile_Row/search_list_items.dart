@@ -43,10 +43,20 @@ class _SearchListItemsState extends State<SearchListItems> {
               ),
             );
           } else if (snapshot.hasError) {
-            print('Error: ${snapshot.error}');
-            return Center(
-              child: Text('Error: ${snapshot.error}'),
-            );
+            return Container(
+                decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey,
+                        offset: Offset(0.5, 0.5),
+                        blurRadius: 10,
+                      )
+                    ]),
+                child: Center(
+                  child: Text('Something went wrong. Please try again...'.tr),
+                ));
           } else if (snapshot.hasData) {
             final nameBranches = snapshot.data!.nameBranches;
             final numberBranches = snapshot.data!.numberBranches;
@@ -149,7 +159,7 @@ class _SearchListItemsState extends State<SearchListItems> {
                             title: Text(
                               numberBranches[numberIndex].name,
                               style: const TextStyle(
-                                color: Color(0xff003A71),
+                                color:ThemeColors.primary,
                               ),
                             ),
                             subtitle: Text(

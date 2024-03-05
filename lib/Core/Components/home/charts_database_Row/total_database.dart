@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sales_management_system/Core/Components/home/charts_database_Row/list_of_items.dart';
 import 'package:sales_management_system/Core/Components/home/custome_elevated_button.dart';
 import 'package:sales_management_system/Core/Components/home/unload_sales_table.dart';
@@ -111,7 +112,6 @@ class _TotalDatabaseState extends State<TotalDatabase> {
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 30.0),
             child: ListOfItems(
-              textColor: ThemeColors.secondaryTextColor,
             ),
           ),
           //-----------------------------------------4------------------------------------
@@ -119,14 +119,14 @@ class _TotalDatabaseState extends State<TotalDatabase> {
           // Widget that appears after 3 seconds
           AnimatedOpacity(
             opacity: _isButtonVisible ? 1.0 : 0.0,
-            duration: Duration(milliseconds: 500),
+            duration:const  Duration(milliseconds: 500),
             child: Padding(
               padding: const EdgeInsets.only(top: 10.0),
               child: CustomeElevatedButton(
                 buttonColor: ThemeColors.secondary,
-                buttonChild: const Text(
-                  'تحديث',
-                  style: TextStyle(
+                buttonChild:  Text(
+                  '10'.tr,
+                  style:const TextStyle(
                     color: ThemeColors.secondaryTextColor,
                   ),
                 ),

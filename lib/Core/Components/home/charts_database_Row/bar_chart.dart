@@ -11,6 +11,7 @@ class BarChartFromAPI extends StatefulWidget {
   const BarChartFromAPI({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _BarChartFromAPIState createState() => _BarChartFromAPIState();
 }
 

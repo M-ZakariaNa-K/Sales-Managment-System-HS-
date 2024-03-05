@@ -11,8 +11,7 @@ import 'package:sales_management_system/Models/home/get_greatest_branch_value.da
 import 'package:sales_management_system/Models/home/get_num_of_branchs.dart';
 
 class ListOfItems extends StatelessWidget {
-  const ListOfItems({super.key, required this.textColor});
-  final Color textColor;
+  const ListOfItems({super.key,});
   @override
   Widget build(BuildContext context) {
     return Wrap(

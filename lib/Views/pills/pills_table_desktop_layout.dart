@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pdf/widgets.dart' as pw;
 import 'package:sales_management_system/Core/Components/Report/export_button.dart';
 import 'package:sales_management_system/Core/Components/custome_elevated_button.dart';
 import 'package:sales_management_system/Core/Components/home/search&profile_Row/search_bar.dart';
@@ -25,27 +24,13 @@ class DesktopLayoutPillsPage extends StatefulWidget {
 }
 
 class _DesktopLayoutPillsPageState extends State<DesktopLayoutPillsPage> {
-  // int numberOfPillsPages = 1;
-  // int currentPage = 1;
-  // int prevPage = 0;
-  // int nextPage = 2;
-  // int total = 0;
-  // int lastPage = 1;
-
   DateTime? selectedStartDateRange;
   DateTime? selectedEndDateRange;
-  final pdf = pw.Document();
 
   //NOTE(from ZAKARIA):  dataBetweenTwoDate list will showen when user choose 2 dates
   //we use it in sourse in PagenatedDataTable
-  // List<InvoiceModel> dataBetweenTwoDate = [];
-  // AllSalesValuesDataModel totalSales =
-  //     AllSalesValuesDataModel(spelledTotal: "", total: "0");
   String formattedStartDate = "";
   String formattedEndDate = "";
-  // List<InvoiceModel>? currentPillsData; // Add this variable
-  // int currentPageIndex = 1; // Add this variable
-
   //========================================================================================
   String formatDate(DateTime date) {
     // Format the DateTime object into a specific format

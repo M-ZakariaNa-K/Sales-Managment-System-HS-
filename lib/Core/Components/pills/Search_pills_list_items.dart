@@ -1,13 +1,10 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sales_management_system/Core/Components/home/sales_table&image_sliderRow/sales_table.dart';
-
 import 'package:sales_management_system/Core/Constants/theme.dart';
 import 'package:sales_management_system/Core/helper/services/pills/invoices_search_service.dart';
-import 'package:sales_management_system/Views/pills/pills.dart';
 
 class SearchPillsListItems extends StatelessWidget {
   const SearchPillsListItems({
@@ -47,7 +44,7 @@ class SearchPillsListItems extends StatelessWidget {
           } else if (snapshot.hasError) {
             print('Error: ${snapshot.error}');
             return Center(
-              child: Text('Error: ${snapshot.error}'),
+              child: Text('Something went wrong. Please try again...'.tr),
             );
           } else if (snapshot.hasData) {
             final invoicesList = snapshot.data!.invoices;

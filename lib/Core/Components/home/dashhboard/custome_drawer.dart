@@ -8,7 +8,7 @@ class DrawerWidget extends StatelessWidget {
   final Function(int) onItemTapped;
   final Color selectedColor;
 
-  const DrawerWidget({
+  const DrawerWidget({super.key, 
     required this.selectedIndex,
     required this.onItemTapped,
     required this.selectedColor,

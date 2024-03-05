@@ -107,196 +107,198 @@ class _DesktopLayoutReportsPageState extends State<DesktopLayoutReportsPage> {
       key: _scaffoldKey,
       backgroundColor: ThemeColors.secondary,
       body: Center(
-        child: Container(
-          padding: const EdgeInsets.all(10),
-          margin: const EdgeInsets.all(10),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: Colors.white.withOpacity(.8),
-            border: Border.all(
-              width: 2,
-              color: Colors.grey,
+        child: SingleChildScrollView(
+          child: Container(
+            padding: const EdgeInsets.all(10),
+            margin: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: Colors.white.withOpacity(.8),
+              border: Border.all(
+                width: 2,
+                color: Colors.grey,
+              ),
             ),
-          ),
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 20.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      '',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: ThemeColors.primaryTextColor,
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                       Text(
+                        '4'.tr,
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: ThemeColors.primaryTextColor,
+                        ),
                       ),
-                    ),
-                    Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                          child: CustomeElevatedButton(
-                            buttonChild: const Text(
-                              "Pick a Date",
-                              style: TextStyle(
-                                  color: ThemeColors.secondaryTextColor),
-                            ),
-                            buttonColor: ThemeColors.secondary,
-                            onPressed: () async {
-                              final DateTimeRange? picked =
-                                  await showDateRangePicker(
-                                context: context,
-                                initialDateRange: DateTimeRange(
-                                  start: DateTime.now(),
-                                  end: DateTime.now()
-                                      .add(const Duration(days: 100)),
-                                ),
-                                firstDate: DateTime(2000),
-                                lastDate: DateTime(2100),
-                                //TO MAKE THE DIALOG SMALLER
-                                builder: (context, child) {
-                                  return Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: <Widget>[
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(top: 50.0),
-                                        child: SizedBox(
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.7,
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.45,
-                                          child: child,
+                      Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                            child: CustomeElevatedButton(
+                              buttonChild:  Text(
+                                "Pick a Date".tr,
+                                style: const TextStyle(
+                                    color: ThemeColors.secondaryTextColor),
+                              ),
+                              buttonColor: ThemeColors.secondary,
+                              onPressed: () async {
+                                final DateTimeRange? picked =
+                                    await showDateRangePicker(
+                                  context: context,
+                                  initialDateRange: DateTimeRange(
+                                    start: DateTime.now(),
+                                    end: DateTime.now()
+                                        .add(const Duration(days: 100)),
+                                  ),
+                                  firstDate: DateTime(2000),
+                                  lastDate: DateTime(2100),
+                                  //TO MAKE THE DIALOG SMALLER
+                                  builder: (context, child) {
+                                    return Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: <Widget>[
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 50.0),
+                                          child: SizedBox(
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                0.7,
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.45,
+                                            child: child,
+                                          ),
                                         ),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
-                              if (picked == null) {
-                                //onpressed X
-                                return;
-                              }
-                              setState(() {
-                                selectedStartDateRange = picked.start;
-                                selectedEndDateRange = picked.end;
-                              });
-
-                              // onDateSaved() async {
-                              //   //NOTE(from ZAKARIA): Here we will call the data from API between the 2 selected Date
-                              formattedStartDate =
-                                  formatDate(selectedStartDateRange!);
-                              formattedEndDate =
-                                  formatDate(selectedEndDateRange!);
-
-                              dataBetweenTwoDate =
-                                  await GetReport2DateService(Dio())
-                                      .getReport2DateService(
-                                          startDate: formattedStartDate,
-                                          endDate: formattedEndDate);
-                              setState(() {
-                                isReportDataDefult = false;
-                              });
-                              // }
-                            },
+                                      ],
+                                    );
+                                  },
+                                );
+                                if (picked == null) {
+                                  //onpressed X
+                                  return;
+                                }
+                                setState(() {
+                                  selectedStartDateRange = picked.start;
+                                  selectedEndDateRange = picked.end;
+                                });
+          
+                                // onDateSaved() async {
+                                //   //NOTE(from ZAKARIA): Here we will call the data from API between the 2 selected Date
+                                formattedStartDate =
+                                    formatDate(selectedStartDateRange!);
+                                formattedEndDate =
+                                    formatDate(selectedEndDateRange!);
+          
+                                dataBetweenTwoDate =
+                                    await GetReport2DateService(Dio())
+                                        .getReport2DateService(
+                                            startDate: formattedStartDate,
+                                            endDate: formattedEndDate);
+                                setState(() {
+                                  isReportDataDefult = false;
+                                });
+                                // }
+                              },
+                            ),
+                          ),
+                          ExportButton(
+                            scaffoldKey: _scaffoldKey,
+                            pdfUrl:
+                                'http://127.0.0.1:8000/api/branches-Sales/PDFForm?start_date=$formattedStartDate&end_date=$formattedEndDate',
+                            excelUrl:
+                                'http://127.0.0.1:8000/api/branches-Sales/ExcelForm?start_date=$formattedStartDate&end_date=$formattedEndDate',
+                          )
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  child: PaginatedDataTable(
+                    // headingRowColor:
+                    //     MaterialStateColor.resolveWith((states) => Colors.white),
+                    // // header: const Text(
+                    //   'Sales Table',
+                    //   style: TextStyle(fontWeight: FontWeight.bold),
+                    // ),
+                    //here data.length && numOfBranshes should has same value and put it in pieChart
+                    rowsPerPage: 10, // Number of rows per page
+                    columns: const [
+                      DataColumn(
+                        label: Expanded(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'الرقم',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                            ],
                           ),
                         ),
-                        ExportButton(
-                          scaffoldKey: _scaffoldKey,
-                          pdfUrl:
-                              'http://127.0.0.1:8000/api/branches-Sales/PDFForm?start_date=$formattedStartDate&end_date=$formattedEndDate',
-                          excelUrl:
-                              'http://127.0.0.1:8000/api/branches-Sales/ExcelForm?start_date=$formattedStartDate&end_date=$formattedEndDate',
-                        )
-                      ],
-                    )
-                  ],
+                      ),
+                      DataColumn(
+                        label: Expanded(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'الفرع',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      DataColumn(
+                        label: Expanded(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'الإجمالي كتابةً',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      DataColumn(
+                        label: Expanded(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'الإجمالي رقماً',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                    source: ReportDataSource(
+                        context: context,
+                        data: selectedStartDateRange == null ||
+                                selectedEndDateRange == null
+                            ? defultData
+                            : dataBetweenTwoDate),
+                  ),
                 ),
-              ),
-              SizedBox(
-                width: double.infinity,
-                child: PaginatedDataTable(
-                  // headingRowColor:
-                  //     MaterialStateColor.resolveWith((states) => Colors.white),
-                  // // header: const Text(
-                  //   'Sales Table',
-                  //   style: TextStyle(fontWeight: FontWeight.bold),
-                  // ),
-                  //here data.length && numOfBranshes should has same value and put it in pieChart
-                  rowsPerPage: 10, // Number of rows per page
-                  columns: const [
-                    DataColumn(
-                      label: Expanded(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'الرقم',
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    DataColumn(
-                      label: Expanded(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'الفرع',
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    DataColumn(
-                      label: Expanded(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'الإجمالي كتابةً',
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    DataColumn(
-                      label: Expanded(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'الإجمالي رقماً',
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                  source: ReportDataSource(
-                      context: context,
-                      data: selectedStartDateRange == null ||
-                              selectedEndDateRange == null
-                          ? defultData
-                          : dataBetweenTwoDate),
-                ),
-              ),
-              Text(
-                  '${dataBetweenTwoDate.isNotEmpty ? dataBetweenTwoDate[dataBetweenTwoDate.length - 1].total : totalSales.total}${"total-price".tr}'),
-            ],
+                Text(
+                    '${dataBetweenTwoDate.isNotEmpty ? dataBetweenTwoDate[dataBetweenTwoDate.length - 1].total : totalSales.total}${"total-price".tr}'),
+              ],
+            ),
           ),
         ),
       ),

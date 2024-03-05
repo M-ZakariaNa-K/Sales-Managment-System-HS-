@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sales_management_system/Core/Components/home/Circle_image.dart';
 import 'package:sales_management_system/Core/Constants/theme.dart';
-import 'package:sales_management_system/Models/home/get_all_branches.dart';
-
 import '../../../../Views/pills/pills.dart';
 
 class MobileSalesItem extends StatelessWidget {
@@ -71,7 +69,7 @@ class MobileSalesItem extends StatelessWidget {
                 },
                 child: Text(
                   "44".tr,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
                   ),
                 ),

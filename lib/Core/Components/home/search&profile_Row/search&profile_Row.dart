@@ -12,6 +12,7 @@ class SearchProfileRow extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        // ignore: missing_required_param
         Expanded(child: SearchBarWidget(isInvoices: false,)),
         Padding(
           padding: EdgeInsets.symmetric(vertical: 20.0),

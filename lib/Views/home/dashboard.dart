@@ -4,7 +4,6 @@ import 'package:sales_management_system/Core/Components/home/dashhboard/custome_
 import 'package:sales_management_system/Core/Constants/theme.dart';
 import 'package:sales_management_system/Views/admins/admins.dart';
 import 'package:sales_management_system/Views/home/home.dart';
-import 'package:sales_management_system/Views/pills/pills.dart';
 import 'package:sales_management_system/Views/reports/report.dart';
 
 class DashboardPage extends StatefulWidget {
@@ -14,6 +13,7 @@ class DashboardPage extends StatefulWidget {
   // ignore: library_private_types_in_public_api
   _DashboardPageState createState() => _DashboardPageState();
 }
+
 class _DashboardPageState extends State<DashboardPage> {
   int _selectedIndex = 0;
   final Color _selectedColor = ThemeColors.primary;
@@ -21,7 +21,6 @@ class _DashboardPageState extends State<DashboardPage> {
   final List<Widget> _pages = [
     const HomePage(),
     const AdminsPage(),
-    ReportsPage(),
     ReportsPage(),
   ];
   bool isDisktopDevice = false;
@@ -40,7 +39,7 @@ class _DashboardPageState extends State<DashboardPage> {
         onItemTapped: _onItemTapped,
         selectedColor: _selectedColor,
       ),
-      appBar: AppBarBuilding(context, scaffoldKey),
+      appBar: appBarBuilding(context, scaffoldKey),
       body: Row(
         children: [
           // Left Bar
@@ -53,7 +52,7 @@ class _DashboardPageState extends State<DashboardPage> {
               : const SizedBox(),
           // Page Content
           Expanded(
-            child:_pages[_selectedIndex],
+            child: _pages[_selectedIndex],
           ),
         ],
       ),

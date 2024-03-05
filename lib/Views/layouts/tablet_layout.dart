@@ -14,19 +14,20 @@ class TabletLayout extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         color: Colors.white,
       ),
-      child: CustomScrollView(
+      child: const CustomScrollView(
         slivers: [
           //======1=======
-          const SliverToBoxAdapter(
+           SliverToBoxAdapter(
+            // ignore: missing_required_param
             child: SearchBarWidget(),
           ),
           //======2=======
-          const SliverToBoxAdapter(
+           SliverToBoxAdapter(
             child: TotalDatabase(),
           ),
 
           //======3=======
-          const SliverToBoxAdapter(
+           SliverToBoxAdapter(
             child: TotalBarChart(),
           ),
           //======4=======

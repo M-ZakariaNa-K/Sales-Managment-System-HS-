@@ -18,6 +18,6 @@ class TotalBarChart extends StatelessWidget {
             color: Colors.grey,
           ),
         ),
-        child: BarChartFromAPI());
+        child: const BarChartFromAPI());
   }
 }

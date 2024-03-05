@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sales_management_system/Core/Components/home/search&profile_Row/search_list_items.dart';
-import 'package:sales_management_system/Core/Components/pills/Search_pills_list_items.dart';
+import 'package:sales_management_system/Core/Components/pills/search_pills_list_items.dart';
 
 class SearchBarWidget extends StatefulWidget {
   const SearchBarWidget({

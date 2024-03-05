@@ -17,8 +17,8 @@ class CustomProfileContainer extends StatelessWidget {
         future: GetprofileService(Dio()).getprofileService(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            return const Padding(
+              padding:  EdgeInsets.symmetric(horizontal: 10.0),
               child: UnloadedItem(
                 width: 170,
                 //MediaQuery.of(context).size.width * 0.104,
@@ -28,7 +28,7 @@ class CustomProfileContainer extends StatelessWidget {
           } else if (snapshot.hasError) {
             print('Error: ${snapshot.error}');
             return Center(
-              child: Text('Error: ${snapshot.error}'),
+              child: Text('Something went wrong. Please try again...'.tr),
             );
           } else if (snapshot.hasData) {
             GetProfileDataModel data = snapshot.data!;
@@ -38,7 +38,7 @@ class CustomProfileContainer extends StatelessWidget {
               decoration: BoxDecoration(
                   color: ThemeColors.secondary.withOpacity(.4),
                   border: Border.all(color: ThemeColors.secondary, width: 2),
-                  borderRadius: BorderRadius.all(Radius.circular(5))),
+                  borderRadius: const BorderRadius.all(Radius.circular(5))),
               child: Row(
                 children: [
                   const CircleAvatar(

@@ -13,7 +13,7 @@ class MyLocale implements Translations {
           "7": "جدول المستخدمين",
           "8": "تسجيل مستخدم جديد",
           "9": "تسجيل خروج",
-          "10": "تعديل",
+          "10": "تحديث",
           "11": "حذف المستخدم",
           "12": "تعديل بيانات المستخدم",
           "13": "ادخل معلومات المستخدم",
@@ -60,10 +60,12 @@ class MyLocale implements Translations {
           "Pick a Date": "اختيار التاريخ",
           "Date": "التاريخ",
           "total": "الإجمالي",
-                     "Downloading Excel file...":"جاري تنزيل الملف...",
-                     "Downloading PDF file...":"جاري تنزيل الملف...",
-"Export":"تصدير",
-"There Is No invoices In This Branch.":"لا يوجد فواتير لهذا الفرع.",
+          "Downloading Excel file...": "جاري تنزيل الملف...",
+          "Downloading PDF file...": "جاري تنزيل الملف...",
+          "Export": "تصدير",
+          "There Is No invoices In This Branch.": "لا يوجد فواتير لهذا الفرع.",
+          'Something went wrong. Please try again...':
+              "حدث خطأ ما. يرجى إعادة المحاولة...",
         },
         "en": {
           "1": "home",
@@ -120,12 +122,15 @@ class MyLocale implements Translations {
           "total-price": "Total Price: ",
           "Save As?": "Save As...",
           "Pick a Date": "Pick a Date",
-           "Date":"Date",
-           "total":"Total",
-           "Downloading Excel file...":"Downloading Excel file...",
-           "Downloading PDF file...":"Downloading PDF file...",
-           "Export":"Export",
-           "There Is No invoices In This Branch.":"There Is No invoices In This Branch.",
+          "Date": "Date",
+          "total": "Total",
+          "Downloading Excel file...": "Downloading Excel file...",
+          "Downloading PDF file...": "Downloading PDF file...",
+          "Export": "Export",
+          "There Is No invoices In This Branch.":
+              "There Is No invoices In This Branch.",
+          'Something went wrong. Please try again...':
+              "Something went wrong. Please try again...",
         }
       };
 }

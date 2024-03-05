@@ -3,7 +3,7 @@ import 'package:sales_management_system/Core/Components/home/search&profile_Row/
 import 'package:sales_management_system/Core/Constants/theme.dart';
 
 // AppBarBuilding function
-AppBar? AppBarBuilding(
+AppBar? appBarBuilding(
     BuildContext context, GlobalKey<ScaffoldState> scaffoldKey) {
   return MediaQuery.of(context).size.width <= 900
       ? AppBar(
@@ -18,7 +18,7 @@ AppBar? AppBarBuilding(
               color: Colors.white,
             ),
           ),
-          actions: [
+          actions: const [
             Padding(
               padding: EdgeInsets.only(right: 20, top: 10),
               child: CustomProfileContainer(

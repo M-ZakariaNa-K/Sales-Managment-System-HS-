@@ -20,8 +20,6 @@ class HomeState extends State<ImageSliders> {
         ),
         AssetImage("images/Slideimage3.jpg"),
         AssetImage("images/Slideimage2.jpg"),
-        // NetworkImage(
-        //     "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_640.jpg")
       ],
       dotSize: 6,
       indicatorBgPadding: 5.0,

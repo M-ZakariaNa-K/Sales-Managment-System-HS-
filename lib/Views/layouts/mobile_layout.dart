@@ -18,6 +18,7 @@ class MobileLayout extends StatelessWidget {
         slivers: [
           //======1=======
           SliverToBoxAdapter(
+            // ignore: missing_required_param
             child: SearchBarWidget(),
           ),
           //======2=======

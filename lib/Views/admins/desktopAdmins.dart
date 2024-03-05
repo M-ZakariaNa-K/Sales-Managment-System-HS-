@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart';
 import 'package:sales_management_system/Controllers/admins/admin_controller.dart';
 import 'package:sales_management_system/Core/Components/components.dart';
 import 'package:sales_management_system/Core/Components/widget.dart';

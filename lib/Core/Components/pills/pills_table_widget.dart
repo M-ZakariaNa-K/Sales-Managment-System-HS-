@@ -25,8 +25,6 @@ class _PillsTableWidgetState extends State<PillsTableWidget> {
   int? prevPage;
   int? nextPage;
   int total = 0;
-  int lastPage = 1;
-  bool isLoading = false; // Add a loading indicator flag
   TextEditingController pagController = TextEditingController();
   @override
   void initState() {
@@ -35,10 +33,6 @@ class _PillsTableWidgetState extends State<PillsTableWidget> {
   }
 
   Future<void> _fetchReportData({dynamic currentPage1}) async {
-    setState(() {
-      isLoading = true;
-    });
-
     Map<String, dynamic> newData =
         await GetInvoiceListService(Dio()).fetchInvoices(
       guid: widget.guid,
@@ -54,7 +48,6 @@ class _PillsTableWidgetState extends State<PillsTableWidget> {
       prevPage = allPillsData["pagination"][0].prevPage;
       nextPage = allPillsData["pagination"][0].nextPage;
       total = allPillsData["pagination"][0].total;
-      isLoading = false; // Set loading to false after data is fetched
     });
   }
 
@@ -83,7 +76,6 @@ class _PillsTableWidgetState extends State<PillsTableWidget> {
                         TableRow(
                           decoration:
                               const BoxDecoration(color: Colors.transparent
-                                  //ThemeColors.secondaryTextColor,
                                   ),
                           children: [
                             TableCell(
@@ -134,7 +126,6 @@ class _PillsTableWidgetState extends State<PillsTableWidget> {
                           allPillsData["invoices"].length,
                           (index) => TableRow(
                             decoration: const BoxDecoration(
-                              // color: ThemeColors.secondaryTextColor,
                               color: Colors.transparent,
                             ),
                             children: [
@@ -184,15 +175,10 @@ class _PillsTableWidgetState extends State<PillsTableWidget> {
                                   )),
                                 ),
                               ),
-                              // GestureDetector(
-                              //   onTap: () {
-                              //     Get.to(OldOrderDetailsDash(
-                              //       orderId: 1,
-                              //     ));
-                              //   },
                             ],
                           ),
                         ),
+                  //2=================================================
                         TableRow(
                             decoration: const BoxDecoration(
                               // color: ThemeColors.secondaryTextColor,
@@ -242,7 +228,7 @@ class _PillsTableWidgetState extends State<PillsTableWidget> {
                                         textAlign: TextAlign.center,
                                       ),
                                     ),
-                                    Text(" / ${numberOfPillsPages}"),
+                                    Text(" / $numberOfPillsPages"),
                                   ],
                                 ),
                               ),
@@ -268,7 +254,6 @@ class _PillsTableWidgetState extends State<PillsTableWidget> {
                     ),
                   ),
 
-                  //2=================================================
                   // Row(
                   //   children: [
                   //     IconButton(

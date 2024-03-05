@@ -73,7 +73,7 @@ class _SalesTableState extends State<SalesTable> {
                     children: [
                       Text(
                         '2'.tr,
-                        style: TextStyle(
+                        style:const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                           color: ThemeColors.primaryTextColor,

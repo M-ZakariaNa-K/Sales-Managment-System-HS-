@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sales_management_system/Core/Components/home/sales_table&image_sliderRow/mobile_sales_item.dart';
 import 'package:sales_management_system/Core/Components/home/unload_sales_table.dart';
 import 'package:sales_management_system/Core/helper/services/home/get_all_branchesServices.dart';
@@ -21,7 +22,8 @@ class MobileSalesItemsList extends StatelessWidget {
           );
         } else if (snapshot.hasError) {
           // If there is an error, display an error message
-          return Text('Error: ${snapshot.error}');
+          print('Error: ${snapshot.error}');
+          return Text('Something went wrong. Please try again...'.tr);
         } else {
           // If data is successfully fetched, build the list of MobileSalesItem widgets
           List<BranchDataModel> data = snapshot.data!;
@@ -37,11 +39,6 @@ class MobileSalesItemsList extends StatelessWidget {
               );
             },
           );
-          //     ListView(
-          //         children: List.generate(
-          //   data.length,
-          //   (index) => MobileSalesItem(branch: data[index], index: index),
-          // ));
         }
       },
     );

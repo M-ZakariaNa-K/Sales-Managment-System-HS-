@@ -9,7 +9,7 @@ class DrawerItem extends StatelessWidget {
   final Function(int) onItemTapped;
   final Color selectedColor;
 
-  const DrawerItem({
+  const DrawerItem({super.key, 
     required this.title,
     required this.icon,
     required this.index,
@@ -23,7 +23,7 @@ class DrawerItem extends StatelessWidget {
     return GestureDetector(
       onTap: () => onItemTapped(index),
       child: AnimatedContainer(
-        duration: Duration(milliseconds: 300), // Duration of the animation
+        duration:const Duration(milliseconds: 300), // Duration of the animation
         padding: const EdgeInsets.symmetric(horizontal: 20),
         decoration: BoxDecoration(
           color: selectedIndex == index && selectedIndex != 4

@@ -1,4 +1,3 @@
-// const String urlVar = "http://127.0.0.1:8000";
 bool isUser = false;
 //======================HOME==================
 

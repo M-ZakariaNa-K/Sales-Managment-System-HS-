@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:sales_management_system/Core/Constants/theme.dart';
 import 'package:sales_management_system/Core/helper/services/getTest.dart';
 import 'package:sales_management_system/Core/helper/shared/Locale.dart';
@@ -42,8 +41,8 @@ class MyApp extends StatelessWidget {
       home: DashboardPage(),
       theme: ThemeData(
         useMaterial3: true,
-        textTheme: GoogleFonts.robotoTextTheme(),
-        fontFamily: GoogleFonts.roboto().fontFamily,
+        // textTheme: GoogleFonts.robotoTextTheme(),
+        // fontFamily: GoogleFonts.roboto().fontFamily,
         colorScheme: ColorScheme.fromSeed(
           seedColor: ThemeColors.primary,
           secondary: ThemeColors.secondary,
