@@ -1,7 +1,10 @@
 // ignore_for_file: file_names
 
 import 'package:dio/dio.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:sales_management_system/Core/Components/components.dart';
+import 'package:sales_management_system/Views/auth/login.dart';
 
 //showTOast: it's like a dialog has a color and text (the text is the
 //response message and the colors is ToastStates.SUCCESSFUL of ToastStates.ERROR)
@@ -35,18 +38,19 @@ class DioHelper {
         .get(path, data: body)
         // ignore: body_might_complete_normally_catch_error
         .catchError((e) {
-      if (e.response != null) {
-        print(e.response?.data);
-        showToast(text: '${e.response.data}', state: ToastStates.WARNING);
-        print(e.response?.headers);
-        print(e.response?.requestOptions);
-        print(e.response?.statusCode);
-      } else {
-        print(e.message);
+      if (e.response.statusCode == 440) {
+        showToast(
+            text: e.response?.data['message'], state: ToastStates.WARNING);
+        Get.off(LoginScreen());
+      }
+
+      if (e.bod) {
+        showToast(text: e.response?.data['message'], state: ToastStates.ERROR);
       }
     });
   }
 
+//=================================================================================
   static Future<Response> postData({
     token,
     required String url,
@@ -63,17 +67,19 @@ class DioHelper {
       data: data,
     )
         .catchError((e) {
-      if (e.response != null) {
-        print(e.response?.data);
-        showToast(text: '${e.response.data}', state: ToastStates.WARNING);
-        print(e.response?.headers);
-        print(e.response?.requestOptions);
-        print(e.response?.statusCode);
-      } else {
-        print(e.message);
+      if (e.response.statusCode == 440) {
+        showToast(
+            text: e.response?.data['message'], state: ToastStates.WARNING);
+        Get.off(LoginScreen());
       }
+      // if (e.response.statusCode == 422) {
+      //   showToast(
+      //       text: e.response?.data['message'], state: ToastStates.WARNING);
+      // }
+      showToast(text: e.response?.data['message'], state: ToastStates.WARNING);
     });
   }
+//=================================================================================
 
   Future postDataWithAuth(
       {required String url,
@@ -86,7 +92,7 @@ class DioHelper {
     var dio = Dio();
     var response = await dio
         .request(
-      '$url',
+      url,
       data: FormData.fromMap(data),
       options: Options(
         method: 'POST',
@@ -94,21 +100,19 @@ class DioHelper {
       ),
     )
         .catchError((e) {
-      if (e.response != null) {
-        print(e.response?.data);
-        showToast(text: '${e.response.data}', state: ToastStates.WARNING);
-        print(e.response?.headers);
-        print(e.response?.requestOptions);
-        print(e.response?.statusCode);
-      } else {
-        print(e.message);
+      if (e.response.statusCode == 440) {
+        showToast(
+            text: e.response?.data['message'], state: ToastStates.WARNING);
+        Get.off(LoginScreen());
       }
+
+      showToast(text: e.response?.data['message'], state: ToastStates.WARNING);
     });
 
     if (response.statusCode == 200) {
       return response.data;
     } else {
-      return response.statusMessage;
+      print('Heeeee ${response.data['message']}');
     }
   }
 
@@ -142,7 +146,7 @@ class DioHelper {
         .catchError((e) {
       if (e.response != null) {
         print(e.response?.data);
-        showToast(text: '${e.response.data}', state: ToastStates.WARNING);
+        //showToast(text: '${e.response.data}', state: ToastStates.WARNING);
         print(e.response?.headers);
         print(e.response?.requestOptions);
         print(e.response?.statusCode);

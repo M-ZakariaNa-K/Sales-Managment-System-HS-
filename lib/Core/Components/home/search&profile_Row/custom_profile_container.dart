@@ -21,7 +21,6 @@ class CustomProfileContainer extends StatelessWidget {
               padding:  EdgeInsets.symmetric(horizontal: 10.0),
               child: UnloadedItem(
                 width: 170,
-                //MediaQuery.of(context).size.width * 0.104,
                 height: 50,
               ),
             );

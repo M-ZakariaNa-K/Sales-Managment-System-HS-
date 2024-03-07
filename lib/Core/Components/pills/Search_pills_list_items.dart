@@ -23,6 +23,7 @@ class SearchPillsListItems extends StatelessWidget {
         future: PillsSearchService(Dio())
             .getsearchapp(query: searchController.text, guid: publicGuidVar),
         builder: (context, snapshot) {
+          print(snapshot);
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Container(
               decoration: const BoxDecoration(
@@ -60,8 +61,8 @@ class SearchPillsListItems extends StatelessWidget {
                           blurRadius: 10,
                         )
                       ]),
-                  child: const Center(
-                      child: Text("لم يتم العثور على الفرع المطلوب")));
+                  child:  Center(
+                      child: Text( "There is no related branch".tr)));
             } else {
               return Container(
                 decoration: const BoxDecoration(
@@ -122,41 +123,6 @@ class SearchPillsListItems extends StatelessWidget {
                             ],
                           ),
                         ),
-                        // ListTile(
-                        //   onTap: () {
-                        //     // Handle onTap for numberBranches
-                        //     Navigator.push(context,
-                        //         MaterialPageRoute(builder: (context) {
-                        //       //Here should has the Id of branch i pressed
-                        //       return PillsPage(
-                        //         context,
-                        //         guid: invoicesList[index].guid,
-                        //         branchName: invoicesList[index].branch,
-                        //       );
-                        //     }));
-                        //   },
-                        //   title: Text(
-                        //     invoicesList[index].number,
-                        //     style: const TextStyle(
-                        //       color: Color(0xff003A71),
-                        //     ),
-                        //   ),
-                        //   subtitle: Text(
-                        //     invoicesList[index].total,
-                        //   ),
-                        //   leading: ClipRRect(
-                        //     borderRadius:
-                        //         const BorderRadius.all(Radius.circular(10)),
-                        //     child: SizedBox(
-                        //       width: 40,
-                        //       height: 40,
-                        //       child: Image.asset(
-                        //         'images/Logo2.png',
-                        //         fit: BoxFit.cover,
-                        //       ),
-                        //     ),
-                        //   ),
-                        // ),
                         const Divider(
                           height: 0,
                           color: ThemeColors.primary,

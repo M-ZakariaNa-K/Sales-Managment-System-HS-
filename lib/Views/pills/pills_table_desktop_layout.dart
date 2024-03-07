@@ -43,19 +43,6 @@ class _DesktopLayoutPillsPageState extends State<DesktopLayoutPillsPage> {
     return '0$n';
   }
 
-  //========================================================================================
-  // @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   super.initState();
-  //   _fetchReportData(currentPage);
-  // }
-
-  // @override
-  // void dispose() {
-  //   super.dispose();
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,7 +62,21 @@ class _DesktopLayoutPillsPageState extends State<DesktopLayoutPillsPage> {
               ),
             ),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Row(
+                  children: [
+                    IconButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        icon: const Icon(
+                          Icons.arrow_back_ios_new,
+                          size: 16,
+                        )),
+                    Text("back".tr),
+                  ],
+                ),
                 //SearchBar
                 SearchBarWidget(
                   isInvoices: true,
@@ -87,7 +88,7 @@ class _DesktopLayoutPillsPageState extends State<DesktopLayoutPillsPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        '${'34'.tr}: ${widget.branchName}',
+                        widget.branchName,
                         style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -134,9 +135,17 @@ class _DesktopLayoutPillsPageState extends State<DesktopLayoutPillsPage> {
                                                     .height *
                                                 0.7,
                                             width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.45,
+                                                        .size
+                                                        .width <
+                                                    600
+                                                ? MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.9
+                                                : MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.45,
                                             child: child,
                                           ),
                                         ),
@@ -161,17 +170,11 @@ class _DesktopLayoutPillsPageState extends State<DesktopLayoutPillsPage> {
                                     formatDate(selectedEndDateRange!);
                                 print(formattedStartDate);
                                 print(formattedEndDate);
-                                // dataBetweenTwoDate =
-                                //     await GetPills2DateService(Dio())
-                                //         .getPills2DateService(
-                                //             startDate: formattedStartDate,
-                                //             endDate: formattedEndDate,
-                                //             guid:
-                                //                 allPillsData["invoices"].guid);
                               },
                             ),
                           ),
                           ExportButton(
+                            isInvoices: true,
                             scaffoldKey: _scaffoldKey,
                             pdfUrl:
                                 'http://127.0.0.1:8000/api/invoices/export-pdf?GUID=${widget.guid}&first_date=$formattedStartDate&last_date=$formattedEndDate',
@@ -187,104 +190,6 @@ class _DesktopLayoutPillsPageState extends State<DesktopLayoutPillsPage> {
                   branchTotal: widget.total,
                   guid: widget.guid,
                 ),
-                // SizedBox(
-                //   width: double.infinity,
-                //   child: PaginatedDataTable(
-                //     // headingRowColor:
-                //     //     MaterialStateColor.resolveWith((states) => Colors.white),
-                //     // // header: const Text(
-                //     //   'Sales Table',
-                //     //   style: TextStyle(fontWeight: FontWeight.bold),
-                //     // ),
-                //     //here data.length && numOfBranshes should has same value and put it in pieChart
-                //     rowsPerPage: 20, // Number of rows per page
-                //     columns: [
-                //       DataColumn(
-                //         label: Expanded(
-                //           child: Row(
-                //             mainAxisAlignment: MainAxisAlignment.center,
-                //             children: [
-                //               Text(
-                //                 '35'.tr,
-                //                 style: const TextStyle(
-                //                     fontWeight: FontWeight.bold),
-                //               ),
-                //             ],
-                //           ),
-                //         ),
-                //       ),
-                //       DataColumn(
-                //         label: Expanded(
-                //           child: Row(
-                //             mainAxisAlignment: MainAxisAlignment.center,
-                //             children: [
-                //               Text(
-                //                 '34'.tr,
-                //                 style: TextStyle(fontWeight: FontWeight.bold),
-                //               ),
-                //             ],
-                //           ),
-                //         ),
-                //       ),
-                //       DataColumn(
-                //         label: Expanded(
-                //           child: Row(
-                //             mainAxisAlignment: MainAxisAlignment.center,
-                //             children: [
-                //               Text(
-                //                 'Date'.tr,
-                //                 style: const TextStyle(
-                //                     fontWeight: FontWeight.bold),
-                //               ),
-                //             ],
-                //           ),
-                //         ),
-                //       ),
-                //       DataColumn(
-                //         label: Expanded(
-                //           child: Row(
-                //             mainAxisAlignment: MainAxisAlignment.center,
-                //             children: [
-                //               Text(
-                //                 'total'.tr,
-                //                 style: const TextStyle(
-                //                     fontWeight: FontWeight.bold),
-                //               ),
-                //             ],
-                //           ),
-                //         ),
-                //       ),
-                //     ],
-                //     source: PillsDataSource(
-                //         context: context,
-                //         data: allPillsData["invoices"],
-                //         numberOfPillsPages: numberOfPillsPages),
-
-                //     // onRowsPerPageChanged: (rowsPerPage) {
-                //     //   // Update the current page index when rows per page changes
-                //     //   setState(() {
-                //     //     currentPageIndex = 1;
-                //     //   });
-                //     //   // Call your function to fetch data for the new page
-                //     //   _fetchReportData(page: currentPageIndex);
-                //     // },
-                //     // Add the onPageChanged callback
-                //     onPageChanged: (pageIndex) {
-                //       // Check if the user is navigating forward or backward
-                //       // bool isNext = pageIndex > currentPageIndex;
-                //       //اذا الايكون اليسارية فبستدعي التابع مع النيكستبيج
-                //       //اذا الايكون اليمينية فبستدعي التابع مع البريف بيج
-                //       setState(() {
-                //         print(
-                //             (pageIndex / numOfClicks) - 19 + (numOfClicks - 1));
-                //         _fetchReportData(
-                //             (pageIndex / numOfClicks) - 19 + (numOfClicks - 1));
-                //         numOfClicks++;
-                //       });
-                //     },
-                //   ),
-                // ),
-                //Text('${allPillsData["invoices"].total}${"total-price".tr}'),
               ],
             ),
           ),

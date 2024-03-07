@@ -1,14 +1,26 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+
 import 'package:sales_management_system/Core/Components/home/dashhboard/appbar_building.dart';
 import 'package:sales_management_system/Core/Components/home/dashhboard/custome_drawer.dart';
 import 'package:sales_management_system/Core/Constants/theme.dart';
 import 'package:sales_management_system/Views/admins/admins.dart';
 import 'package:sales_management_system/Views/home/home.dart';
+import 'package:sales_management_system/Views/pills/pills.dart';
 import 'package:sales_management_system/Views/reports/report.dart';
 
-class DashboardPage extends StatefulWidget {
-  const DashboardPage({Key? key}) : super(key: key);
+bool publicisPillsPage = false;
 
+class DashboardPage extends StatefulWidget {
+  const DashboardPage({
+    Key? key,
+    this.guid,
+    this.branchName,
+    this.total,
+  }) : super(key: key);
+  final String? guid;
+  final String? branchName;
+  final dynamic total;
   @override
   // ignore: library_private_types_in_public_api
   _DashboardPageState createState() => _DashboardPageState();
@@ -21,7 +33,7 @@ class _DashboardPageState extends State<DashboardPage> {
   final List<Widget> _pages = [
     const HomePage(),
     const AdminsPage(),
-    ReportsPage(),
+    const ReportsPage(),
   ];
   bool isDisktopDevice = false;
 
@@ -52,7 +64,13 @@ class _DashboardPageState extends State<DashboardPage> {
               : const SizedBox(),
           // Page Content
           Expanded(
-            child: _pages[_selectedIndex],
+            child:
+             publicisPillsPage
+                ? PillsPage(
+                    guid: widget.guid!,
+                    branchName: widget.branchName!,
+                    total: widget.total!)
+                : _pages[_selectedIndex],
           ),
         ],
       ),
@@ -62,6 +80,7 @@ class _DashboardPageState extends State<DashboardPage> {
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
+      publicisPillsPage = false;
     });
   }
 }

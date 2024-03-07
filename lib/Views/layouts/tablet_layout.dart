@@ -17,17 +17,17 @@ class TabletLayout extends StatelessWidget {
       child: const CustomScrollView(
         slivers: [
           //======1=======
-           SliverToBoxAdapter(
+          SliverToBoxAdapter(
             // ignore: missing_required_param
-            child: SearchBarWidget(),
+            child: SearchBarWidget(isInvoices: false),
           ),
           //======2=======
-           SliverToBoxAdapter(
+          SliverToBoxAdapter(
             child: TotalDatabase(),
           ),
 
           //======3=======
-           SliverToBoxAdapter(
+          SliverToBoxAdapter(
             child: TotalBarChart(),
           ),
           //======4=======

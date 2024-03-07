@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sales_management_system/Core/Components/home/Circle_image.dart';
 import 'package:sales_management_system/Core/Constants/theme.dart';
-import '../../../../Views/pills/pills.dart';
+import 'package:sales_management_system/Views/home/dashboard.dart';
 
 class MobileSalesItem extends StatelessWidget {
   const MobileSalesItem({super.key, required this.branch, required this.index});
@@ -56,14 +56,19 @@ class MobileSalesItem extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
+                    publicisPillsPage = true;
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => PillsPage(
-                        context,
-                        total: branch.totalSales,
-                        guid: branch.guid,
-                        branchName: branch.branch,
-                      ),
+                      builder: (context) => DashboardPage(
+                  guid: branch.guid,
+                  total:  branch.totalSales,
+branchName:  branch.branch,
+                ),
+                      // PillsPage(
+                      //   total: branch.totalSales,
+                      //   guid: branch.guid,
+                      //   branchName: branch.branch,
+                      // ),
                     ),
                   );
                 },

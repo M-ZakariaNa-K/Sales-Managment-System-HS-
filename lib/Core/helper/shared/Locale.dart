@@ -23,14 +23,14 @@ class MyLocale implements Translations {
           "17": "تأكيد",
           "18": "هل أنت متأكد من إزالة المستخدم",
           "19": "تراجع",
-          "20": "تسجيل الدخول إلى حسابك",
+          "Login to your Account": "تسجيل الدخول إلى حسابك",
           "22": "كلمة المرور",
           "23": "كلمة مرور فارغة",
-          "24": "اسم المستخدم فارغة",
+          "24": "اسم المستخدم فارغ",
           "25": "تسجيل الدخول",
           "26": "تسجيل",
           "27": "تعديل",
-          "28": "الإسم",
+          "28": "الاسم",
           "29": "الإسم لا يمكن ان يكون فارغاً",
           "30": "حذف",
           "31": "كلمة المرور الجديدة",
@@ -66,6 +66,16 @@ class MyLocale implements Translations {
           "There Is No invoices In This Branch.": "لا يوجد فواتير لهذا الفرع.",
           'Something went wrong. Please try again...':
               "حدث خطأ ما. يرجى إعادة المحاولة...",
+          "Admin Database:": "قاعدة بيانات الأدمن:",
+          "Users Database:": "قاعدة بيانات المستخدمين:",
+          "back": "عودة",
+          "There is no related branch": "لم يتم العثور على الفرع المطلوب",
+          "Mounthly Report": "التقرير الشهري",
+          "Username": "اسم المستخدم",
+          "Export Excel": "تصدير ملف Excel",
+          "Export PDF": "تصدير ملف PDF",
+          "Arabic": "اللغة العربية",
+          "English": "اللغة الأنكليزية"
         },
         "en": {
           "1": "home",
@@ -87,7 +97,7 @@ class MyLocale implements Translations {
           "17": "Confirm",
           "18": "you will remove user",
           "19": "Cancel",
-          "20": "Log in to your account",
+          "Login to your Account": "Log in to your account",
           "22": "Password",
           "23": "Password musn't be empty",
           "24": "UserName musn't be empty",
@@ -131,6 +141,16 @@ class MyLocale implements Translations {
               "There Is No invoices In This Branch.",
           'Something went wrong. Please try again...':
               "Something went wrong. Please try again...",
+          "Users Database:": "Users Database",
+          "Admin Database:": "Admin Database:",
+          "back": "go back",
+          "There is no related branch": "There is no related branch",
+          "Mounthly Report": "Mounthly Report",
+          "Username": "UserName",
+          "Export Excel": "Export Excel",
+          "Export PDF": "Export PDF",
+          "Arabic": "Arabic",
+          "English": "English"
         }
       };
 }

@@ -5,7 +5,7 @@ import 'package:sales_management_system/Core/Components/home/sales_table&image_s
 import 'package:sales_management_system/Core/Components/home/search&profile_Row/search_bar.dart';
 
 class MobileLayout extends StatelessWidget {
-  const MobileLayout({Key? key});
+  const MobileLayout({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,9 @@ class MobileLayout extends StatelessWidget {
           //======1=======
           SliverToBoxAdapter(
             // ignore: missing_required_param
-            child: SearchBarWidget(),
+            child: SearchBarWidget(
+              isInvoices: false,
+            ),
           ),
           //======2=======
           SliverToBoxAdapter(

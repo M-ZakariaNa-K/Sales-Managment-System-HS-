@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sales_management_system/Core/Constants/theme.dart';
 
+import '../../widget.dart';
+
 class DrawerItem extends StatelessWidget {
   final String title;
   final IconData icon;
@@ -9,7 +11,8 @@ class DrawerItem extends StatelessWidget {
   final Function(int) onItemTapped;
   final Color selectedColor;
 
-  const DrawerItem({super.key, 
+  const DrawerItem({
+    super.key,
     required this.title,
     required this.icon,
     required this.index,
@@ -23,7 +26,8 @@ class DrawerItem extends StatelessWidget {
     return GestureDetector(
       onTap: () => onItemTapped(index),
       child: AnimatedContainer(
-        duration:const Duration(milliseconds: 300), // Duration of the animation
+        duration:
+            const Duration(milliseconds: 300), // Duration of the animation
         padding: const EdgeInsets.symmetric(horizontal: 20),
         decoration: BoxDecoration(
           color: selectedIndex == index && selectedIndex != 4
@@ -42,7 +46,9 @@ class DrawerItem extends StatelessWidget {
               style: TextStyle(
                 color: index == 4
                     ? ThemeColors.primary
-                    : ThemeColors.secondaryTextColor,
+                    : !isUserAdmin! && index == 1
+                        ? Colors.grey
+                        : ThemeColors.secondaryTextColor,
               ),
             ),
           ),
@@ -52,7 +58,9 @@ class DrawerItem extends StatelessWidget {
             icon,
             color: index == 4
                 ? ThemeColors.primary
-                : ThemeColors.secondaryTextColor,
+                : !isUserAdmin! && index == 1
+                    ? Colors.grey
+                    : ThemeColors.secondaryTextColor,
           ),
           selected: selectedIndex == index,
         ),

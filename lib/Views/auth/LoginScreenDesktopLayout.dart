@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sales_management_system/Controllers/auth/loginController.dart';
+import 'package:sales_management_system/Controllers/lang/lang_controller.dart';
 import 'package:sales_management_system/Core/Components/components.dart';
 import 'package:sales_management_system/Core/Constants/theme.dart';
 
@@ -36,12 +37,22 @@ class DesktopLayoutLoginScreen extends StatelessWidget {
                   key: formKey,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.only(
-                          bottomLeft: Radius.circular(20),
-                          topLeft: Radius.circular(20)),
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: LanguageRadioController().selectedValue
+                              ? const Radius.circular(0)
+                              : const Radius.circular(20),
+                          bottomRight: LanguageRadioController().selectedValue
+                              ? const Radius.circular(20)
+                              : const Radius.circular(0),
+                          topRight: LanguageRadioController().selectedValue
+                              ? const Radius.circular(20)
+                              : const Radius.circular(0),
+                          topLeft: LanguageRadioController().selectedValue
+                              ? const Radius.circular(0)
+                              : const Radius.circular(20)),
                       color: Colors.white.withOpacity(.9),
                     ),
-                    height: verticalPadding,
+                    height: verticalPadding > 400 ? verticalPadding : 400,
                     width: horizontalPadding * 0.4,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -50,7 +61,7 @@ class DesktopLayoutLoginScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            '20'.tr,
+                            'Login to your Account'.tr,
                             style: const TextStyle(
                                 color: ThemeColors.primary,
                                 fontSize: 25,
@@ -74,7 +85,7 @@ class DesktopLayoutLoginScreen extends StatelessWidget {
                                 Icons.person,
                                 color: ThemeColors.primary,
                               ),
-                              labelText: '12'.tr,
+                              labelText: 'Username'.tr,
                             ),
                           ),
                           const SizedBox(
@@ -145,9 +156,19 @@ class DesktopLayoutLoginScreen extends StatelessWidget {
                   width: horizontalPadding * 0.2,
                   decoration: const BoxDecoration(),
                   child: ClipRRect(
-                    borderRadius: const BorderRadius.only(
-                        topRight: Radius.circular(20),
-                        bottomRight: Radius.circular(20)),
+                    borderRadius: BorderRadius.only(
+                        topLeft: LanguageRadioController().selectedValue
+                            ? const Radius.circular(20)
+                            : const Radius.circular(0),
+                        bottomLeft: LanguageRadioController().selectedValue
+                            ? const Radius.circular(20)
+                            : const Radius.circular(0),
+                        topRight: LanguageRadioController().selectedValue
+                            ? const Radius.circular(0)
+                            : const Radius.circular(20),
+                        bottomRight: LanguageRadioController().selectedValue
+                            ? const Radius.circular(0)
+                            : const Radius.circular(20)),
                     child: Image.asset(
                       'images/pic1.jpg',
                       fit: BoxFit.fill,

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sales_management_system/Core/Constants/theme.dart';
 import 'package:sales_management_system/Core/helper/services/pills/invoices_list_service.dart';
+import 'package:flutter/services.dart';
 
 class PillsTableWidget extends StatefulWidget {
   const PillsTableWidget({
@@ -75,8 +76,7 @@ class _PillsTableWidgetState extends State<PillsTableWidget> {
                       children: [
                         TableRow(
                           decoration:
-                              const BoxDecoration(color: Colors.transparent
-                                  ),
+                              const BoxDecoration(color: Colors.transparent),
                           children: [
                             TableCell(
                               verticalAlignment:
@@ -178,10 +178,9 @@ class _PillsTableWidgetState extends State<PillsTableWidget> {
                             ],
                           ),
                         ),
-                  //2=================================================
+                        //2=================================================
                         TableRow(
                             decoration: const BoxDecoration(
-                              // color: ThemeColors.secondaryTextColor,
                               color: Colors.transparent,
                             ),
                             children: [
@@ -224,7 +223,11 @@ class _PillsTableWidgetState extends State<PillsTableWidget> {
                                           }
                                         },
                                         keyboardType: TextInputType
-                                            .number, // Set the keyboard type to numeric
+                                            .number, // to set the keyboard type to numeric
+                                        inputFormatters: <TextInputFormatter>[
+                                          FilteringTextInputFormatter.allow(RegExp(
+                                              r'[0-9]')), // Allow only numbers
+                                        ],
                                         textAlign: TextAlign.center,
                                       ),
                                     ),
@@ -232,7 +235,6 @@ class _PillsTableWidgetState extends State<PillsTableWidget> {
                                   ],
                                 ),
                               ),
-                              //Text("${currentPage} - ${numberOfPillsPages}"),
                               IconButton(
                                   onPressed: pagController.text !=
                                           numberOfPillsPages.toString()
@@ -253,36 +255,6 @@ class _PillsTableWidgetState extends State<PillsTableWidget> {
                       ],
                     ),
                   ),
-
-                  // Row(
-                  //   children: [
-                  //     IconButton(
-                  //         onPressed: prevPage != 0
-                  //             ? () {
-                  //                 _fetchReportData(currentPage1: prevPage);
-                  //               }
-                  //             : () {},
-                  //         icon: Icon(
-                  //           Icons.arrow_back_ios_new_rounded,
-                  //           color: prevPage != 0
-                  //               ? ThemeColors.primary
-                  //               : Colors.grey,
-                  //         )),
-                  //     Text("${currentPage} - ${numberOfPillsPages}"),
-                  //     IconButton(
-                  //         onPressed: nextPage != null
-                  //             ? () {
-                  //                 _fetchReportData(currentPage1: nextPage);
-                  //               }
-                  //             : () {},
-                  //         icon: Icon(
-                  //           Icons.arrow_forward_ios_rounded,
-                  //           color: nextPage != null
-                  //               ? ThemeColors.primary
-                  //               : Colors.grey,
-                  //         )),
-                  //   ],
-                  // )
                 ],
               ),
             ),
@@ -299,110 +271,5 @@ class _PillsTableWidgetState extends State<PillsTableWidget> {
               ),
             ),
           );
-    //  Stack(
-    //   children: [
-    //     SizedBox(
-    //       width: double.infinity,
-    //       child: PaginatedDataTable(
-    //         rowsPerPage: 20,
-    //         columns: [
-    //           DataColumn(
-    //               label: Expanded(
-    //             child: Row(
-    //               mainAxisAlignment: MainAxisAlignment.center,
-    //               children: [
-    //                 Center(child: Text('35'.tr)),
-    //               ],
-    //             ),
-    //           )),
-    //           // DataColumn(label: Center(child: Text('34'.tr))),
-    //           DataColumn(
-    //               label: Expanded(
-    //             child: Row(
-    //               mainAxisAlignment: MainAxisAlignment.center,
-    //               children: [
-    //                 Center(child: Text('Date'.tr)),
-    //               ],
-    //             ),
-    //           )),
-    //           DataColumn(
-    //               label: Expanded(
-    //             child: Row(
-    //               mainAxisAlignment: MainAxisAlignment.center,
-    //               children: [
-    //                 Center(child: Text('total'.tr)),
-    //               ],
-    //             ),
-    //           )),
-    //         ],
-    //         source: PillsDataSource(
-    //           context: context,
-    //           data: !isLoading ? allPillsData["invoices"] : [],
-    //           numberOfPillsPages: numberOfPillsPages,
-    //         ),
-    //         onPageChanged: (pageIndex) {
-    //           setState(() {
-    //             _fetchReportData(currentPage1: nextPage);
-    //           });
-    //         },
-    //       ),
-    //     ),
-    //     if (isLoading) // Show loading indicator if isLoading is true
-    //       const Center(
-    //         child: CircularProgressIndicator(),
-    //       ),
-    //   ],
-    // );
   }
 }
-
-// class PillsDataSource extends DataTableSource {
-//   BuildContext context;
-//   PillsDataSource(
-//       {required this.context,
-//       @required this.data,
-//       required this.numberOfPillsPages});
-//   final List<InvoiceModel>? data;
-//   final int numberOfPillsPages;
-//   @override
-//   DataRow? getRow(
-//     int index,
-//   ) {
-//     if (index >= data!.length) {
-//       return null;
-//     }
-//     final rowData = data![index];
-//     return DataRow(cells: [
-//       DataCell(Center(child: Text(rowData.number))),
-//       // DataCell(Center(child: Text(rowData.branch))),
-//       DataCell(
-//         Row(
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           crossAxisAlignment: CrossAxisAlignment.center,
-//           children: [
-//             Center(
-//               child: SizedBox(
-//                 width: 300,
-//                 child: Text(
-//                   rowData.date,
-//                   textAlign: TextAlign.center,
-//                   overflow: TextOverflow.ellipsis,
-//                   maxLines: 2,
-//                 ),
-//               ),
-//             ),
-//           ],
-//         ),
-//       ),
-//       DataCell(Center(child: Text("${rowData.total}"))),
-//     ]);
-//   }
-
-//   @override
-//   int get rowCount => numberOfPillsPages;
-//   @override
-//   bool get isRowCountApproximate => false;
-
-//   @override
-//   int get selectedRowCount => 0;
-// }

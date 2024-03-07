@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:sales_management_system/Views/auth/LoginScreenDesktopLayout.dart';
 import 'package:sales_management_system/Views/auth/LoginScreenMobileLayout.dart';
+import 'package:sales_management_system/Views/auth/LoginScreenTableLayout.dart';
+
 // ignore: must_be_immutable
 class LoginScreen extends StatelessWidget {
   var userController = TextEditingController();
@@ -17,8 +19,10 @@ class LoginScreen extends StatelessWidget {
     final horizontalPadding = mediaQueryData.size.width;
 
     return LayoutBuilder(builder: (context, constraints) {
-      if (horizontalPadding <= 1000) {
+      if (horizontalPadding <= 600) {
         return MobileLayoutLoginScreen(context);
+      } else if (horizontalPadding <= 1200) {
+        return TabletLayoutLoginScreen(context);
       } else {
         return DesktopLayoutLoginScreen(context);
       }

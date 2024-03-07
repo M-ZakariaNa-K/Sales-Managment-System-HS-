@@ -8,7 +8,7 @@ class GetDatabsNameService {
 
   GetDatabsNameService(this.dio);
 
-  Future<GetDatabsNameModel> getDatabsNameService(
+  Future<String> getDatabsNameService(
       {required String baseUrl}) async {
     try {
       // Make sure the URL is correct and accessible
@@ -22,20 +22,16 @@ class GetDatabsNameService {
         GetDatabsNameModel databaseName = GetDatabsNameModel(
           name: data["data"]["name"],
         );
-        return databaseName;
+        return databaseName.name;
       } else {
         // Handle the case where the response status code is not 200
         print('Failed to get data. Status code: ${response.statusCode}');
-        return GetDatabsNameModel(
-          name: "",
-        );
+        return "";
       }
     } catch (e) {
       // Handle any errors that occur during the API call
       print('Error fetching data: $e');
-      return GetDatabsNameModel(
-        name: "",
-      );
+      return "";
     }
   }
 }

@@ -10,7 +10,6 @@ import 'package:sales_management_system/Core/Constants/theme.dart';
 import 'package:sales_management_system/Core/helper/services/home/get_database_name_service.dart';
 import 'package:sales_management_system/Core/helper/services/home/get_databases_list_service.dart';
 import 'package:sales_management_system/Core/helper/services/home/post_update_database_service.dart';
-import 'package:sales_management_system/Core/helper/shared/shared.dart';
 import 'package:sales_management_system/Models/home/get_database_name_model.dart';
 import 'package:sales_management_system/Models/home/get_databases_list_model.dart';
 
@@ -21,12 +20,15 @@ class TotalDatabase extends StatefulWidget {
   State<TotalDatabase> createState() => _TotalDatabaseState();
 }
 
+String? selectedDatabase1;
+String? selectedDatabase2;
+
 class _TotalDatabaseState extends State<TotalDatabase> {
-  late Future<GetDatabsNameModel> _adminDatabaseFuture;
-  late Future<GetDatabsNameModel> _userDatabaseFuture;
+  late Future<String> _adminDatabaseFuture;
+  late Future<String> _userDatabaseFuture;
   late Future<List<GetDatabasesListDataModel>> _future;
-  String? selectedDatabase1;
-  String? selectedDatabase2;
+  String adminDatabase = "";
+  String userDatabase = "";
   bool _isButtonVisible = false;
   bool _isDisposed = false; // Add this variable
 
@@ -35,8 +37,13 @@ class _TotalDatabaseState extends State<TotalDatabase> {
     super.initState();
     _adminDatabaseFuture = GetDatabsNameService(Dio())
         .getDatabsNameService(baseUrl: 'databases/get-admin');
+    // _adminDatabaseFuture = GetDatabsNameService(Dio())
+    //     .getDatabsNameService(baseUrl: 'databases/get-admin');
     _userDatabaseFuture = GetDatabsNameService(Dio())
         .getDatabsNameService(baseUrl: 'databases/get-users');
+
+    showCurrentDatabase();
+    //Show  list of Databases
     _future = GetDatabasesListService(Dio()).getDatabasesListService();
 
     // Show the button after 3 seconds
@@ -48,6 +55,11 @@ class _TotalDatabaseState extends State<TotalDatabase> {
         });
       }
     });
+  }
+
+  Future<void> showCurrentDatabase() async {
+    adminDatabase = await _adminDatabaseFuture;
+    userDatabase = await _userDatabaseFuture;
   }
 
   @override
@@ -83,25 +95,39 @@ class _TotalDatabaseState extends State<TotalDatabase> {
               child: Wrap(
                 children: [
                   //-----------------------------------------1------------------------------------
-                  FutureBuilder(
-                    future: _adminDatabaseFuture,
-                    builder:
-                        (context, AsyncSnapshot<GetDatabsNameModel> snapshot) {
-                      return _buildDropDown(
-                          selectedDatabase1, snapshot.data?.name);
-                    },
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Admin Database:".tr),
+                      _buildDropDown(
+                        selectedDatabase1,
+                        adminDatabase,
+                        (value) {
+                          setState(() {
+                            selectedDatabase1 = value;
+                          });
+                        },
+                      ),
+                    ],
                   ),
                   const SizedBox(
                     width: 10,
                   ),
                   //-----------------------------------------2------------------------------------
-                  FutureBuilder(
-                    future: _userDatabaseFuture,
-                    builder:
-                        (context, AsyncSnapshot<GetDatabsNameModel> snapshot) {
-                      return _buildDropDown(
-                          selectedDatabase2, snapshot.data?.name);
-                    },
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Users Database:".tr),
+                      _buildDropDown(
+                        selectedDatabase2,
+                        userDatabase,
+                        (value) {
+                          setState(() {
+                            selectedDatabase2 = value;
+                          });
+                        },
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -111,36 +137,39 @@ class _TotalDatabaseState extends State<TotalDatabase> {
           //------Data(Number of admins,company total sales for this month,the most sold branch)-----
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 30.0),
-            child: ListOfItems(
-            ),
+            child: ListOfItems(),
           ),
           //-----------------------------------------4------------------------------------
 
           // Widget that appears after 3 seconds
           AnimatedOpacity(
             opacity: _isButtonVisible ? 1.0 : 0.0,
-            duration:const  Duration(milliseconds: 500),
+            duration: const Duration(milliseconds: 500),
             child: Padding(
               padding: const EdgeInsets.only(top: 10.0),
               child: CustomeElevatedButton(
                 buttonColor: ThemeColors.secondary,
-                buttonChild:  Text(
+                buttonChild: Text(
                   '10'.tr,
-                  style:const TextStyle(
+                  style: const TextStyle(
                     color: ThemeColors.secondaryTextColor,
                   ),
                 ),
                 onPressed: () {
                   // Update Sales Table Data depend on selectedDatabase
                   if (selectedDatabase1 != null) {
-                    PostUpdateDatabaseService(Dio(), selectedDatabase1!)
+                    PostUpdateDatabaseService(Dio())
                         .postUpdateAdminDatabaseService(
-                            baseURL: "databases/set-admin");
+                            choosenDatabase: selectedDatabase1!,
+                            baseURL:
+                                "http://127.0.0.1:8000/api/databases/set-admin");
                   }
                   if (selectedDatabase2 != null) {
-                    PostUpdateDatabaseService(Dio(), selectedDatabase2!)
+                    PostUpdateDatabaseService(Dio())
                         .postUpdateAdminDatabaseService(
-                            baseURL: "databases/set-users");
+                            baseURL:
+                                "http://127.0.0.1:8000/api/databases/set-users",
+                            choosenDatabase: selectedDatabase2!);
                   }
                 },
               ),
@@ -151,7 +180,8 @@ class _TotalDatabaseState extends State<TotalDatabase> {
     );
   }
 
-  Widget _buildDropDown(String? selectedValue, String? hintText) {
+  Widget _buildDropDown(
+      String? selectedValue, String? hintText, Function(String?)? onChanged) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5.0),
       child: FutureBuilder(
@@ -180,19 +210,22 @@ class _TotalDatabaseState extends State<TotalDatabase> {
                   ),
                 ),
                 value: selectedValue,
-                onChanged: (value) {
-                  setState(() {
-                    selectedValue = value;
-                  });
-                },
-                items: !isUser
-                    ? databaseOptions.map((String database) {
-                        return DropdownMenuItem<String>(
-                          value: database,
-                          child: Text(database),
-                        );
-                      }).toList()
-                    : [],
+                onChanged: onChanged,
+                // (value) {
+                //   setState(() {
+                //     selectedValue = value;
+                //   });
+                // },
+                items:
+                    // isUserAdmin!
+                    //     ?
+                    databaseOptions.map((String database) {
+                  return DropdownMenuItem<String>(
+                    value: database,
+                    child: Text(database),
+                  );
+                }).toList(),
+                // : [],
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   contentPadding: EdgeInsets.symmetric(
@@ -207,4 +240,16 @@ class _TotalDatabaseState extends State<TotalDatabase> {
       ),
     );
   }
+}
+
+// Define a class to hold the value
+class ValueHolder {
+  int value;
+
+  ValueHolder(this.value);
+}
+
+// Function to modify the value
+void modifyValue(ValueHolder holder, int newValue) {
+  holder.value = newValue;
 }

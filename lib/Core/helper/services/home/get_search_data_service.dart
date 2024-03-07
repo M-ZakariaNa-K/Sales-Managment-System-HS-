@@ -9,12 +9,12 @@ class SearchAppService {
 
   Future<GetSearchDataModel> getsearchapp({required String query}) async {
     // Add connectTimeout and receiveTimeout to handle timeouts
-    dio.options.connectTimeout = Duration(seconds: 30); // 30 seconds
-    dio.options.receiveTimeout = Duration(seconds: 20); // 20 seconds
+    dio.options.connectTimeout = const Duration(seconds: 30); // 30 seconds
+    dio.options.receiveTimeout = const Duration(seconds: 20); // 20 seconds
 
     try {
-       Response response = await DioHelper()
-          .getData(path: "branches-Sales/Search-For?param=$query", token: token);
+      Response response = await DioHelper().getData(
+          path: "branches-Sales/Search-For?param=$query", token: token);
       if (response.statusCode == 200) {
         Map<String, dynamic> data = response.data;
         List<dynamic> names = data['data']['Name results'] as List<dynamic>;

@@ -11,17 +11,14 @@ class DisktopLayout extends StatefulWidget {
 }
 
 class _DisktopLayoutState extends State<DisktopLayout> {
-  late TextEditingController _databaseTextFildController;
 
   @override
   void initState() {
     super.initState();
-    _databaseTextFildController = TextEditingController();
   }
 
   @override
   void dispose() {
-    _databaseTextFildController.dispose();
     super.dispose();
   }
 

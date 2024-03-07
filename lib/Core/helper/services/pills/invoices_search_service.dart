@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:sales_management_system/Core/Components/home/sales_table&image_sliderRow/sales_table.dart';
 import 'package:sales_management_system/Core/Components/widget.dart';
 import 'package:sales_management_system/Core/helper/services/getTest.dart';
 import 'package:sales_management_system/Models/pills/invoices_search_model.dart';
@@ -16,8 +17,8 @@ class PillsSearchService {
     try {
       Response response = await DioHelper().getData(
         path:
-           // "invoices/search?GUID=241CD19C-5BC4-4373-BF92-8633191BF33B&search=322",
-    "invoices/search?GUID=$guid&search=$query",
+            // "invoices/search?GUID=241CD19C-5BC4-4373-BF92-8633191BF33B&search=322",
+            "invoices/search?GUID=$publicGuidVar&search=$query",
         token: token,
       );
       if (response.statusCode == 200) {

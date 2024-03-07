@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sales_management_system/Core/Components/home/search&profile_Row/search_list_items.dart';
 import 'package:sales_management_system/Core/Components/pills/search_pills_list_items.dart';
+import 'package:sales_management_system/Core/Constants/theme.dart';
 
 class SearchBarWidget extends StatefulWidget {
   const SearchBarWidget({
     Key? key,
-    @required this.isInvoices,
+    required this.isInvoices,
     @required this.guid,
   }) : super(key: key);
   final bool? isInvoices;
@@ -28,7 +29,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
       child: Column(
         children: [
           Container(
-            height: 50,
+            height: 48,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(30.0),
@@ -49,10 +50,8 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
                   borderRadius: BorderRadius.circular(30.0),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(
-                    color: Color.fromRGBO(200, 29, 36, 1),
-                  ),
-                  borderRadius: BorderRadius.circular(5.0),
+                  borderSide: const BorderSide(color: ThemeColors.primary),
+                  borderRadius: BorderRadius.circular(30.0),
                 ),
                 prefixIcon: const Padding(
                   padding: EdgeInsets.all(10),

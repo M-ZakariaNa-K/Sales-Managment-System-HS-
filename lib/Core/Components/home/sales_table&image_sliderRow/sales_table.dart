@@ -7,7 +7,7 @@ import 'package:sales_management_system/Core/Constants/theme.dart';
 import 'package:sales_management_system/Core/helper/services/home/get_all_branchesServices.dart';
 import 'package:sales_management_system/Core/helper/services/home/get_all_branches_sorted_by_valueService.dart';
 import 'package:sales_management_system/Models/home/get_all_branches.dart';
-import 'package:sales_management_system/Views/pills/pills.dart';
+import 'package:sales_management_system/Views/home/dashboard.dart';
 
 String publicGuidVar = "";
 
@@ -73,7 +73,7 @@ class _SalesTableState extends State<SalesTable> {
                     children: [
                       Text(
                         '2'.tr,
-                        style:const TextStyle(
+                        style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                           color: ThemeColors.primaryTextColor,
@@ -256,16 +256,22 @@ class SalesDataSource extends DataTableSource {
       DataCell(Center(
         child: ElevatedButton(
           onPressed: () {
+            publicisPillsPage = true;
             publicGuidVar = rowData.guid!;
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => PillsPage(
-                                          total:rowData.totalSales,
-
-                  context,
-                  guid: rowData.guid!,
-                  branchName: rowData.branch!,
+                builder: (context) => DashboardPage(
+                  guid: rowData.guid,
+                  total: rowData.totalSales,
+                  branchName: rowData.branch,
                 ),
+                //  PillsPage(
+                //                           total:rowData.totalSales,
+
+                //   context,
+                //   guid: rowData.guid!,
+                //   branchName: rowData.branch!,
+                // ),
               ),
             );
           },

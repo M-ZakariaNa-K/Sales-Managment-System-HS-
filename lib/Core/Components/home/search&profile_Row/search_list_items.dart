@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:sales_management_system/Core/Constants/theme.dart';
 import 'package:sales_management_system/Core/helper/services/home/get_search_data_service.dart';
 import 'package:sales_management_system/Models/home/get_search_data_model.dart';
-import 'package:sales_management_system/Views/pills/pills.dart';
+import 'package:sales_management_system/Views/home/dashboard.dart';
 
 class SearchListItems extends StatefulWidget {
   const SearchListItems({super.key, required this.searchController});
@@ -95,22 +95,28 @@ class _SearchListItemsState extends State<SearchListItems> {
                         children: [
                           ListTile(
                             onTap: () {
+                              publicisPillsPage = true;
                               // Handle onTap for numberBranches
                               Navigator.push(context,
                                   MaterialPageRoute(builder: (context) {
                                 //Here should has the Id of branch i pressed
-                                return PillsPage(
-                                  context,
+                                return
+                                 DashboardPage(
                                   total: nameBranches[index].totalSales,
                                   guid: nameBranches[index].guid,
                                   branchName: nameBranches[index].name,
                                 );
+                                //  PillsPage(
+                                //   total: nameBranches[index].totalSales,
+                                //   guid: nameBranches[index].guid,
+                                //   branchName: nameBranches[index].name,
+                                // );
                               }));
                             },
                             title: Text(
                               nameBranches[index].name,
                               style: const TextStyle(
-                                color: Color(0xff003A71),
+                                color: ThemeColors.primary,
                               ),
                             ),
                             subtitle: Text(
@@ -119,7 +125,7 @@ class _SearchListItemsState extends State<SearchListItems> {
                             leading: ClipRRect(
                               borderRadius:
                                   const BorderRadius.all(Radius.circular(10)),
-                              child: Container(
+                              child: SizedBox(
                                 width: 40,
                                 height: 40,
                                 child: Image.asset(
@@ -144,22 +150,34 @@ class _SearchListItemsState extends State<SearchListItems> {
                         children: [
                           ListTile(
                             onTap: () {
+                              publicisPillsPage = true;
                               // Handle onTap for numberBranches
                               Navigator.push(context,
                                   MaterialPageRoute(builder: (context) {
                                 //Here should has the Id of branch i pressed
-                                return PillsPage(
-                                  context,
-                                  total: nameBranches[index].totalSales,
-                                  guid: numberBranches[index].guid,
-                                  branchName: nameBranches[index].name,
+                                return
+                                 DashboardPage(
+                                  total: numberBranches[
+                                          index != 0 ? index - 1 : index]
+                                      .totalSales,
+                                  guid: numberBranches[
+                                          index != 0 ? index - 1 : index]
+                                      .guid,
+                                  branchName: numberBranches[
+                                          index != 0 ? index - 1 : index]
+                                      .name,
                                 );
+                                // PillsPage(
+                                //   total: nameBranches[index].totalSales,
+                                //   guid: numberBranches[index].guid,
+                                //   branchName: nameBranches[index].name,
+                                // );
                               }));
                             },
                             title: Text(
                               numberBranches[numberIndex].name,
                               style: const TextStyle(
-                                color:ThemeColors.primary,
+                                color: ThemeColors.primary,
                               ),
                             ),
                             subtitle: Text(

@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pdf/widgets.dart' as pw;
 import 'package:sales_management_system/Core/Components/Report/export_button.dart';
 import 'package:sales_management_system/Core/Components/custome_elevated_button.dart';
 import 'package:sales_management_system/Core/Components/home/sales_table&image_sliderRow/mobile_sales_item.dart';
@@ -25,10 +24,10 @@ class MobileLayoutReportsPage extends StatefulWidget {
 }
 
 class _MobileLayoutReportsPageState extends State<MobileLayoutReportsPage> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   bool isDataBetween2DateLoading = false;
   DateTime? selectedStartDateRange;
   DateTime? selectedEndDateRange;
-  final pdf = pw.Document();
   List<BranchDataModel> defultData = [];
   //NOTE(from ZAKARIA):  dataBetweenTwoDate list will showen when user choose 2 dates
   //we use it in sourse in PagenatedDataTable
@@ -106,6 +105,7 @@ class _MobileLayoutReportsPageState extends State<MobileLayoutReportsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       backgroundColor: ThemeColors.secondary,
       body: defultData.isEmpty
           ? const Center(
@@ -132,9 +132,9 @@ class _MobileLayoutReportsPageState extends State<MobileLayoutReportsPage> {
                           child: Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Row(children: [
-                              const Text(
-                                "التقرير الشهري",
-                                style: TextStyle(
+                              Text(
+                                "Mounthly Report".tr,
+                                style: const TextStyle(
                                   fontSize: 18,
                                 ),
                               ),
@@ -191,14 +191,10 @@ class _MobileLayoutReportsPageState extends State<MobileLayoutReportsPage> {
                                       //onpressed X
                                       return;
                                     }
-                                    // if (picked != null &&
-                                    //     // ignore: unrelated_type_equality_checks
-                                    //     picked != selectedStartDateRange) {
                                     setState(() {
                                       selectedStartDateRange = picked.start;
                                       selectedEndDateRange = picked.end;
                                     });
-                                    // }
                                     //   //NOTE(from ZAKARIA): Here we will call the data from API between the 2 selected Date
                                     formattedStartDate =
                                         formatDate(selectedStartDateRange!);
@@ -218,10 +214,12 @@ class _MobileLayoutReportsPageState extends State<MobileLayoutReportsPage> {
                                 ),
                               ),
                               ExportButton(
+                                isInvoices: false,
                                 pdfUrl:
                                     'http://127.0.0.1:8000/api/branches-Sales/PDFForm?start_date=$formattedStartDate&end_date=$formattedEndDate',
                                 excelUrl:
                                     'http://127.0.0.1:8000/api/branches-Sales/ExcelForm?start_date=$formattedStartDate&end_date=$formattedEndDate',
+                                scaffoldKey: _scaffoldKey,
                               ),
                             ]),
                           ),
