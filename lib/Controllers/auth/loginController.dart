@@ -40,7 +40,7 @@ class LoginController extends GetxController {
       await AdminController().getUserList();
       showToast(text: 'Logged in Successfully', state: ToastStates.SUCCESS);
       storage.setItem('isLoggedIn', true);
-      Get.off(const DashboardPage());
+      Get.toNamed('/DashBoard');
 
       void navigateToNewScreen(BuildContext context, String route) {
         //saveCurrentRoute(route);
