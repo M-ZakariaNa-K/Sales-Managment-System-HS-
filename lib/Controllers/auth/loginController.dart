@@ -9,6 +9,7 @@ import 'package:sales_management_system/Models/admins/users_model.dart';
 import 'package:sales_management_system/Models/auth/userModel.dart';
 import 'package:sales_management_system/Views/admins/admins.dart';
 import 'package:sales_management_system/Views/home/dashboard.dart';
+import 'package:sales_management_system/Views/home/splash_view.dart';
 import 'package:sales_management_system/main.dart';
 
 class LoginController extends GetxController {
@@ -40,11 +41,13 @@ class LoginController extends GetxController {
       await AdminController().getUserList();
       showToast(text: 'Logged in Successfully', state: ToastStates.SUCCESS);
       storage.setItem('isLoggedIn', true);
-      Get.toNamed('/DashBoard');
+      // Get.toNamed('/DashBoard');
+      Get.off(const DashboardPage());
 
       void navigateToNewScreen(BuildContext context, String route) {
         //saveCurrentRoute(route);
-        Get.toNamed('/DashBoard');
+        // Get.toNamed('/DashBoard');
+        Get.off(const DashboardPage());
       }
     });
   }

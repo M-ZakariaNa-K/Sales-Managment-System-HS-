@@ -1,5 +1,4 @@
 import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sales_management_system/Core/Components/widget.dart';
@@ -9,15 +8,15 @@ import 'package:sales_management_system/Core/helper/shared/Locale.dart';
 import 'package:sales_management_system/Core/helper/shared/LocaleController.dart';
 import 'package:sales_management_system/Views/admins/admins.dart';
 import 'package:sales_management_system/Views/auth/login.dart';
-import 'dart:html' as html;
-import 'dart:convert';
+// import 'dart:html' as html;
 import 'package:localstorage/localstorage.dart';
 import 'package:sales_management_system/Views/home/dashboard.dart';
 import 'package:sales_management_system/Views/home/home.dart';
+import 'package:sales_management_system/Views/home/splash_view.dart';
 
-void saveCurrentRoute(String route) {
-  html.window.localStorage['lastRoute'] = route;
-}
+// void saveCurrentRoute(String route) {
+//   html.window.localStorage['lastRoute'] = route;
+// }
 
 void storeToken(String token) {
   window.localStorage['token'] = token;
@@ -32,19 +31,22 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   DioHelper.init();
-  if(retrieveToken()!=null) token = retrieveToken()!;
-  String lastRoute = html.window.localStorage['lastRoute'] ?? '/';
+  if (retrieveToken() != null) token = retrieveToken()!;
+  // String lastRoute = html.window.localStorage['lastRoute'] ?? '/';
 
-  runApp(MyApp(
-    startRoute: lastRoute,
-  ));
+  runApp(const MyApp(
+      // startRoute: lastRoute,
+      ));
 }
 // NOTICE: Do not play anything else
 
 // ignore: must_be_immutable
 class MyApp extends StatelessWidget {
-  final String startRoute;
-  MyApp({Key? key, required this.startRoute});
+  // final String startRoute;
+ const MyApp({
+    Key? key,
+    // required this.startRoute
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -65,14 +67,14 @@ class MyApp extends StatelessWidget {
       // put the home page as your main working screen
       home: SplashScreen(),
 
-      getPages: [
-        GetPage(name: '/Login', page: () => LoginScreen()),
-        GetPage(name: '/Admins', page: () => const AdminsPage()),
-        GetPage(name: '/DashBoard', page: () => const DashboardPage()),
-        GetPage(name: '/Pills', page: () => LoginScreen()),
-        // GetPage(name: '/Login', page: () => LoginScreen()),
-      ],
-      initialRoute: startRoute,
+      // getPages: [
+      //   // GetPage(name: '/Login', page: () => LoginScreen()),
+      //   // GetPage(name: '/Admins', page: () => const AdminsPage()),
+      //   // GetPage(name: '/DashBoard', page: () => const DashboardPage()),
+      //   // GetPage(name: '/Pills', page: () => LoginScreen()),
+      //   // GetPage(name: '/Login', page: () => LoginScreen()),
+      // ],
+      // initialRoute: startRoute,
 
       theme: ThemeData(
         useMaterial3: true,
@@ -101,38 +103,37 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class SplashScreen extends StatefulWidget {
-  @override
-  _SplashScreenState createState() => _SplashScreenState();
-}
+// class SplashScreen extends StatefulWidget {
+//   @override
+//   _SplashScreenState createState() => _SplashScreenState();
+// }
 
-final LocalStorage storage = new LocalStorage('app');
 
-class _SplashScreenState extends State<SplashScreen> {
-  @override
-  void initState() {
-    super.initState();
-    _checkAuthStatus();
-  }
+// class _SplashScreenState extends State<SplashScreen> {
+//   @override
+//   void initState() {
+//     super.initState();
+//     _checkAuthStatus();
+//   }
 
-  Future<void> _checkAuthStatus() async {
-    await storage.ready;
-    bool isLoggedIn = storage.getItem('isLoggedIn') ?? false;
-    print(isLoggedIn);
-    // Navigate to the appropriate screen based on the authentication status.
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-        builder: (context) => isLoggedIn ? HomePage() : LoginScreen(),
-      ),
-    );
-  }
+//   Future<void> _checkAuthStatus() async {
+//     await storage.ready;
+//     bool isLoggedIn = storage.getItem('isLoggedIn') ?? false;
+//     print(isLoggedIn);
+//     // Navigate to the appropriate screen based on the authentication status.
+//     Navigator.of(context).pushReplacement(
+//       MaterialPageRoute(
+//         builder: (context) => isLoggedIn ? const DashboardPage() : LoginScreen(),
+//       ),
+//     );
+//   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: CircularProgressIndicator(),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return const Scaffold(
+//       body: Center(
+//         child: CircularProgressIndicator(),
+//       ),
+//     );
+//   }
+// }

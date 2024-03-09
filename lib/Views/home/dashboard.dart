@@ -64,8 +64,7 @@ class _DashboardPageState extends State<DashboardPage> {
               : const SizedBox(),
           // Page Content
           Expanded(
-            child:
-             publicisPillsPage
+            child: publicisPillsPage
                 ? PillsPage(
                     guid: widget.guid!,
                     branchName: widget.branchName!,
