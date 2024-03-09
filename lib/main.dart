@@ -1,5 +1,8 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sales_management_system/Core/Components/widget.dart';
 import 'package:sales_management_system/Core/Constants/theme.dart';
 import 'package:sales_management_system/Core/helper/services/getTest.dart';
 import 'package:sales_management_system/Core/helper/shared/Locale.dart';
@@ -16,12 +19,20 @@ void saveCurrentRoute(String route) {
   html.window.localStorage['lastRoute'] = route;
 }
 
+void storeToken(String token) {
+  window.localStorage['token'] = token;
+}
+
+String? retrieveToken() {
+  return window.localStorage['token'];
+}
+
 void main() async {
 // setting min and max with the same size to prevent resizing
   WidgetsFlutterBinding.ensureInitialized();
 
   DioHelper.init();
-
+  if(retrieveToken()!=null) token = retrieveToken()!;
   String lastRoute = html.window.localStorage['lastRoute'] ?? '/';
 
   runApp(MyApp(
@@ -54,13 +65,13 @@ class MyApp extends StatelessWidget {
       // put the home page as your main working screen
       home: SplashScreen(),
 
-      // getPages: [
-      //   GetPage(name: '/Login', page: () => LoginScreen()),
-      //   GetPage(name: '/Admins', page: () => const AdminsPage()),
-      //   GetPage(name: '/DashBoard', page: () => const DashboardPage()),
-      //   // GetPage(name: '/Login', page: () => LoginScreen()),
-      //   // GetPage(name: '/Login', page: () => LoginScreen()),
-      // ],
+      getPages: [
+        GetPage(name: '/Login', page: () => LoginScreen()),
+        GetPage(name: '/Admins', page: () => const AdminsPage()),
+        GetPage(name: '/DashBoard', page: () => const DashboardPage()),
+        GetPage(name: '/Pills', page: () => LoginScreen()),
+        // GetPage(name: '/Login', page: () => LoginScreen()),
+      ],
       initialRoute: startRoute,
 
       theme: ThemeData(
@@ -95,9 +106,9 @@ class SplashScreen extends StatefulWidget {
   _SplashScreenState createState() => _SplashScreenState();
 }
 
-  final LocalStorage storage = new LocalStorage('app');
-class _SplashScreenState extends State<SplashScreen> {
+final LocalStorage storage = new LocalStorage('app');
 
+class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
@@ -107,7 +118,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Future<void> _checkAuthStatus() async {
     await storage.ready;
     bool isLoggedIn = storage.getItem('isLoggedIn') ?? false;
-print(isLoggedIn);
+    print(isLoggedIn);
     // Navigate to the appropriate screen based on the authentication status.
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(

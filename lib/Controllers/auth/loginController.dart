@@ -35,6 +35,7 @@ class LoginController extends GetxController {
         data: {'username': userName, 'password': password}).then((value) async {
       userModel = UserModel.fromJson(value.data);
       token = userModel!.data!.token!;
+      storeToken(token);
       print("${token}   GGGGGG");
       await AdminController().getUserList();
       showToast(text: 'Logged in Successfully', state: ToastStates.SUCCESS);

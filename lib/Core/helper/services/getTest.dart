@@ -76,7 +76,7 @@ class DioHelper {
       //   showToast(
       //       text: e.response?.data['message'], state: ToastStates.WARNING);
       // }
-      showToast(text: e.response?.data['message'], state: ToastStates.WARNING);
+      else showToast(text: e.response?.data['message'], state: ToastStates.WARNING);
     });
   }
 //=================================================================================
