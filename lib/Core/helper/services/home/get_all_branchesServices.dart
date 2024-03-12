@@ -2,6 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:sales_management_system/Core/Components/widget.dart';
 import 'package:sales_management_system/Core/helper/services/getTest.dart';
 import 'package:sales_management_system/Models/home/get_all_branches.dart';
+import 'package:sales_management_system/main.dart';
+import 'package:sales_management_system/session.dart';
 
 class GetAllBranchesService {
   final Dio dio;
@@ -11,10 +13,15 @@ class GetAllBranchesService {
   Future<List<BranchDataModel>> getAllBranchesService() async {
     try {
       // Make sure the URL is correct and accessible
-  Response response = await DioHelper().getData(
-        token: token,
-        path: "branches-Sales/All-branches",
-      );
+      Response response = await DioHelper().getData(
+            token: token,
+            path: "branches-Sales/All-branches",
+          );
+      // sessionManager.setToken(token); // Ensure the token is set
+
+      // Response response = await sessionManager
+      //     .get("http://127.0.0.1:8000/api/branches-Sales/All-branches");
+      print(response);
       if (response.statusCode == 200) {
         // Parse the JSON response data
         Map<String, dynamic> data = response.data;
@@ -31,7 +38,7 @@ class GetAllBranchesService {
           branchesList.add(a);
         }
         return branchesList;
-      } else {   
+      } else {
         // Handle the case where the response status code is not 200
         print('Failed to get data. Status code: ${response.statusCode}');
         return [];

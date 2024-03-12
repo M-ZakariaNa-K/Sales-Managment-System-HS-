@@ -2,6 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:sales_management_system/Core/Components/widget.dart';
 import 'package:sales_management_system/Core/helper/services/getTest.dart';
 import 'package:sales_management_system/Models/home/get_search_data_model.dart';
+import 'package:sales_management_system/main.dart';
+import 'package:sales_management_system/session.dart';
 
 class SearchAppService {
   SearchAppService(this.dio);
@@ -15,6 +17,10 @@ class SearchAppService {
     try {
       Response response = await DioHelper().getData(
           path: "branches-Sales/Search-For?param=$query", token: token);
+      // sessionManager.setToken(token); // Ensure the token is set
+
+      // Response response = await sessionManager
+      //     .get("http://127.0.0.1:8000/api/branches-Sales/Search-For?param=$query");
       if (response.statusCode == 200) {
         Map<String, dynamic> data = response.data;
         List<dynamic> names = data['data']['Name results'] as List<dynamic>;

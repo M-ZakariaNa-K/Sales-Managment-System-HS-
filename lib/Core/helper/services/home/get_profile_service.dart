@@ -2,6 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:sales_management_system/Core/Components/widget.dart';
 import 'package:sales_management_system/Core/helper/services/getTest.dart';
 import 'package:sales_management_system/Models/home/get_profile_model.dart';
+import 'package:sales_management_system/main.dart';
+
+import '../../../../session.dart';
 
 class GetprofileService {
   final Dio dio;
@@ -15,6 +18,10 @@ class GetprofileService {
         token: token,
         path: "users/get-current",
       );
+      // sessionManager.setToken(token); // Ensure the token is set
+
+      // Response response = await sessionManager
+      //     .get("http://127.0.0.1:8000/api/users/get-current");
       if (response.statusCode == 200) {
         // Parse the JSON response data
         Map<String, dynamic> data = response.data;

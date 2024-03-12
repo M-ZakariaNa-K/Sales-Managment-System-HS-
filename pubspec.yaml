@@ -48,6 +48,7 @@ dependencies:
   another_carousel_pro: ^1.0.0
   html: ^0.15.4
   localstorage: ^4.0.1+4
+  async: ^2.8.2
 dev_dependencies:
   flutter_test:
     sdk: flutter

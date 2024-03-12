@@ -1,6 +1,10 @@
+import 'dart:async';
+import 'dart:developer';
 import 'dart:html';
+import 'package:async/async.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sales_management_system/Core/Components/components.dart';
 import 'package:sales_management_system/Core/Components/widget.dart';
 import 'package:sales_management_system/Core/Constants/theme.dart';
 import 'package:sales_management_system/Core/helper/services/getTest.dart';
@@ -8,15 +12,15 @@ import 'package:sales_management_system/Core/helper/shared/Locale.dart';
 import 'package:sales_management_system/Core/helper/shared/LocaleController.dart';
 import 'package:sales_management_system/Views/admins/admins.dart';
 import 'package:sales_management_system/Views/auth/login.dart';
-// import 'dart:html' as html;
+import 'dart:html' as html;
 import 'package:localstorage/localstorage.dart';
 import 'package:sales_management_system/Views/home/dashboard.dart';
-import 'package:sales_management_system/Views/home/home.dart';
-import 'package:sales_management_system/Views/home/splash_view.dart';
 
-// void saveCurrentRoute(String route) {
-//   html.window.localStorage['lastRoute'] = route;
-// }
+// SessionManager sessionManager = SessionManager();
+
+void saveCurrentRoute(String route) {
+  html.window.localStorage['lastRoute'] = route;
+}
 
 void storeToken(String token) {
   window.localStorage['token'] = token;
@@ -26,27 +30,64 @@ String? retrieveToken() {
   return window.localStorage['token'];
 }
 
+RestartableTimer? tokenRemovalTimer;
+
+void removeTokenAfter(Duration duration) {
+  log(DateTime.now().toString());
+  tokenRemovalTimer = RestartableTimer(duration, removeToken);
+}
+
+void removeToken() {
+  window.localStorage.remove('token');
+  DioHelper().getData(path: 'users/logout', token: token).then((value) {
+    showToast(text: "Session has been expired", state: ToastStates.SUCCESS);
+    token = '';
+    Get.toNamed('/Login');
+  });
+}
+
+void stopTokenRemovalTimer() {
+  tokenRemovalTimer?.cancel();
+}
+// void removeTokenAfter(Duration duration) {
+//   Timer(duration, () {
+//     window.localStorage.remove('token');
+//       DioHelper()
+//                   .getData(path: 'users/logout', token: token)
+//                   .then((value) {
+//                 showToast(
+//                     text: "Session has been expired",
+//                     state: ToastStates.SUCCESS);
+//                 token = '';
+//                 Get.toNamed('/Login');
+//               });
+//     // token = '';
+//     // print("FEFEF");
+//   });
+// }
+
 void main() async {
+// sessionManager.setToken(token);
+
 // setting min and max with the same size to prevent resizing
   WidgetsFlutterBinding.ensureInitialized();
 
   DioHelper.init();
   if (retrieveToken() != null) token = retrieveToken()!;
-  // String lastRoute = html.window.localStorage['lastRoute'] ?? '/';
+  String lastRoute = html.window.localStorage['lastRoute'] ?? '/';
 
-  runApp(const MyApp(
-      // startRoute: lastRoute,
-      ));
+  runApp(MyApp(
+    startRoute: lastRoute,
+  ));
 }
 // NOTICE: Do not play anything else
 
+final LocalStorage storage = new LocalStorage('app');
+
 // ignore: must_be_immutable
 class MyApp extends StatelessWidget {
-  // final String startRoute;
- const MyApp({
-    Key? key,
-    // required this.startRoute
-  });
+  final String startRoute;
+  const MyApp({Key? key, required this.startRoute});
 
   @override
   Widget build(BuildContext context) {
@@ -65,16 +106,16 @@ class MyApp extends StatelessWidget {
       title: 'Alnasser Food Company',
       // NOTE (From Zakaria): everyone when creating your task page
       // put the home page as your main working screen
-      home: SplashScreen(),
+      home: LoginScreen(),
 
-      // getPages: [
-      //   // GetPage(name: '/Login', page: () => LoginScreen()),
-      //   // GetPage(name: '/Admins', page: () => const AdminsPage()),
-      //   // GetPage(name: '/DashBoard', page: () => const DashboardPage()),
-      //   // GetPage(name: '/Pills', page: () => LoginScreen()),
-      //   // GetPage(name: '/Login', page: () => LoginScreen()),
-      // ],
-      // initialRoute: startRoute,
+      getPages: [
+        GetPage(name: '/Login', page: () => LoginScreen()),
+        GetPage(name: '/admins', page: () => const AdminsPage()),
+        GetPage(name: '/DashBoard', page: () => const DashboardPage()),
+        // GetPage(name: '/Pills', page: () => LoginScreen()),
+        // GetPage(name: '/Login', page: () => LoginScreen()),
+      ],
+      initialRoute: startRoute,
 
       theme: ThemeData(
         useMaterial3: true,
@@ -103,37 +144,37 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// class SplashScreen extends StatefulWidget {
-//   @override
-//   _SplashScreenState createState() => _SplashScreenState();
-// }
+class SplashScreen extends StatefulWidget {
+  @override
+  _SplashScreenState createState() => _SplashScreenState();
+}
 
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    _checkAuthStatus();
+  }
 
-// class _SplashScreenState extends State<SplashScreen> {
-//   @override
-//   void initState() {
-//     super.initState();
-//     _checkAuthStatus();
-//   }
+  Future<void> _checkAuthStatus() async {
+    await storage.ready;
+    // bool isLoggedIn = storage.getItem('isLoggedIn') ?? false;
+    // print(isLoggedIn);
+    // Navigate to the appropriate screen based on the authentication status.
+    // Navigator.of(context).pushReplacement(
+    //   MaterialPageRoute(
+    //     builder: (context) =>
+    //         isLoggedIn ? const DashboardPage() : LoginScreen(),
+    //   ),
+    // );
+  }
 
-//   Future<void> _checkAuthStatus() async {
-//     await storage.ready;
-//     bool isLoggedIn = storage.getItem('isLoggedIn') ?? false;
-//     print(isLoggedIn);
-//     // Navigate to the appropriate screen based on the authentication status.
-//     Navigator.of(context).pushReplacement(
-//       MaterialPageRoute(
-//         builder: (context) => isLoggedIn ? const DashboardPage() : LoginScreen(),
-//       ),
-//     );
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return const Scaffold(
-//       body: Center(
-//         child: CircularProgressIndicator(),
-//       ),
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      body: Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
+  }
+}

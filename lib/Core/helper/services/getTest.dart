@@ -4,7 +4,9 @@ import 'package:dio/dio.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:sales_management_system/Core/Components/components.dart';
+import 'package:sales_management_system/Core/Components/widget.dart';
 import 'package:sales_management_system/Views/auth/login.dart';
+import 'package:sales_management_system/main.dart';
 
 //showTOast: it's like a dialog has a color and text (the text is the
 //response message and the colors is ToastStates.SUCCESSFUL of ToastStates.ERROR)
@@ -29,20 +31,21 @@ class DioHelper {
       Map<String, dynamic>? query,
       Map<String, dynamic>? body,
       String? token}) async {
+    isSessionExpired = false;
     dio.options.headers = {
       'Accept': 'application/json',
       'Authorization': 'Bearer $token'
     };
-
+    stopTokenRemovalTimer();
+    removeTokenAfter(const Duration(seconds: 20));
     return await dio
         .get(path, data: body)
         // ignore: body_might_complete_normally_catch_error
         .catchError((e) {
-      if (e.response.statusCode == 440) {
-        showToast(
-            text: e.response?.data['message'], state: ToastStates.WARNING);
-        Get.off(LoginScreen());
-      }
+      // if (e.response.statusCode == 401) {
+      //   showToast(text: 'Session has been Expired', state: ToastStates.WARNING);
+      //   Get.toNamed('/Login');
+      // }
 
       if (e.bod) {
         showToast(text: e.response?.data['message'], state: ToastStates.ERROR);
@@ -60,23 +63,25 @@ class DioHelper {
       'Accept': 'application/json',
       'Authorization': 'Bearer $token'
     };
-
+    stopTokenRemovalTimer();
+    removeTokenAfter(const Duration(seconds: 20));
     return dio
         .post(
       url,
       data: data,
     )
         .catchError((e) {
-      if (e.response.statusCode == 440) {
+      // if (e.response.statusCode == 401) {
+      //   showToast(text: 'Session has been Expired', state: ToastStates.WARNING);
+      //   Get.toNamed('/Login');
+      // }
+      if (e.response.statusCode == 422) {
         showToast(
             text: e.response?.data['message'], state: ToastStates.WARNING);
-        Get.off(LoginScreen());
+      } else {
+        showToast(
+            text: e.response?.data['message'], state: ToastStates.WARNING);
       }
-      // if (e.response.statusCode == 422) {
-      //   showToast(
-      //       text: e.response?.data['message'], state: ToastStates.WARNING);
-      // }
-      else showToast(text: e.response?.data['message'], state: ToastStates.WARNING);
     });
   }
 //=================================================================================
@@ -89,7 +94,8 @@ class DioHelper {
       'Accept': 'application/json',
       'Authorization': 'Bearer $token'
     };
-    var dio = Dio();
+    stopTokenRemovalTimer();
+    removeTokenAfter(const Duration(seconds: 20));
     var response = await dio
         .request(
       url,
@@ -100,13 +106,13 @@ class DioHelper {
       ),
     )
         .catchError((e) {
-      if (e.response.statusCode == 440) {
+      if (e.response.statusCode == 401) {
+        showToast(text: 'Session has been Expired', state: ToastStates.WARNING);
+        Get.toNamed('/Login');
+      } else {
         showToast(
             text: e.response?.data['message'], state: ToastStates.WARNING);
-        Get.off(LoginScreen());
       }
-
-      showToast(text: e.response?.data['message'], state: ToastStates.WARNING);
     });
 
     if (response.statusCode == 200) {
@@ -127,6 +133,8 @@ class DioHelper {
       'lang': lang,
       'Authorization': token ?? ''
     };
+    stopTokenRemovalTimer();
+    removeTokenAfter(const Duration(seconds: 20));
     return dio.put(baseURL, queryParameters: query, data: data);
   }
 
@@ -139,7 +147,8 @@ class DioHelper {
       'Accept': 'application/json',
       'Authorization': 'Bearer $token'
     };
-
+    stopTokenRemovalTimer();
+    removeTokenAfter(const Duration(seconds: 20));
     return await dio
         .delete(path, data: body)
         // ignore: body_might_complete_normally_catch_error

@@ -11,6 +11,7 @@ import 'package:sales_management_system/Views/admins/admins.dart';
 import 'package:sales_management_system/Views/home/dashboard.dart';
 import 'package:sales_management_system/Views/home/splash_view.dart';
 import 'package:sales_management_system/main.dart';
+import 'package:sales_management_system/session.dart';
 
 class LoginController extends GetxController {
   bool isSecure = true;
@@ -37,18 +38,23 @@ class LoginController extends GetxController {
       userModel = UserModel.fromJson(value.data);
       token = userModel!.data!.token!;
       storeToken(token);
+      // sessionManager.setToken(token);
+
       print("${token}   GGGGGG");
       await AdminController().getUserList();
       showToast(text: 'Logged in Successfully', state: ToastStates.SUCCESS);
       storage.setItem('isLoggedIn', true);
-      // Get.toNamed('/DashBoard');
-      Get.off(const DashboardPage());
+      Get.toNamed('/DashBoard');
+      // Get.off(const DashboardPage());
 
-      void navigateToNewScreen(BuildContext context, String route) {
-        //saveCurrentRoute(route);
-        // Get.toNamed('/DashBoard');
-        Get.off(const DashboardPage());
-      }
+      // void navigateToNewScreen(BuildContext context, String route) {
+      //   // saveCurrentRoute(route);
+      //   Get.toNamed('/DashBoard');
+      //   Get.off(const DashboardPage());
+      // }
     });
   }
 }
+// //Zakaria here 11/ 3 /2024
+//   final String authToken = token; // Replace 'your_auth_token_here' with your actual authentication token
+//   final Session sessionLogin = Session(authToken);

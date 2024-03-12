@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:sales_management_system/Views/auth/LoginScreenDesktopLayout.dart';
 import 'package:sales_management_system/Views/auth/LoginScreenMobileLayout.dart';
 import 'package:sales_management_system/Views/auth/LoginScreenTableLayout.dart';
 
-// ignore: must_be_immutable
 class LoginScreen extends StatelessWidget {
   var userController = TextEditingController();
   var passwordController = TextEditingController();

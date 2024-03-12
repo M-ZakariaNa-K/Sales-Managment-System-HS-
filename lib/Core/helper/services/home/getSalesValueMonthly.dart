@@ -9,9 +9,13 @@ class GetSalesValueMonthlyService {
 
   Future<List<SalesInMonthModel>> getSalesValueMonthlyService() async {
     try {
-  Response response = await DioHelper()
+      Response response = await DioHelper()
           .getData(path: "branches-Sales/GetSalesMonthly", token: token);
 
+      // sessionManager.setToken(token); // Ensure the token is set
+
+      // Response response = await sessionManager
+      // .get("http://127.0.0.1:8000/api/branches-Sales/GetSalesMonthly");
       if (response.statusCode == 200) {
         List<dynamic> jsonData = response.data['data'];
         List<SalesInMonthModel> salesData = jsonData.map((item) {

@@ -2,6 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:sales_management_system/Core/Components/widget.dart';
 import 'package:sales_management_system/Core/helper/services/getTest.dart';
 import 'package:sales_management_system/Models/home/get_all_sales_value.dart';
+import 'package:sales_management_system/main.dart';
+import 'package:sales_management_system/session.dart';
 
 class AllSalesValuesService {
   final Dio dio;
@@ -9,8 +11,14 @@ class AllSalesValuesService {
 
   Future<List<AllSalesValuesDataModel>> getAllSalesValues() async {
     try {
+      //======================================================
       Response response = await DioHelper()
           .getData(path: "branches-Sales/getSalesValue", token: token);
+      //======================================================
+      // sessionManager.setToken(token); // Ensure the token is set
+
+      // Response response = await sessionManager
+      //     .get("http://127.0.0.1:8000/api/branches-Sales/getSalesValue");
       // await dio.get("$urlVar/api/branches-Sales/getSalesValue");
       // Check if the response status code is 200 (OK)
       if (response.statusCode == 200) {

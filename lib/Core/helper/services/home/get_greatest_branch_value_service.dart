@@ -2,6 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:sales_management_system/Core/Components/widget.dart';
 import 'package:sales_management_system/Core/helper/services/getTest.dart';
 import 'package:sales_management_system/Models/home/get_greatest_branch_value.dart';
+import 'package:sales_management_system/main.dart';
+import 'package:sales_management_system/session.dart';
 
 class GetGreatestBranchValueService {
   final Dio dio;
@@ -14,6 +16,10 @@ class GetGreatestBranchValueService {
   
  Response response = await DioHelper()
           .getData(path: "branches-Sales/getGreatestBranch", token: token);
+      // sessionManager.setToken(token); // Ensure the token is set
+
+      // Response response = await sessionManager
+      //     .get("http://127.0.0.1:8000/api/branches-Sales/getGreatestBranch");
       // Check if the response status code is 200 (OK)
       if (response.statusCode == 200) {
         // Parse the JSON response data
