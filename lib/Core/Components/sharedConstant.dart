@@ -1,0 +1,26 @@
+import 'package:flutter/material.dart';
+import 'package:localstorage/localstorage.dart';
+import 'package:sales_management_system/Models/admins/new_user_model.dart';
+import 'package:sales_management_system/Models/admins/user_info_model.dart';
+import 'package:sales_management_system/Models/admins/users_model.dart';
+import 'package:sales_management_system/Models/auth/userModel.dart';
+import 'package:sales_management_system/Models/pills/pills.dart';
+import 'package:sales_management_system/main.dart';
+
+List<int> users = [];
+List<PillsModel> pills = [];
+int pillsIndex = 0;
+String token = '';
+UserModel? userModel;
+NewUserModel? newUserModel;
+ListUserModel? listUserModel;
+bool isDataLoading = true;
+bool isLoadingFaild = false;
+UserInfoModel? userInfoModel;
+bool? isUserAdmin = box.read('isUserAdmin');
+bool? isPdf = box.read('isPdf');
+bool? isExcel = box.read('isExcel');
+bool isEditAdmin = false;
+Widget? widget;
+String sessionId = '';
+final LocalStorage storage = LocalStorage('app');
