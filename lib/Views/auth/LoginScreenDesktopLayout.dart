@@ -1,17 +1,15 @@
 // ignore: file_names
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sales_management_system/Controllers/auth/hostIPController.dart';
 import 'package:sales_management_system/Controllers/auth/loginController.dart';
 import 'package:sales_management_system/Controllers/lang/lang_controller.dart';
 import 'package:sales_management_system/Core/Components/components.dart';
 import 'package:sales_management_system/Core/Constants/theme.dart';
+import 'package:sales_management_system/Views/auth/login.dart';
 
 // ignore: must_be_immutable
 class DesktopLayoutLoginScreen extends StatelessWidget {
-  var userController = TextEditingController();
-  var passwordController = TextEditingController();
-  var formKey = GlobalKey<FormState>();
-
   DesktopLayoutLoginScreen(BuildContext context, {super.key});
 
   @override
@@ -35,7 +33,7 @@ class DesktopLayoutLoginScreen extends StatelessWidget {
               width: double.infinity,
               child: Row(children: [
                 Form(
-                  key: formKey,
+                  key: LoginScreen.formKey,
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(
@@ -72,7 +70,7 @@ class DesktopLayoutLoginScreen extends StatelessWidget {
                             height: 20,
                           ),
                           TextFormField(
-                            controller: userController,
+                            controller: LoginScreen.userController,
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return '24'.tr;
@@ -93,7 +91,7 @@ class DesktopLayoutLoginScreen extends StatelessWidget {
                             height: 40,
                           ),
                           TextFormField(
-                            controller: passwordController,
+                            controller: LoginScreen.passwordController,
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return '23'.tr;
@@ -122,10 +120,12 @@ class DesktopLayoutLoginScreen extends StatelessWidget {
                           ),
                           defaultButton(
                               function: () async {
-                                if (formKey.currentState!.validate()) {
+                                if (LoginScreen.formKey.currentState!
+                                    .validate()) {
                                   controller.loginState(
-                                      userName: userController.text,
-                                      password: passwordController.text);
+                                      userName: LoginScreen.userController.text,
+                                      password:
+                                          LoginScreen.passwordController.text);
                                 }
                               },
                               label: '25'.tr,
@@ -133,7 +133,158 @@ class DesktopLayoutLoginScreen extends StatelessWidget {
                           const SizedBox(
                             height: 20,
                           ),
-
+                          //=========================================================================
+                          Center(
+                            child: SizedBox(
+                              width: 200,
+                              child: defaultButton(
+                                  function: () async {
+//=======================================
+//Here i get the last HostIp was choosen
+                                    String hostIp1 =
+                                        await HostIpController().gethostIP();
+                                    LoginScreen.hostController.text = hostIp1;
+////=======================================
+                                    // ignore: use_build_context_synchronously
+                                    showDialog(
+                                        context: context,
+                                        builder: (context) => AlertDialog(
+                                              title:
+                                                  const Text('Choose host IP'),
+                                              content: GetBuilder(
+                                                init: HostIpController(),
+                                                builder: (HostIpController
+                                                        controller) =>
+                                                    Container(
+                                                  height: 220,
+                                                  width: 160,
+                                                  padding:
+                                                      const EdgeInsets.all(5),
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    children: [
+                                                      TextFormField(
+                                                        onChanged:
+                                                            (String value) {
+                                                          if (value ==
+                                                              '123456') {
+                                                            LoginScreen
+                                                                    .hostIsEnable =
+                                                                true;
+                                                            controller.update();
+                                                          } else {
+                                                            LoginScreen
+                                                                    .hostIsEnable =
+                                                                false;
+                                                          }
+                                                          controller.update();
+                                                        },
+                                                        controller: LoginScreen
+                                                            .hostPasswordController,
+                                                        validator: (value) {
+                                                          if (value!.isEmpty) {
+                                                            return '23'.tr;
+                                                          }
+                                                          return null;
+                                                        },
+                                                        obscureText:
+                                                            controller.isSecure,
+                                                        decoration:
+                                                            InputDecoration(
+                                                          border: OutlineInputBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          10)),
+                                                          prefixIcon:
+                                                              const Icon(
+                                                            Icons.lock,
+                                                            color: ThemeColors
+                                                                .primary,
+                                                          ),
+                                                          labelText: '22'.tr,
+                                                          suffixIcon:
+                                                              IconButton(
+                                                            icon: controller
+                                                                .secureOrNot,
+                                                            onPressed: () {
+                                                              controller
+                                                                  .changeSecureState();
+                                                            },
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      const SizedBox(
+                                                        height: 25,
+                                                      ),
+                                                      TextFormField(
+                                                        enabled: LoginScreen
+                                                            .hostIsEnable,
+                                                        controller: LoginScreen
+                                                            .hostController,
+                                                        validator: (value) {
+                                                          if (value!.isIPv4) {
+                                                            return 'please enter ip '
+                                                                .tr;
+                                                          }
+                                                          return null;
+                                                        },
+                                                        decoration:
+                                                            InputDecoration(
+                                                          border: OutlineInputBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          10)),
+                                                          labelText:
+                                                              'HOST IP'.tr,
+                                                          prefixIcon:
+                                                              const Icon(
+                                                            Icons.network_cell,
+                                                            color: ThemeColors
+                                                                .primary,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      const SizedBox(
+                                                        height: 20,
+                                                      ),
+                                                      //======================================
+                                                      defaultButton(
+                                                          color: !LoginScreen
+                                                                  .hostIsEnable
+                                                              ? ThemeColors
+                                                                  .primary
+                                                                  .withOpacity(
+                                                                      .3)
+                                                              : ThemeColors
+                                                                  .primary,
+                                                          function: LoginScreen
+                                                                  .hostIsEnable
+                                                              ? () {
+                                                                  controller.hostIPLogin(
+                                                                      hostController: LoginScreen
+                                                                          .hostController
+                                                                          .text);
+                                                                }
+                                                              : () {},
+                                                          //======================================
+                                                          label: 'Confirm',
+                                                          context: context)
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ));
+                                  },
+                                  label: 'Host IP'.tr,
+                                  context: context),
+                            ),
+                          ),
                         ],
                       ),
                     ),

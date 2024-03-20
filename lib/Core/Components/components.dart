@@ -64,10 +64,13 @@ String chooseToastColor({required ToastStates state}) {
 }
 
 Widget defaultButton(
-        {required void Function() function, required String label, context}) =>
+        {required void Function() function,
+        required String label,
+        context,
+        @required Color? color}) =>
     Container(
       decoration: BoxDecoration(
-        color: ThemeColors.primary,
+        color: color == null ? ThemeColors.primary : color,
         borderRadius: BorderRadiusDirectional.circular(10),
       ),
       height: 47,

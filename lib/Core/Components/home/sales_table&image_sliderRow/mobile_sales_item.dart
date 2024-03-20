@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sales_management_system/Core/Components/home/Circle_image.dart';
-import 'package:sales_management_system/Core/Components/sharedConstant.dart';
 import 'package:sales_management_system/Core/Constants/theme.dart';
 import 'package:sales_management_system/Views/home/dashboard.dart';
-import 'package:sales_management_system/main.dart';
 
 class MobileSalesItem extends StatelessWidget {
   const MobileSalesItem({super.key, required this.branch, required this.index});

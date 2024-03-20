@@ -1,10 +1,14 @@
-2024/03/19-03:12:41.651 35b0 Reusing MANIFEST C:\Users\ASUS\AppData\Local\Temp\flutter_tools.bb55e416\flutter_tools_chrome_device.3b68e784\Default\Sync Data\LevelDB/MANIFEST-000001
-2024/03/19-03:12:41.652 35b0 Recovering log #26
-2024/03/19-03:12:41.654 35b0 Reusing old log C:\Users\ASUS\AppData\Local\Temp\flutter_tools.bb55e416\flutter_tools_chrome_device.3b68e784\Default\Sync Data\LevelDB/000026.log 
-2024/03/19-03:12:41.654 35b0 Delete type=0 #3
-2024/03/19-03:12:41.655 35b0 Delete type=0 #4
-2024/03/19-03:12:41.655 35b0 Delete type=0 #7
-2024/03/19-03:12:41.655 35b0 Delete type=2 #8
-2024/03/19-03:12:41.655 35b0 Delete type=2 #11
-2024/03/19-03:12:41.655 35b0 Delete type=0 #12
-2024/03/19-03:12:41.655 35b0 Delete type=2 #13
+2024/03/20-05:02:15.174 5350 Reusing MANIFEST C:\Users\ASUS\AppData\Local\Temp\flutter_tools.630fbb45\flutter_tools_chrome_device.2b410220\Default\Sync Data\LevelDB/MANIFEST-000001
+2024/03/20-05:02:15.174 5350 Recovering log #30
+2024/03/20-05:02:15.177 5350 Reusing old log C:\Users\ASUS\AppData\Local\Temp\flutter_tools.630fbb45\flutter_tools_chrome_device.2b410220\Default\Sync Data\LevelDB/000030.log 
+2024/03/20-05:02:15.178 5350 Delete type=0 #3
+2024/03/20-05:02:15.179 5350 Delete type=0 #4
+2024/03/20-05:02:15.179 5350 Delete type=0 #7
+2024/03/20-05:02:15.179 5350 Delete type=2 #8
+2024/03/20-05:02:15.179 5350 Delete type=2 #11
+2024/03/20-05:02:15.179 5350 Delete type=0 #12
+2024/03/20-05:02:15.179 5350 Delete type=2 #13
+2024/03/20-05:02:15.179 5350 Delete type=0 #26
+2024/03/20-05:05:11.433 23ac Level-0 table #34: started
+2024/03/20-05:05:11.437 23ac Level-0 table #34: 54810 bytes OK
+2024/03/20-05:05:11.438 23ac Delete type=0 #30

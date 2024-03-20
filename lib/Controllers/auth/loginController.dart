@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:sales_management_system/Controllers/admins/admin_controller.dart';
 import 'package:sales_management_system/Core/Components/components.dart';
 import 'package:sales_management_system/Core/Components/sharedConstant.dart';
 import 'package:sales_management_system/Core/helper/services/getTest.dart';
@@ -12,8 +11,10 @@ import 'package:sales_management_system/main.dart';
 
 class LoginController extends GetxController {
   bool isSecure = true;
+  bool hostIpIsSecure = true;
   bool checkBox = false;
   Icon secureOrNot = const Icon(Icons.remove_red_eye);
+  Icon hostIpSecureOrNot = const Icon(Icons.remove_red_eye);
 
 //rony
   final box = GetStorage();
@@ -26,10 +27,7 @@ class LoginController extends GetxController {
     update();
   }
 
-  void changeCheckBox() {
-    checkBox = !checkBox;
-    update();
-  }
+ 
 
   void loginState({required String userName, required String password}) {
     DioHelper.postData(
@@ -56,7 +54,6 @@ class LoginController extends GetxController {
           box.write('isPdf', isPdf);
           storeToken(token, isUserAdmin!, isExcel!, isPdf!);
 
-         
           showToast(text: 'Logged in Successfully', state: ToastStates.SUCCESS);
           storage.setItem('isLoggedIn', true);
           //================================
@@ -76,4 +73,6 @@ class LoginController extends GetxController {
       //showToast(text: 'Error: $error', state: ToastStates.ERROR);
     });
   }
+
+  
 }

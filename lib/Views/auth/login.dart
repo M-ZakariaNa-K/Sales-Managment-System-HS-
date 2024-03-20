@@ -7,8 +7,10 @@ import 'package:sales_management_system/Views/auth/LoginScreenTableLayout.dart';
 class LoginScreen extends StatelessWidget {
     static var userController = TextEditingController();
     static var passwordController = TextEditingController();
+    static var hostController = TextEditingController();
+    static var hostPasswordController = TextEditingController();
     static var formKey = GlobalKey<FormState>();
-
+    static bool hostIsEnable = false;
 
   const LoginScreen({super.key});
 
