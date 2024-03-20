@@ -56,7 +56,6 @@ class MobileSalesItem extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-           
                   publicisPillsPage = true;
                   Navigator.of(context).push(
                     MaterialPageRoute(
@@ -130,7 +129,10 @@ class MobileSalesItem extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                Text("${branch.totalSales}"),
+                Text(
+                  "${branch.totalSales}",
+                  textDirection: TextDirection.ltr,
+                ),
               ],
             ),
           )

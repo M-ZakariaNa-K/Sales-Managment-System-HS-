@@ -239,7 +239,7 @@ class SalesDataSource extends DataTableSource {
 
     return DataRow(cells: [
       DataCell(Center(child: Text(rowData.number!))),
-      DataCell(Center(child: Text(rowData.branch!))),
+      DataCell(Center(child: Text(rowData.branch!, textDirection: TextDirection.ltr,))),
       DataCell(
         Center(
           child: SizedBox(
@@ -252,7 +252,7 @@ class SalesDataSource extends DataTableSource {
           ),
         ),
       ),
-      DataCell(Center(child: Text("${rowData.totalSales!}"))),
+      DataCell(Center(child: Text("${rowData.totalSales!}", textDirection: TextDirection.ltr,))),
       DataCell(Center(
         child: ElevatedButton(
           onPressed: () {

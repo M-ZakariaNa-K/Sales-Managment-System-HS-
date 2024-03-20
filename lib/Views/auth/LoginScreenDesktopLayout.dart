@@ -222,6 +222,8 @@ class DesktopLayoutLoginScreen extends StatelessWidget {
                                                         height: 25,
                                                       ),
                                                       TextFormField(
+                                                        textDirection:
+                                                            TextDirection.ltr,
                                                         enabled: LoginScreen
                                                             .hostIsEnable,
                                                         controller: LoginScreen
@@ -270,6 +272,15 @@ class DesktopLayoutLoginScreen extends StatelessWidget {
                                                                       hostController: LoginScreen
                                                                           .hostController
                                                                           .text);
+                                                                  LoginScreen
+                                                                      .hostPasswordController
+                                                                      .clear();
+                                                                  LoginScreen
+                                                                          .hostIsEnable =
+                                                                      false;
+
+                                                                  ///=======to delete the dialog
+                                                                  Get.back();
                                                                 }
                                                               : () {},
                                                           //======================================
