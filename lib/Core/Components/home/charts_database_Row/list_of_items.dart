@@ -39,13 +39,12 @@ class ListOfItems extends StatelessWidget {
               .getGreatestBranchValueService(),
           builder: (context, snapshot) {
             return _buildListItem(
-              context,
-              snapshot,
-              title: "51".tr,
+              context, snapshot,
+              title:
+                  "${"51".tr} : ${snapshot.hasData ? snapshot.data!.branch : ""}",
+              // "51".tr,
               icon: Icons.area_chart_outlined,
-              subtitle: snapshot.hasData
-                  ? "${snapshot.data!.branch} / ${snapshot.data!.totalSales}"
-                  : "",
+              subtitle: snapshot.hasData ? snapshot.data!.totalSales : "",
             );
           },
         ),
@@ -82,6 +81,7 @@ class ListOfItems extends StatelessWidget {
         child: Text('Something went wrong. Please try again...'),
       );
     } else {
+      // ignore: missing_required_param
       return CostumeListTile(
         title: title,
         subtitle: subtitle,

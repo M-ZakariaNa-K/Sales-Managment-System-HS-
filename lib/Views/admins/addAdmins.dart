@@ -92,7 +92,7 @@ class AddAdminScreen extends StatelessWidget {
                             return '24'.tr;
                           }
                           if (value.length < 7 || value.length > 29) {
-                            return 'The userName must be starting with a letter and containing 7 to 29 letters';
+                            return 'The username must be starting with a letter and containing 7 to 29 letters';
                           }
                           return null;
                         },

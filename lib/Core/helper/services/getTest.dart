@@ -49,8 +49,11 @@ class DioHelper {
               text: e.response?.data['message'], state: ToastStates.WARNING);
           // Get.off(const LoginScreen());
         } else {
-          showToast(
-              text: e.response?.data['message'], state: ToastStates.ERROR);
+          if (e.response?.data['message'] !=
+              "User does not have the right roles.") {
+            showToast(
+                text: e.response?.data['message'], state: ToastStates.ERROR);
+          }
         }
       });
     } else {
@@ -86,7 +89,8 @@ class DioHelper {
       if (e.response.statusCode == 401) {
         showToast(
             text: e.response?.data['message'], state: ToastStates.WARNING);
-        Get.off(const LoginScreen());
+
+        //Get.off(const LoginScreen());
       } else {
         showToast(
             text: e.response?.data['message'], state: ToastStates.WARNING);
@@ -123,7 +127,7 @@ class DioHelper {
       if (e.response.statusCode == 401) {
         showToast(
             text: e.response?.data['message'], state: ToastStates.WARNING);
-        Get.off(LoginScreen());
+        //Get.off(LoginScreen());
       }
 
       showToast(text: e.response?.data['message'], state: ToastStates.WARNING);

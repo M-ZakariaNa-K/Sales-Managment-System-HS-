@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sales_management_system/Controllers/lang/lang_controller.dart';
 import 'package:sales_management_system/Core/Components/Report/export_button.dart';
 import 'package:sales_management_system/Core/Components/custome_elevated_button.dart';
 import 'package:sales_management_system/Core/Constants/theme.dart';
@@ -127,7 +128,7 @@ class _DesktopLayoutReportsPageState extends State<DesktopLayoutReportsPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                       "Mounthly Report".tr,
+                      "Mounthly Report".tr,
                       style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -212,7 +213,7 @@ class _DesktopLayoutReportsPageState extends State<DesktopLayoutReportsPage> {
                           pdfUrl:
                               '$zakBasicUrl/branches-Sales/PDFForm?start_date=$formattedStartDate&end_date=$formattedEndDate',
                           excelUrl:
-                              '$zakBasicUrl/api/branches-Sales/ExcelForm?start_date=$formattedStartDate&end_date=$formattedEndDate',
+                              '$zakBasicUrl/branches-Sales/ExcelForm?start_date=$formattedStartDate&end_date=$formattedEndDate',
                         )
                       ],
                     )
@@ -238,8 +239,18 @@ class _DesktopLayoutReportsPageState extends State<DesktopLayoutReportsPage> {
                           : dataBetweenTwoDate),
                 ),
               ),
-              Text(
-                  '${dataBetweenTwoDate.isNotEmpty ? dataBetweenTwoDate[dataBetweenTwoDate.length - 1].total : totalSales.total}${"total-price".tr}'),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  LanguageRadioController().selectedValue
+                      ? Text(
+                          '${dataBetweenTwoDate.isNotEmpty ? dataBetweenTwoDate[dataBetweenTwoDate.length - 1].total : totalSales.total}${"total-price".tr}',
+                          textDirection: TextDirection.ltr)
+                      : Text(
+                          '${"total-price".tr} ${dataBetweenTwoDate.isNotEmpty ? dataBetweenTwoDate[dataBetweenTwoDate.length - 1].total : totalSales.total}',
+                        ),
+                ],
+              ),
               const SizedBox(
                 height: 250,
               )

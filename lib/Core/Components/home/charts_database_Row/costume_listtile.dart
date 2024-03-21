@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:sales_management_system/Controllers/lang/lang_controller.dart';
 import 'package:sales_management_system/Core/Constants/theme.dart';
 
 // ignore: must_be_immutable
@@ -42,6 +43,11 @@ class CostumeListTile extends StatelessWidget {
               fontSize: 14),
         ),
         subtitle: Text(subtitle,
+            textDirection: LanguageRadioController().selectedValue
+                ?TextDirection.ltr : null,
+            textAlign: LanguageRadioController().selectedValue
+                ? TextAlign.end
+                : TextAlign.start,
             style: const TextStyle(
               color: ThemeColors.primaryTextColor,
             )),

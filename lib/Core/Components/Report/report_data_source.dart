@@ -42,7 +42,7 @@ class ReportDataSource extends DataTableSource {
           ),
         ),
       ),
-      DataCell(Center(child: Text("${rowData.totalSales!}"))),
+      DataCell(Center(child: Text("${rowData.totalSales!}",   textDirection: TextDirection.ltr,))),
     ]);
   }
 

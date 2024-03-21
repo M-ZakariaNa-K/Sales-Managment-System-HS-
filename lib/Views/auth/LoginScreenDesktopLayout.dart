@@ -119,17 +119,18 @@ class DesktopLayoutLoginScreen extends StatelessWidget {
                             height: 40,
                           ),
                           defaultButton(
-                              function: () async {
-                                if (LoginScreen.formKey.currentState!
-                                    .validate()) {
-                                  controller.loginState(
-                                      userName: LoginScreen.userController.text,
-                                      password:
-                                          LoginScreen.passwordController.text);
-                                }
-                              },
-                              label: '25'.tr,
-                              context: context),
+                            function: () async {
+                              if (LoginScreen.formKey.currentState!
+                                  .validate()) {
+                                controller.loginState(
+                                    userName: LoginScreen.userController.text,
+                                    password:
+                                        LoginScreen.passwordController.text,);
+                              }
+                            },
+                            label: '25'.tr,
+                            context: context,
+                          ),
                           const SizedBox(
                             height: 20,
                           ),

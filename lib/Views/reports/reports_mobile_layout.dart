@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sales_management_system/Controllers/lang/lang_controller.dart';
 import 'package:sales_management_system/Core/Components/Report/export_button.dart';
 import 'package:sales_management_system/Core/Components/custome_elevated_button.dart';
 import 'package:sales_management_system/Core/Components/home/sales_table&image_sliderRow/mobile_sales_item.dart';
@@ -268,8 +269,20 @@ class _MobileLayoutReportsPageState extends State<MobileLayoutReportsPage> {
                               ),
                         Padding(
                           padding: const EdgeInsets.only(bottom: 10.0),
-                          child: Text(
-                              '${dataBetweenTwoDate.isNotEmpty ? dataBetweenTwoDate[dataBetweenTwoDate.length - 1].total : totalSales.total}${"total-price".tr}'),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                               LanguageRadioController().selectedValue
+                                        ? Text(
+                                '${dataBetweenTwoDate.isNotEmpty ? dataBetweenTwoDate[dataBetweenTwoDate.length - 1].total : totalSales.total}${"total-price".tr}',
+                                textDirection:
+                                  TextDirection.ltr
+                              ): Text(
+                                '${"total-price".tr} ${dataBetweenTwoDate.isNotEmpty ? dataBetweenTwoDate[dataBetweenTwoDate.length - 1].total : totalSales.total}',
+                              ),
+                        
+                            ],
+                          ),
                         ),
                       ],
                     ),

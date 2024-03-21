@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sales_management_system/Controllers/lang/lang_controller.dart';
 import 'package:sales_management_system/Core/Constants/theme.dart';
 import 'package:sales_management_system/Core/helper/services/pills/invoices_search_service.dart';
 
@@ -113,8 +114,17 @@ class SearchPillsListItems extends StatelessWidget {
                                       color: ThemeColors.primary,
                                     ),
                                   ),
-                                  Text(
-                                    "${"total".tr}: ${invoicesList[index].total}",
+                                  Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Text(
+                                        "${"total".tr}: ",
+                                      ),
+                                      Text(
+                                        invoicesList[index].total,
+                                        textDirection: TextDirection.ltr,
+                                      ),
+                                    ],
                                   ),
                                   Text(
                                     "${"Date".tr}: ${invoicesList[index].date}",

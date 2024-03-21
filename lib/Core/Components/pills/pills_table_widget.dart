@@ -169,6 +169,7 @@ class _PillsTableWidgetState extends State<PillsTableWidget> {
                                   child: Center(
                                       child: Text(
                                     "${allPillsData["invoices"][index].total}",
+                                       textDirection: TextDirection.ltr,
                                     style: const TextStyle(
                                       color: Colors.black,
                                     ),
